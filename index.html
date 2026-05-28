@@ -25,10 +25,11 @@ body:hover #cursor{opacity:1;}
 
 /* ── PAGES ── */
 .page{display:none;}.page.active{display:block;}
-.page-body{padding-top:72px;min-height:100vh;}
+.page-body{padding-top:108px;min-height:100vh;}
+.page-body.no-announce{padding-top:72px;}
 
 /* ── NAV ── */
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:72px;border-bottom:1px solid var(--border);position:fixed;top:0;left:0;right:0;background:rgba(8,8,8,.96);backdrop-filter:blur(16px);z-index:5000;transition:height .3s;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:72px;border-bottom:1px solid var(--border);position:fixed;top:36px;left:0;right:0;background:rgba(8,8,8,.96);backdrop-filter:blur(16px);z-index:5000;transition:height .3s,top .3s;}
 nav.scrolled{height:60px;border-bottom-color:#242424;}
 .logo-wrap{cursor:pointer;display:flex;align-items:center;}
 .logo-wrap img{height:42px;object-fit:contain;}
@@ -46,9 +47,8 @@ nav ul li button:hover,nav ul li a:hover,nav ul li button.active,nav ul li a.act
 .nav-insta svg{width:15px;height:15px;fill:currentColor;flex-shrink:0;}
 
 /* ── ANNOUNCEMENT BAR ── */
-.announce{background:var(--gold);color:var(--black);text-align:center;padding:.55rem 1rem;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;position:fixed;top:0;left:0;right:0;z-index:5001;transition:transform .3s;}
+.announce{background:var(--gold);color:var(--black);text-align:center;padding:0 1rem;height:36px;line-height:36px;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;position:fixed;top:0;left:0;right:0;z-index:5001;transition:transform .3s;white-space:nowrap;overflow:hidden;}
 .announce.hidden{transform:translateY(-100%);}
-nav{top:36px;}
 nav.announce-hidden{top:0;}
 
 /* ── HERO ── */
@@ -175,7 +175,7 @@ nav.announce-hidden{top:0;}
 .shop-card-info .price{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);}
 
 /* ── PRODUCT PAGE ── */
-.product-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 72px);}
+.product-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 108px);}
 .prod-img-col{background:#f0ede8;position:relative;overflow:hidden;}
 .prod-img-main{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:4rem;min-height:60vh;}
 .prod-img-main img{max-width:100%;max-height:75vh;object-fit:contain;transition:transform .4s ease;}
@@ -245,7 +245,7 @@ nav.announce-hidden{top:0;}
 .stat-block .stat-lbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-top:.4rem;}
 
 /* ── CONTACT ── */
-.contact-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 72px);}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 108px);}
 .contact-left{background:var(--b2);padding:7rem 5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;}
 .contact-left .sec-label{font-size:.62rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1.5rem;}
 .contact-left h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,6rem);letter-spacing:.05em;line-height:.95;margin-bottom:2.5rem;}
@@ -351,7 +351,7 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
   .shop-row2{max-width:100%;grid-template-columns:1fr;}
 }
 /* ── CHECKOUT ── */
-.checkout-layout{display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 72px);gap:0;}
+.checkout-layout{display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 108px);gap:0;}
 .checkout-left{padding:4rem 4rem 4rem 5rem;border-right:1px solid var(--border);max-width:700px;}
 .checkout-logo img{height:38px;object-fit:contain;margin-bottom:2.5rem;display:block;}
 .checkout-step-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
@@ -399,7 +399,7 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
 .order-success h2{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.06em;margin-bottom:1rem;}
 .order-success p{color:var(--gray);font-size:.88rem;line-height:1.8;margin-bottom:1rem;}
 .order-num{font-size:.78rem;color:var(--gold);letter-spacing:.1em;padding:1rem;background:var(--b3);border:1px solid var(--border);display:inline-block;margin-top:.5rem;}
-.checkout-right{background:var(--b2);padding:4rem 3rem;position:sticky;top:72px;align-self:start;border-left:1px solid var(--border);}
+.checkout-right{background:var(--b2);padding:4rem 3rem;position:sticky;top:108px;align-self:start;border-left:1px solid var(--border);}
 .summary-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.06em;margin-bottom:1.5rem;}
 .co-checkout-item{display:grid;grid-template-columns:56px 1fr auto;gap:.8rem;padding:.9rem 0;border-bottom:1px solid var(--border);align-items:center;}
 .co-checkout-item img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#f0ede8;padding:.3rem;}
@@ -1012,8 +1012,8 @@ window.addEventListener('scroll', () => {
   const s = window.scrollY;
   const nav = document.getElementById('nav');
   const ann = document.getElementById('announce');
-  if (s > 80) { nav.classList.add('scrolled'); ann.classList.add('hidden'); nav.classList.add('announce-hidden'); }
-  else { nav.classList.remove('scrolled'); ann.classList.remove('hidden'); nav.classList.remove('announce-hidden'); }
+  if (s > 80) { nav.classList.add('scrolled'); ann.classList.add('hidden'); nav.classList.add('announce-hidden'); document.querySelectorAll('.page-body').forEach(p=>p.style.paddingTop='72px'); document.querySelectorAll('.checkout-right').forEach(p=>p.style.top='72px'); }
+  else { nav.classList.remove('scrolled'); ann.classList.remove('hidden'); nav.classList.remove('announce-hidden'); document.querySelectorAll('.page-body').forEach(p=>p.style.paddingTop=''); document.querySelectorAll('.checkout-right').forEach(p=>p.style.top=''); }
   lastScroll = s;
 });
 
