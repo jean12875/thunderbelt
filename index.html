@@ -6,507 +6,473 @@
 <title>THUNDERBELT | 独立品牌</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold:#C9962A; --gold-l:#e8b84b; --gold-dim:rgba(201,150,42,0.12);
-  --black:#080808; --b2:#0f0f0f; --b3:#161616; --b4:#1e1e1e;
-  --white:#f0ede8; --gray:#666; --gray2:#333; --border:#1c1c1c;
-  --red:#e05252;
-}
+/* ROOT */
+:root{--gold:#C9962A;--gold-l:#e8b84b;--gold-dim:rgba(201,150,42,.12);--black:#080808;--b2:#0f0f0f;--b3:#161616;--b4:#1e1e1e;--white:#f0ede8;--gray:#666;--gray2:#333;--border:#1c1c1c;--red:#e05252;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--black);color:var(--white);font-family:'Noto Sans SC',sans-serif;overflow-x:hidden;cursor:none;}
+body{background:var(--black);color:var(--white);font-family:'Noto Sans SC',sans-serif;overflow-x:hidden;}
 
-/* ── CUSTOM CURSOR ── */
-#cursor{position:fixed;width:12px;height:12px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .1s,background .2s,width .2s,height .2s;}
-#cursor-ring{position:fixed;width:36px;height:36px;border-radius:50%;border:1px solid rgba(201,150,42,.5);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .18s ease,width .2s,height .2s,opacity .2s;}
-body:hover #cursor{opacity:1;}
-.cursor-grow #cursor{width:6px;height:6px;}
-.cursor-grow #cursor-ring{width:52px;height:52px;border-color:var(--gold);}
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:.1s;}
+#cur-ring{position:fixed;width:34px;height:34px;border-radius:50%;border:1px solid rgba(201,150,42,.45);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:left .12s,top .12s,width .2s,height .2s;}
+@media(hover:none){#cur,#cur-ring{display:none;}body{cursor:auto;}}
 
-/* ── PAGES ── */
+/* PAGES */
 .page{display:none;}.page.active{display:block;}
-.page-body{padding-top:108px;min-height:100vh;}
-.page-body.no-announce{padding-top:72px;}
 
-/* ── NAV ── */
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 4rem;height:72px;border-bottom:1px solid var(--border);position:fixed;top:36px;left:0;right:0;background:rgba(8,8,8,.96);backdrop-filter:blur(16px);z-index:5000;transition:height .3s,top .3s;}
-nav.scrolled{height:60px;border-bottom-color:#242424;}
-.logo-wrap{cursor:pointer;display:flex;align-items:center;}
-.logo-wrap img{height:42px;object-fit:contain;}
-nav ul{list-style:none;display:flex;gap:0;align-items:center;}
-nav ul li button,nav ul li a{background:none;border:none;color:var(--gray);text-decoration:none;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:.5rem 1.1rem;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:color .2s;display:block;}
-nav ul li button:hover,nav ul li a:hover,nav ul li button.active,nav ul li a.active{color:var(--white);}
-.nav-right{display:flex;align-items:center;gap:.5rem;}
-.nav-icon-btn{background:none;border:none;cursor:none;color:var(--gray);padding:.5rem .7rem;transition:color .2s;position:relative;display:flex;align-items:center;}
-.nav-icon-btn:hover{color:var(--white);}
-.nav-icon-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;}
-.cart-badge{position:absolute;top:4px;right:4px;background:var(--gold);color:var(--black);font-size:.55rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all .2s;}
-.cart-badge.visible{opacity:1;transform:scale(1);}
-.nav-insta{display:flex;align-items:center;gap:.4rem;color:var(--gray);text-decoration:none;font-size:.68rem;padding:.5rem .8rem;transition:color .2s;letter-spacing:.1em;}
-.nav-insta:hover{color:var(--gold);}
-.nav-insta svg{width:15px;height:15px;fill:currentColor;flex-shrink:0;}
+/* ANNOUNCE */
+.ann{position:fixed;top:0;left:0;right:0;height:34px;line-height:34px;background:var(--gold);color:var(--black);text-align:center;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;z-index:6000;transition:transform .3s;white-space:nowrap;overflow:hidden;padding:0 1rem;}
+.ann.off{transform:translateY(-100%);}
 
-/* ── ANNOUNCEMENT BAR ── */
-.announce{background:var(--gold);color:var(--black);text-align:center;padding:0 1rem;height:36px;line-height:36px;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;position:fixed;top:0;left:0;right:0;z-index:5001;transition:transform .3s;white-space:nowrap;overflow:hidden;}
-.announce.hidden{transform:translateY(-100%);}
-nav.announce-hidden{top:0;}
+/* NAV */
+nav{position:fixed;top:34px;left:0;right:0;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;background:rgba(8,8,8,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);z-index:5000;transition:top .3s,height .3s;}
+nav.up{top:0;}
+.logo-img{height:40px;object-fit:contain;cursor:pointer;}
+nav ul{list-style:none;display:flex;align-items:center;}
+nav ul li a,nav ul li button{background:none;border:none;color:var(--gray);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;padding:.45rem 1rem;cursor:pointer;font-family:inherit;transition:color .2s;display:block;text-decoration:none;}
+nav ul li a:hover,nav ul li button:hover,nav ul li a.on,nav ul li button.on{color:var(--white);}
+.nav-r{display:flex;align-items:center;gap:.3rem;}
+.ico-btn{background:none;border:none;color:var(--gray);padding:.45rem .6rem;cursor:pointer;position:relative;display:flex;align-items:center;transition:color .2s;}
+.ico-btn:hover{color:var(--white);}
+.ico-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;}
+.cbadge{position:absolute;top:3px;right:3px;background:var(--gold);color:var(--black);font-size:.52rem;font-weight:700;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:.2s;}
+.cbadge.on{opacity:1;transform:scale(1);}
+.ig-link{display:flex;align-items:center;gap:.4rem;color:var(--gray);text-decoration:none;font-size:.65rem;padding:.45rem .8rem;transition:color .2s;letter-spacing:.08em;}
+.ig-link:hover{color:var(--gold);}
+.ig-link svg{width:14px;height:14px;fill:currentColor;flex-shrink:0;}
 
-/* ── HERO ── */
-.hero-section{position:relative;min-height:calc(100vh - 108px);display:flex;flex-direction:column;overflow:hidden;}
-.hero-bg-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:hidden;z-index:0;}
-.hero-bg-text span{font-family:'Bebas Neue',sans-serif;font-size:clamp(14rem,30vw,32rem);color:rgba(255,255,255,.018);letter-spacing:.05em;line-height:1;user-select:none;white-space:nowrap;}
-.hero-wordmark{text-align:center;padding:4rem 2rem 1.5rem;position:relative;z-index:2;}
-.hero-wordmark .big-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,16vw,16rem);line-height:.92;letter-spacing:.04em;background:linear-gradient(160deg,#fff 0%,#ccc 40%,#777 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;user-select:none;animation:fadeDown .9s ease both;}
-.hero-sub{text-align:center;font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-top:.6rem;animation:fadeUp .9s .2s ease both;}
-@keyframes fadeDown{from{opacity:0;transform:translateY(-24px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+/* PAGE BODY */
+.pb{padding-top:102px;min-height:100vh;}
 
-.hero-products-row{display:flex;align-items:flex-end;justify-content:center;gap:1.5rem;padding:2rem 3rem 0;flex:1;animation:fadeUp .9s .35s ease both;}
-.hero-prod-item{flex:1;max-width:200px;cursor:none;position:relative;transition:transform .3s ease;}
-.hero-prod-item img{width:100%;aspect-ratio:1/1;object-fit:contain;padding:1.2rem;background:#f0ede8;display:block;transition:transform .4s ease;}
-.hero-prod-item:hover{transform:translateY(-10px);}
-.hero-prod-item:hover img{transform:scale(1.04);}
-.hero-prod-label{text-align:center;padding:.7rem 0 0;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);transition:color .2s;}
-.hero-prod-item:hover .hero-prod-label{color:var(--gold);}
-.hero-prod-item.featured{max-width:260px;transform:translateY(-16px);}
-.hero-prod-item.featured:hover{transform:translateY(-26px);}
-.hero-prod-badge{position:absolute;top:.5rem;right:.5rem;background:var(--gold);color:var(--black);font-size:.55rem;font-weight:700;padding:.25rem .5rem;letter-spacing:.1em;text-transform:uppercase;z-index:2;}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.82rem 2.4rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:all .22s;border:none;text-decoration:none;}
+.btn-g{background:var(--gold);color:var(--black);font-weight:700;}.btn-g:hover{background:var(--gold-l);}
+.btn-o{background:transparent;border:1px solid var(--border);color:var(--white);}.btn-o:hover{border-color:var(--gold);color:var(--gold);}
 
-.hero-cta-row{display:flex;justify-content:center;gap:1.2rem;padding:2.5rem 2rem 3rem;animation:fadeUp .9s .5s ease both;}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2.4rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;cursor:none;text-decoration:none;font-family:'Noto Sans SC',sans-serif;transition:all .25s;border:none;}
-.btn-gold{background:var(--gold);color:var(--black);font-weight:700;}
-.btn-gold:hover{background:var(--gold-l);}
-.btn-outline{background:transparent;border:1px solid var(--border);color:var(--white);}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+/* TICKER */
+.band{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.85rem 0;background:var(--b2);}
+.band-t{display:flex;gap:2.5rem;animation:tick 22s linear infinite;white-space:nowrap;}
+.band-t span{font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gray);flex-shrink:0;}
+.band-t .a{color:var(--gold);}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ── BAND ── */
-.band{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.9rem 0;background:var(--b2);}
-.band-inner{display:flex;gap:2.5rem;animation:ticker 22s linear infinite;white-space:nowrap;}
-.band-inner span{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gray);flex-shrink:0;}
-.band-inner .acc{color:var(--gold);}
-@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+/* HERO */
+.hero{position:relative;min-height:calc(100vh - 102px);display:flex;flex-direction:column;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;overflow:hidden;}
+.hero-bg span{font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,28vw,30rem);color:rgba(255,255,255,.016);letter-spacing:.05em;white-space:nowrap;user-select:none;}
+.hero-wm{text-align:center;padding:3.5rem 2rem 1rem;z-index:2;position:relative;}
+.hero-wm h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4.5rem,15vw,15rem);line-height:.92;letter-spacing:.04em;background:linear-gradient(160deg,#fff 0%,#ccc 40%,#777 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;user-select:none;animation:fD .85s ease both;}
+.hero-sub{text-align:center;font-size:.64rem;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-top:.5rem;animation:fU .85s .18s ease both;}
+@keyframes fD{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fU{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero-prods{display:flex;align-items:flex-end;justify-content:center;gap:1.2rem;padding:1.5rem 2.5rem 0;flex:1;animation:fU .85s .3s ease both;}
+.hpi{flex:1;max-width:170px;cursor:pointer;transition:transform .28s ease;}
+.hpi img{width:100%;aspect-ratio:1/1;object-fit:contain;padding:1rem;background:#f0ede8;display:block;transition:transform .35s ease;}
+.hpi:hover{transform:translateY(-10px);}
+.hpi:hover img{transform:scale(1.04);}
+.hpi-lbl{text-align:center;padding:.6rem 0 0;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);transition:color .2s;}
+.hpi:hover .hpi-lbl{color:var(--gold);}
+.hpi.feat{max-width:220px;transform:translateY(-14px);}
+.hpi.feat:hover{transform:translateY(-24px);}
+.hpi-badge{position:absolute;top:.4rem;right:.4rem;background:var(--gold);color:var(--black);font-size:.5rem;font-weight:700;padding:.18rem .45rem;letter-spacing:.08em;text-transform:uppercase;}
+.hpi{position:relative;}
+.hero-cta{display:flex;justify-content:center;gap:1.2rem;padding:2.2rem 2rem 3rem;animation:fU .85s .45s ease both;}
 
-/* ── CART SIDEBAR ── */
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:8000;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px);}
-.cart-overlay.open{opacity:1;pointer-events:all;}
-.cart-sidebar{position:fixed;right:-460px;top:0;bottom:0;width:440px;background:var(--b2);z-index:8001;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;border-left:1px solid var(--border);}
-.cart-sidebar.open{right:0;}
-.cart-header{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 2rem;border-bottom:1px solid var(--border);}
-.cart-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;}
-.cart-header .cart-count-label{font-size:.65rem;letter-spacing:.15em;color:var(--gray);margin-top:.1rem;}
-.cart-close{background:none;border:none;color:var(--gray);cursor:none;padding:.3rem;transition:color .2s;}
-.cart-close:hover{color:var(--white);}
-.cart-close svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;}
-.cart-items{flex:1;overflow-y:auto;padding:1.5rem 2rem;}
-.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1rem;color:var(--gray);}
-.cart-empty .empty-icon{font-size:3rem;opacity:.3;}
-.cart-empty p{font-size:.8rem;letter-spacing:.1em;}
-.cart-item{display:grid;grid-template-columns:72px 1fr auto;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border);align-items:center;}
-.cart-item-img{background:#f0ede8;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.cart-item-img img{width:100%;height:100%;object-fit:contain;padding:.5rem;}
-.cart-item-name{font-size:.78rem;font-weight:500;margin-bottom:.25rem;}
-.cart-item-size{font-size:.65rem;color:var(--gray);letter-spacing:.1em;margin-bottom:.4rem;}
-.cart-item-qty{display:flex;align-items:center;gap:.6rem;}
-.qty-btn{background:var(--b3);border:1px solid var(--border);color:var(--white);width:24px;height:24px;cursor:none;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:border-color .2s;}
-.qty-btn:hover{border-color:var(--gold);}
-.cart-item-qty span{font-size:.78rem;min-width:20px;text-align:center;}
-.cart-item-price{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);}
-.cart-item-remove{grid-column:3;grid-row:1;align-self:start;background:none;border:none;color:var(--gray);cursor:none;font-size:.8rem;padding:.2rem;transition:color .2s;}
-.cart-item-remove:hover{color:var(--red);}
-.cart-footer{padding:1.5rem 2rem;border-top:1px solid var(--border);}
-.cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;}
-.cart-subtotal .lbl{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);}
-.cart-subtotal .val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);}
-.cart-shipping{font-size:.65rem;color:var(--gray);letter-spacing:.08em;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
-.btn-checkout{width:100%;background:var(--gold);color:var(--black);border:none;padding:1.1rem;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
-.btn-checkout:hover{background:var(--gold-l);}
-.btn-clear-cart{width:100%;background:none;border:1px solid var(--border);color:var(--gray);padding:.7rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;margin-top:.6rem;}
-.btn-clear-cart:hover{border-color:var(--red);color:var(--red);}
+/* CART SIDEBAR */
+.c-ov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:7999;opacity:0;pointer-events:none;transition:opacity .28s;backdrop-filter:blur(3px);}
+.c-ov.on{opacity:1;pointer-events:all;}
+.c-sb{position:fixed;right:-440px;top:0;bottom:0;width:420px;background:var(--b2);z-index:8000;transition:right .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;border-left:1px solid var(--border);}
+.c-sb.on{right:0;}
+.c-hd{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.8rem;border-bottom:1px solid var(--border);}
+.c-hd h2{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.06em;}
+.c-hd .cct{font-size:.6rem;letter-spacing:.12em;color:var(--gray);margin-top:.1rem;}
+.c-cls{background:none;border:none;color:var(--gray);cursor:pointer;padding:.3rem;transition:color .2s;}
+.c-cls:hover{color:var(--white);}
+.c-cls svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;}
+.c-list{flex:1;overflow-y:auto;padding:1.2rem 1.8rem;}
+.c-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:.8rem;color:var(--gray);}
+.c-empty .ei{font-size:2.5rem;opacity:.3;}
+.c-empty p{font-size:.75rem;letter-spacing:.08em;}
+.ci{display:grid;grid-template-columns:64px 1fr auto;gap:.9rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:center;}
+.ci-img{background:#f0ede8;aspect-ratio:1/1;}
+.ci-img img{width:100%;height:100%;object-fit:contain;padding:.4rem;}
+.ci-name{font-size:.74rem;font-weight:500;margin-bottom:.2rem;}
+.ci-sz{font-size:.6rem;color:var(--gray);letter-spacing:.08em;margin-bottom:.35rem;}
+.ci-q{display:flex;align-items:center;gap:.5rem;}
+.qb{background:var(--b3);border:1px solid var(--border);color:var(--white);width:22px;height:22px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:border-color .2s;}
+.qb:hover{border-color:var(--gold);}
+.ci-q span{font-size:.74rem;min-width:18px;text-align:center;}
+.ci-p{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);}
+.ci-rm{background:none;border:none;color:var(--gray);cursor:pointer;font-size:.75rem;padding:.15rem;transition:color .2s;grid-column:3;grid-row:1;align-self:start;}
+.ci-rm:hover{color:var(--red);}
+.c-ft{padding:1.3rem 1.8rem;border-top:1px solid var(--border);}
+.c-sub{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
+.c-sub .l{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);}
+.c-sub .v{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;}
+.c-ship{font-size:.6rem;color:var(--gray);margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+.btn-co{width:100%;background:var(--gold);color:var(--black);border:none;padding:1rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;}
+.btn-co:hover{background:var(--gold-l);}
+.btn-clr{width:100%;background:none;border:1px solid var(--border);color:var(--gray);padding:.65rem;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:all .2s;margin-top:.5rem;}
+.btn-clr:hover{border-color:var(--red);color:var(--red);}
 
-/* ── SEARCH OVERLAY ── */
-.search-overlay{position:fixed;inset:0;background:rgba(8,8,8,.97);z-index:7000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
-.search-overlay.open{opacity:1;pointer-events:all;}
-.search-box{width:100%;max-width:700px;padding:0 2rem;}
-.search-input-wrap{position:relative;margin-bottom:2rem;}
-.search-input-wrap input{width:100%;background:none;border:none;border-bottom:1px solid var(--border);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);letter-spacing:.08em;padding:.5rem 3rem .5rem 0;outline:none;transition:border-color .2s;}
-.search-input-wrap input:focus{border-bottom-color:var(--gold);}
-.search-input-wrap input::placeholder{color:var(--gray2);}
-.search-close{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray);cursor:none;transition:color .2s;}
-.search-close:hover{color:var(--white);}
-.search-close svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5;}
-.search-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;}
-.search-result-item{cursor:none;transition:opacity .2s;}
-.search-result-item:hover{opacity:.75;}
-.search-result-item img{width:100%;aspect-ratio:1/1;object-fit:contain;padding:1rem;background:#f0ede8;display:block;}
-.search-result-item .sr-name{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;margin-top:.5rem;color:var(--gray);}
-.search-result-item .sr-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);}
-.search-label{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gray);margin-bottom:1rem;display:block;}
+/* SEARCH */
+.s-ov{position:fixed;inset:0;background:rgba(8,8,8,.97);z-index:6900;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.s-ov.on{opacity:1;pointer-events:all;}
+.s-box{width:100%;max-width:680px;padding:0 2rem;}
+.s-wrap{position:relative;margin-bottom:1.8rem;}
+.s-wrap input{width:100%;background:none;border:none;border-bottom:1px solid var(--border);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4.5vw,3.5rem);letter-spacing:.07em;padding:.4rem 2.5rem .4rem 0;outline:none;transition:border-color .2s;}
+.s-wrap input:focus{border-bottom-color:var(--gold);}
+.s-wrap input::placeholder{color:var(--gray2);}
+.s-cls{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray);cursor:pointer;transition:color .2s;}
+.s-cls:hover{color:var(--white);}
+.s-cls svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;}
+.s-lbl{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:.9rem;}
+.s-res{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.9rem;}
+.s-item{cursor:pointer;transition:opacity .2s;}
+.s-item:hover{opacity:.72;}
+.s-item img{width:100%;aspect-ratio:1/1;object-fit:contain;padding:.9rem;background:#f0ede8;display:block;}
+.s-item .sn{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.45rem;color:var(--gray);}
+.s-item .sp{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold);}
 
-/* ── WISHLIST BTN ── */
-.wish-btn{background:none;border:1px solid var(--border);color:var(--white);padding:1rem 1.2rem;cursor:none;transition:all .2s;display:flex;align-items:center;justify-content:center;}
-.wish-btn:hover{border-color:var(--gold);}
-.wish-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;transition:fill .2s,stroke .2s;}
-.wish-btn.active svg{fill:var(--red);stroke:var(--red);}
-
-/* ── SHOP ── */
-.shop-hero{text-align:center;padding:5rem 2rem 2.5rem;border-bottom:1px solid var(--border);}
-.shop-hero .sec-label{font-size:.62rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1rem;}
-.shop-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);letter-spacing:.08em;line-height:1;}
-.filter-bar{display:flex;align-items:center;gap:.5rem;padding:1.2rem 3rem;border-bottom:1px solid var(--border);background:var(--b2);overflow-x:auto;}
+/* SHOP */
+.sh-hero{text-align:center;padding:4.5rem 2rem 2rem;border-bottom:1px solid var(--border);}
+.sec-lbl{font-size:.58rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1rem;}
+.sh-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,7vw,6.5rem);letter-spacing:.07em;line-height:1;}
+.filter-bar{display:flex;align-items:center;gap:.45rem;padding:1rem 3rem;border-bottom:1px solid var(--border);background:var(--b2);overflow-x:auto;flex-wrap:nowrap;}
 .filter-bar::-webkit-scrollbar{display:none;}
-.filter-btn{background:none;border:1px solid var(--border);color:var(--gray);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.45rem 1.1rem;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;white-space:nowrap;flex-shrink:0;}
-.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold);}
-.sort-select{background:var(--b3);border:1px solid var(--border);color:var(--gray);font-size:.62rem;letter-spacing:.1em;padding:.45rem .9rem;cursor:none;font-family:'Noto Sans SC',sans-serif;outline:none;margin-left:auto;flex-shrink:0;}
-.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
-.shop-card{background:var(--b2);cursor:none;transition:background .2s;position:relative;}
-.shop-card:hover{background:var(--b3);}
-.shop-card.hidden{display:none;}
-.shop-card-img{aspect-ratio:1/1;overflow:hidden;background:#f0ede8;position:relative;}
-.shop-card-img img{width:100%;height:100%;object-fit:contain;padding:2rem;transition:transform .5s cubic-bezier(.25,.46,.45,.94);}
-.shop-card:hover .shop-card-img img{transform:scale(1.05);}
-.shop-card-badge{position:absolute;top:.8rem;left:.8rem;background:var(--gold);color:var(--black);font-size:.55rem;font-weight:700;padding:.2rem .55rem;letter-spacing:.1em;text-transform:uppercase;z-index:2;}
-.shop-card-wish{position:absolute;top:.7rem;right:.7rem;background:rgba(8,8,8,.7);border:none;padding:.45rem;cursor:none;opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center;}
-.shop-card:hover .shop-card-wish{opacity:1;}
-.shop-card-wish svg{width:16px;height:16px;fill:none;stroke:var(--white);stroke-width:1.5;transition:fill .2s,stroke .2s;}
-.shop-card-wish.active svg{fill:var(--red);stroke:var(--red);}
-.shop-card-info{padding:1.3rem 1.6rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
-.shop-card-info h3{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;}
-.shop-card-info .sub{font-size:.62rem;color:var(--gray);letter-spacing:.08em;margin-top:.25rem;}
-.shop-card-info .price{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);}
+.fb{background:none;border:1px solid var(--border);color:var(--gray);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;padding:.4rem 1rem;cursor:pointer;font-family:inherit;transition:all .2s;white-space:nowrap;flex-shrink:0;}
+.fb:hover,.fb.on{border-color:var(--gold);color:var(--gold);}
+.sort-s{background:var(--b3);border:1px solid var(--border);color:var(--gray);font-size:.58rem;letter-spacing:.1em;padding:.4rem .85rem;cursor:pointer;font-family:inherit;outline:none;margin-left:auto;flex-shrink:0;}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.sc{background:var(--b2);cursor:pointer;transition:background .18s;position:relative;}
+.sc:hover{background:var(--b3);}
+.sc.hidden{display:none;}
+.sc-img{aspect-ratio:1/1;overflow:hidden;background:#f0ede8;position:relative;}
+.sc-img img{width:100%;height:100%;object-fit:contain;padding:1.8rem;transition:transform .45s cubic-bezier(.25,.46,.45,.94);}
+.sc:hover .sc-img img{transform:scale(1.05);}
+.sc-badge{position:absolute;top:.7rem;left:.7rem;background:var(--gold);color:var(--black);font-size:.52rem;font-weight:700;padding:.18rem .5rem;letter-spacing:.08em;text-transform:uppercase;z-index:2;}
+.sc-wish{position:absolute;top:.6rem;right:.6rem;background:rgba(8,8,8,.65);border:none;padding:.4rem;cursor:pointer;opacity:0;transition:opacity .2s;display:flex;align-items:center;}
+.sc:hover .sc-wish{opacity:1;}
+.sc-wish svg{width:15px;height:15px;fill:none;stroke:var(--white);stroke-width:1.5;transition:fill .2s,stroke .2s;}
+.sc-wish.on svg{fill:var(--red);stroke:var(--red);}
+.sc-info{padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.sc-info h3{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;font-weight:500;}
+.sc-info .sub{font-size:.58rem;color:var(--gray);margin-top:.2rem;}
+.sc-info .price{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);}
 
-/* ── PRODUCT PAGE ── */
-.product-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 108px);}
-.prod-img-col{background:#f0ede8;position:relative;overflow:hidden;}
-.prod-img-main{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:4rem;min-height:60vh;}
-.prod-img-main img{max-width:100%;max-height:75vh;object-fit:contain;transition:transform .4s ease;}
-.prod-img-main:hover img{transform:scale(1.03);}
-.prod-img-zoom-hint{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#aaa;background:rgba(0,0,0,.35);padding:.3rem .8rem;backdrop-filter:blur(4px);}
-.prod-info-col{padding:4rem 3.5rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);overflow-y:auto;}
-.back-btn{background:none;border:none;color:var(--gray);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;cursor:none;font-family:'Noto Sans SC',sans-serif;padding:0;margin-bottom:2rem;display:flex;align-items:center;gap:.4rem;transition:color .2s;}
-.back-btn:hover{color:var(--gold);}
-.prod-cat{font-size:.62rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:block;}
-.prod-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4vw,4.5rem);letter-spacing:.04em;line-height:.98;margin-bottom:1.2rem;}
-.prod-price-wrap{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;}
-.prod-price{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);letter-spacing:.04em;}
-.prod-stock{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#5a9a5a;border:1px solid #2a5a2a;padding:.25rem .6rem;}
-.prod-desc{color:var(--gray);font-size:.85rem;line-height:1.9;font-weight:300;max-width:420px;margin-bottom:2rem;}
-.size-section{margin-bottom:1.8rem;}
-.size-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;}
-.size-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);}
-.size-guide-btn{background:none;border:none;color:var(--gold);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;cursor:none;font-family:'Noto Sans SC',sans-serif;text-decoration:underline;transition:color .2s;}
-.size-guide-btn:hover{color:var(--gold-l);}
-.size-opts{display:flex;gap:.5rem;flex-wrap:wrap;}
-.size-btn{width:48px;height:48px;background:none;border:1px solid var(--border);color:var(--white);font-size:.72rem;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;}
-.size-btn:hover,.size-btn.sel{border-color:var(--gold);color:var(--gold);}
-.size-btn.sel{background:var(--gold-dim);}
-.qty-section{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;}
-.qty-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);}
-.qty-control{display:flex;align-items:center;gap:.5rem;}
-.qty-control button{width:36px;height:36px;background:var(--b3);border:1px solid var(--border);color:var(--white);font-size:1.1rem;cursor:none;transition:border-color .2s;display:flex;align-items:center;justify-content:center;}
-.qty-control button:hover{border-color:var(--gold);}
-.qty-control .qty-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;min-width:32px;text-align:center;}
-.prod-actions{display:flex;gap:.8rem;margin-bottom:2rem;flex-wrap:wrap;}
-.btn-add-cart{flex:1;background:var(--gold);color:var(--black);border:none;padding:1.1rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
-.btn-add-cart:hover{background:var(--gold-l);}
-.prod-meta{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
-.prod-meta-item{display:flex;align-items:center;gap:.6rem;font-size:.68rem;color:var(--gray);letter-spacing:.06em;}
-.prod-meta-item svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;flex-shrink:0;color:var(--gold);}
-.prod-related{padding:4rem;background:var(--b2);border-top:1px solid var(--border);}
-.prod-related h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;margin-bottom:1.5rem;}
-.related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
-.related-card{background:var(--b3);cursor:none;}
-.related-card img{width:100%;aspect-ratio:1/1;object-fit:contain;padding:1.2rem;background:#f0ede8;transition:transform .3s ease;display:block;}
-.related-card:hover img{transform:scale(1.04);}
-.related-card .rc-info{padding:.8rem 1rem;border-top:1px solid var(--border);}
-.related-card .rc-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);}
-.related-card .rc-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);}
+/* PRODUCT */
+.pl{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 102px);}
+.p-img{background:#f0ede8;display:flex;align-items:center;justify-content:center;padding:3.5rem;min-height:55vh;position:relative;}
+.p-img img{max-width:100%;max-height:72vh;object-fit:contain;transition:transform .35s ease;}
+.p-img:hover img{transform:scale(1.03);}
+.p-zm{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:#999;background:rgba(0,0,0,.3);padding:.25rem .7rem;backdrop-filter:blur(4px);}
+.p-info{padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);overflow-y:auto;}
+.back-b{background:none;border:none;color:var(--gray);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;font-family:inherit;padding:0;margin-bottom:1.8rem;display:flex;align-items:center;gap:.4rem;transition:color .2s;}
+.back-b:hover{color:var(--gold);}
+.p-cat{font-size:.58rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:.7rem;}
+.p-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,4rem);letter-spacing:.04em;line-height:.96;margin-bottom:1.1rem;}
+.p-pw{display:flex;align-items:center;gap:.9rem;margin-bottom:1.5rem;}
+.p-price{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gold);letter-spacing:.04em;}
+.p-stk{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:#5a9a5a;border:1px solid #2a5a2a;padding:.2rem .55rem;}
+.p-desc{color:var(--gray);font-size:.82rem;line-height:1.9;font-weight:300;max-width:400px;margin-bottom:1.8rem;}
+.sz-sec{margin-bottom:1.5rem;}
+.sz-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;}
+.sz-lbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);}
+.sz-guide{background:none;border:none;color:var(--gold);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:inherit;text-decoration:underline;transition:color .2s;}
+.sz-guide:hover{color:var(--gold-l);}
+.sz-opts{display:flex;gap:.45rem;flex-wrap:wrap;}
+.szb{width:46px;height:46px;background:none;border:1px solid var(--border);color:var(--white);font-size:.68rem;cursor:pointer;font-family:inherit;transition:all .18s;display:flex;align-items:center;justify-content:center;}
+.szb:hover,.szb.on{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.qty-sec{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.qty-lbl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);}
+.qty-ctrl{display:flex;align-items:center;gap:.45rem;}
+.qty-ctrl button{width:34px;height:34px;background:var(--b3);border:1px solid var(--border);color:var(--white);cursor:pointer;transition:border-color .2s;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.qty-ctrl button:hover{border-color:var(--gold);}
+.qty-n{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;min-width:30px;text-align:center;}
+.p-acts{display:flex;gap:.7rem;margin-bottom:1.8rem;flex-wrap:wrap;}
+.btn-ac{flex:1;background:var(--gold);color:var(--black);border:none;padding:1rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;}
+.btn-ac:hover{background:var(--gold-l);}
+.wish-b{background:none;border:1px solid var(--border);color:var(--white);padding:.9rem 1.1rem;cursor:pointer;transition:all .18s;display:flex;align-items:center;}
+.wish-b:hover{border-color:var(--gold);}
+.wish-b svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.5;transition:fill .2s,stroke .2s;}
+.wish-b.on svg{fill:var(--red);stroke:var(--red);}
+.p-meta{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;padding-top:1.4rem;border-top:1px solid var(--border);}
+.pmi{display:flex;align-items:center;gap:.5rem;font-size:.62rem;color:var(--gray);}
+.pmi svg{width:13px;height:13px;fill:none;stroke:var(--gold);stroke-width:1.5;flex-shrink:0;}
+.p-rel{padding:3.5rem 4rem;background:var(--b2);border-top:1px solid var(--border);}
+.p-rel h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.06em;margin-bottom:1.3rem;}
+.rg{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.rc{background:var(--b3);cursor:pointer;}
+.rc img{width:100%;aspect-ratio:1/1;object-fit:contain;padding:1.1rem;background:#f0ede8;transition:transform .3s;display:block;}
+.rc:hover img{transform:scale(1.04);}
+.rc-i{padding:.7rem .9rem;border-top:1px solid var(--border);}
+.rc-n{font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--gray);}
+.rc-p{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--gold);}
 
-/* ── ABOUT ── */
-.about-hero{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;border-bottom:1px solid var(--border);}
-.about-left{background:var(--b2);display:flex;flex-direction:column;justify-content:center;padding:7rem 5rem;}
-.about-left .sec-label{font-size:.62rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1.5rem;}
-.about-left h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,7vw,7rem);letter-spacing:.05em;line-height:.95;margin-bottom:2rem;}
-.about-left p{color:var(--gray);font-size:.9rem;line-height:2;font-weight:300;max-width:440px;}
-.about-right{display:flex;align-items:center;justify-content:center;background:var(--b3);padding:4rem;}
-.about-right img{max-width:260px;object-fit:contain;filter:drop-shadow(0 0 80px rgba(201,150,42,.25));animation:float 5s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
-.about-values{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
-.value-block{background:var(--b2);padding:3rem 2.8rem;}
-.value-block .icon{font-size:1.8rem;margin-bottom:1.2rem;}
-.value-block h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.06em;margin-bottom:.6rem;}
-.value-block p{font-size:.82rem;color:var(--gray);line-height:1.85;font-weight:300;}
-.about-story{padding:6rem 8rem;max-width:920px;margin:0 auto;text-align:center;}
-.about-story .sec-label{font-size:.62rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1.2rem;}
-.about-story h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:.06em;margin-bottom:1.8rem;line-height:1;}
-.about-story p{color:var(--gray);font-size:.9rem;line-height:2;font-weight:300;margin-bottom:1.2rem;}
-.about-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);}
-.stat-block{background:var(--b2);padding:2.5rem;text-align:center;}
-.stat-block .stat-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);letter-spacing:.04em;line-height:1;}
-.stat-block .stat-lbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-top:.4rem;}
+/* ABOUT */
+.ab-hero{display:grid;grid-template-columns:1fr 1fr;min-height:65vh;border-bottom:1px solid var(--border);}
+.ab-l{background:var(--b2);display:flex;flex-direction:column;justify-content:center;padding:6rem 4.5rem;}
+.ab-l h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,6.5vw,6.5rem);letter-spacing:.05em;line-height:.94;margin-bottom:1.8rem;}
+.ab-l p{color:var(--gray);font-size:.85rem;line-height:2;font-weight:300;max-width:420px;}
+.ab-r{display:flex;align-items:center;justify-content:center;background:var(--b3);padding:3.5rem;}
+.ab-r img{max-width:240px;object-fit:contain;filter:drop-shadow(0 0 70px rgba(201,150,42,.22));animation:fl 5s ease-in-out infinite;}
+@keyframes fl{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.ab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);}
+.sb{background:var(--b2);padding:2.2rem;text-align:center;}
+.sb .sn{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;color:var(--gold);letter-spacing:.04em;line-height:1;}
+.sb .sl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-top:.35rem;}
+.ab-vals{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.vb{background:var(--b2);padding:2.8rem 2.5rem;}
+.vb .ic{font-size:1.7rem;margin-bottom:1rem;}
+.vb h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.05em;margin-bottom:.55rem;}
+.vb p{font-size:.78rem;color:var(--gray);line-height:1.82;font-weight:300;}
+.ab-story{padding:5rem 7rem;max-width:880px;margin:0 auto;text-align:center;}
+.ab-story h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.5vw,4rem);letter-spacing:.05em;margin-bottom:1.6rem;line-height:1;}
+.ab-story p{color:var(--gray);font-size:.85rem;line-height:2;font-weight:300;margin-bottom:1.1rem;}
 
-/* ── CONTACT ── */
-.contact-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 108px);}
-.contact-left{background:var(--b2);padding:7rem 5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;}
-.contact-left .sec-label{font-size:.62rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1.5rem;}
-.contact-left h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,6rem);letter-spacing:.05em;line-height:.95;margin-bottom:2.5rem;}
-.contact-left p{color:var(--gray);font-size:.88rem;line-height:1.9;font-weight:300;max-width:400px;margin-bottom:3rem;}
-.ci-list{display:flex;flex-direction:column;gap:1.8rem;}
-.ci-item{display:flex;align-items:flex-start;gap:1.2rem;}
-.ci-icon{font-size:1.1rem;margin-top:.1rem;flex-shrink:0;}
-.ci-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.25rem;}
-.ci-val{font-size:.88rem;color:var(--white);}
-.ci-val a{color:var(--white);text-decoration:none;transition:color .2s;}
-.ci-val a:hover{color:var(--gold);}
-.contact-right{padding:7rem 5rem;display:flex;flex-direction:column;justify-content:center;}
-.contact-right h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.08em;margin-bottom:2rem;}
-.fg{margin-bottom:1.3rem;}
-.fg label{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:.5rem;}
-.fg input,.fg textarea,.fg select{width:100%;background:var(--b3);border:1px solid var(--border);color:var(--white);padding:.85rem 1.1rem;font-family:'Noto Sans SC',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;appearance:none;resize:none;}
+/* CONTACT */
+.ct-lay{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 102px);}
+.ct-l{background:var(--b2);padding:6rem 4.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;}
+.ct-l h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);letter-spacing:.05em;line-height:.94;margin-bottom:2.2rem;}
+.ct-l p{color:var(--gray);font-size:.84rem;line-height:1.9;font-weight:300;max-width:380px;margin-bottom:2.8rem;}
+.ci-list{display:flex;flex-direction:column;gap:1.5rem;}
+.cii{display:flex;align-items:flex-start;gap:1.1rem;}
+.cii-ic{font-size:1rem;margin-top:.1rem;flex-shrink:0;}
+.cii-lbl{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.22rem;}
+.cii-val{font-size:.82rem;}
+.cii-val a{color:var(--white);text-decoration:none;transition:color .2s;}
+.cii-val a:hover{color:var(--gold);}
+.ct-r{padding:6rem 4.5rem;display:flex;flex-direction:column;justify-content:center;}
+.ct-r h2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.07em;margin-bottom:1.8rem;}
+.fg{margin-bottom:1.15rem;}
+.fg label{display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-bottom:.42rem;}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--b3);border:1px solid var(--border);color:var(--white);padding:.78rem 1rem;font-family:inherit;font-size:.82rem;outline:none;transition:border-color .2s;appearance:none;resize:none;}
 .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold);}
-.fg textarea{min-height:120px;}
+.fg textarea{min-height:110px;}
 .fg select option{background:var(--b3);}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.btn-submit{background:var(--gold);color:var(--black);font-weight:700;padding:1rem 2.5rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
-.btn-submit:hover{background:var(--gold-l);}
-.form-success{display:none;background:rgba(90,154,90,.08);border:1px solid #2a5a2a;padding:1rem 1.2rem;font-size:.8rem;color:#7acc7a;letter-spacing:.06em;margin-top:1rem;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.btn-sub{background:var(--gold);color:var(--black);font-weight:700;padding:.9rem 2.2rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;transition:background .2s;}
+.btn-sub:hover{background:var(--gold-l);}
+.f-ok{display:none;background:rgba(90,154,90,.08);border:1px solid #2a5a2a;padding:.9rem 1.1rem;font-size:.75rem;color:#7acc7a;margin-top:.9rem;}
 
-/* ── SIZE GUIDE MODAL ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9000;opacity:0;pointer-events:none;transition:opacity .25s;display:flex;align-items:center;justify-content:center;}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--b2);border:1px solid var(--border);padding:2.5rem;max-width:540px;width:90%;position:relative;}
-.modal h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.06em;margin-bottom:1.5rem;}
-.modal table{width:100%;border-collapse:collapse;font-size:.78rem;}
-.modal table th{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);text-align:left;padding:.6rem .8rem;border-bottom:1px solid var(--border);}
-.modal table td{padding:.6rem .8rem;color:var(--gray);border-bottom:1px solid #141414;}
-.modal-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;color:var(--gray);cursor:none;transition:color .2s;}
-.modal-close:hover{color:var(--white);}
-.modal-close svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;}
+/* SIZE MODAL */
+.m-ov{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:8900;opacity:0;pointer-events:none;transition:opacity .22s;display:flex;align-items:center;justify-content:center;}
+.m-ov.on{opacity:1;pointer-events:all;}
+.modal{background:var(--b2);border:1px solid var(--border);padding:2.2rem;max-width:520px;width:90%;position:relative;}
+.modal h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;margin-bottom:1.3rem;}
+.modal table{width:100%;border-collapse:collapse;font-size:.74rem;}
+.modal th{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-align:left;padding:.55rem .75rem;border-bottom:1px solid var(--border);}
+.modal td{padding:.55rem .75rem;color:var(--gray);border-bottom:1px solid #131313;}
+.m-cls{position:absolute;top:1.1rem;right:1.1rem;background:none;border:none;color:var(--gray);cursor:pointer;transition:color .2s;}
+.m-cls:hover{color:var(--white);}
+.m-cls svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;}
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--b3);color:var(--white);padding:.85rem 1.8rem;font-size:.72rem;letter-spacing:.12em;z-index:9999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;border:1px solid var(--border);white-space:nowrap;display:flex;align-items:center;gap:.6rem;}
-.toast.show{transform:translateX(-50%) translateY(0);}
-.toast .t-icon{color:var(--gold);font-size:.9rem;}
+/* CHECKOUT */
+.ck-lay{display:grid;grid-template-columns:1fr 400px;min-height:calc(100vh - 102px);}
+.ck-l{padding:3.5rem 4rem 3.5rem 4.5rem;border-right:1px solid var(--border);}
+.ck-logo{margin-bottom:2.2rem;}
+.ck-logo img{height:36px;object-fit:contain;}
+.ck-sh{margin-bottom:2rem;}
+.ck-sh-hd{display:flex;align-items:center;gap:.9rem;margin-bottom:1.8rem;padding-bottom:1.1rem;border-bottom:1px solid var(--border);}
+.ck-sn{width:30px;height:30px;border-radius:50%;background:var(--gold);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ck-sh-hd h2{font-family:'Bebas Neue',sans-serif;font-size:1.65rem;letter-spacing:.06em;}
+.ck-fr{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.ck-fg{margin-bottom:.9rem;}
+.ck-fg label{display:block;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-bottom:.4rem;}
+.ck-fg input,.ck-fg select{width:100%;background:var(--b3);border:1px solid var(--border);color:var(--white);padding:.75rem .9rem;font-family:inherit;font-size:.82rem;outline:none;transition:border-color .2s;appearance:none;}
+.ck-fg input:focus,.ck-fg select:focus{border-color:var(--gold);}
+.ck-fg select option{background:var(--b3);}
+.ship-opts{display:flex;flex-direction:column;gap:.45rem;margin:1.3rem 0;}
+.ship-opt{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;border:1px solid var(--border);cursor:pointer;transition:border-color .2s;background:var(--b3);}
+.ship-opt:hover{border-color:var(--gray2);}
+.ship-opt.on{border-color:var(--gold);background:var(--gold-dim);}
+.ship-r{width:14px;height:14px;border-radius:50%;border:1px solid var(--gray2);flex-shrink:0;transition:all .2s;}
+.ship-opt.on .ship-r{border-color:var(--gold);background:var(--gold);}
+.ship-info{flex:1;}
+.ship-info span{font-size:.74rem;font-weight:500;display:block;}
+.ship-info small{font-size:.58rem;color:var(--gray);}
+.ship-p{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);}
+.btn-nxt{background:var(--gold);color:var(--black);border:none;padding:1rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;width:100%;margin-top:.9rem;}
+.btn-nxt:hover{background:var(--gold-l);}
+.pay-meths{display:flex;gap:.45rem;margin-bottom:1.6rem;flex-wrap:wrap;}
+.pm{background:var(--b3);border:1px solid var(--border);color:var(--gray);padding:.62rem 1.1rem;font-size:.68rem;cursor:pointer;font-family:inherit;transition:all .18s;}
+.pm:hover{border-color:var(--gray2);color:var(--white);}
+.pm.on{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.card-w{position:relative;}
+.card-w input{padding-right:4.5rem;}
+.card-ic{position:absolute;right:.7rem;top:50%;transform:translateY(-50%);display:flex;gap:.35rem;}
+.cv{font-size:.5rem;font-weight:900;color:#1a1f71;background:#fff;padding:.18rem .38rem;}
+.cm{font-size:.5rem;font-weight:900;color:#eb001b;background:#fff;padding:.18rem .38rem;}
+.alt-pi{background:var(--b3);border:1px solid var(--border);padding:1.8rem;text-align:center;margin-top:.4rem;}
+.alt-pi .api{font-size:1.3rem;font-weight:700;margin-bottom:.7rem;color:var(--gold);}
+.alt-pi p{font-size:.75rem;color:var(--gray);line-height:1.75;}
+.promo-row{display:flex;gap:.55rem;margin-top:.3rem;}
+.promo-row input{flex:1;}
+.btn-promo{background:var(--b4);border:1px solid var(--border);color:var(--white);padding:.75rem 1.2rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:all .18s;white-space:nowrap;}
+.btn-promo:hover{border-color:var(--gold);color:var(--gold);}
+.promo-msg{font-size:.64rem;margin-top:.35rem;display:none;}
+.sec-b{display:flex;align-items:center;gap:.45rem;font-size:.58rem;color:var(--gray);margin-top:1.3rem;padding:.72rem .9rem;background:var(--b3);border:1px solid var(--border);}
+.sec-b svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.5;flex-shrink:0;}
+.ck-btns{display:flex;gap:.7rem;margin-top:1.6rem;flex-wrap:wrap;}
+.btn-bk{background:none;border:1px solid var(--border);color:var(--gray);padding:.9rem 1.6rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:all .18s;}
+.btn-bk:hover{border-color:var(--gold);color:var(--gold);}
+.btn-cf{flex:1;background:var(--gold);color:var(--black);border:none;padding:.9rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;}
+.btn-cf:hover{background:var(--gold-l);}
+.ord-ok{text-align:center;padding:2.5rem 1rem;}
+.ok-ic{width:66px;height:66px;border-radius:50%;background:rgba(90,154,90,.12);border:1px solid #2a5a2a;color:#7acc7a;font-size:1.8rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.3rem;}
+.ord-ok h2{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.06em;margin-bottom:.9rem;}
+.ord-ok p{color:var(--gray);font-size:.82rem;line-height:1.8;margin-bottom:.9rem;}
+.ord-n{font-size:.72rem;color:var(--gold);letter-spacing:.09em;padding:.9rem;background:var(--b3);border:1px solid var(--border);display:inline-block;margin-top:.4rem;}
+.ck-r{background:var(--b2);padding:3.5rem 2.5rem;position:sticky;top:102px;align-self:start;border-left:1px solid var(--border);max-height:calc(100vh - 102px);overflow-y:auto;}
+.ck-r h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.06em;margin-bottom:1.3rem;}
+.cki{display:grid;grid-template-columns:52px 1fr auto;gap:.75rem;padding:.85rem 0;border-bottom:1px solid var(--border);align-items:center;}
+.cki img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#f0ede8;padding:.3rem;}
+.ckin{font-size:.7rem;font-weight:500;margin-bottom:.18rem;}
+.ckis{font-size:.58rem;color:var(--gray);}
+.ckip{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--gold);}
+.ck-tots{padding:1.1rem 0;border-bottom:1px solid var(--border);margin-bottom:1.1rem;}
+.ctr{display:flex;justify-content:space-between;font-size:.74rem;color:var(--gray);margin-bottom:.5rem;}
+.ctr.fin{font-size:.9rem;color:var(--white);font-weight:700;margin-top:.7rem;padding-top:.7rem;border-top:1px solid var(--border);}
+.ctr.fin span:last-child{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);}
+.ck-trust{display:flex;flex-direction:column;gap:.5rem;}
+.ckt{font-size:.62rem;color:var(--gray);display:flex;align-items:center;gap:.4rem;}
 
-/* ── NEWSLETTER ── */
-.newsletter{background:var(--b3);border-top:1px solid var(--border);padding:4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
-.newsletter-text h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.06em;margin-bottom:.3rem;}
-.newsletter-text p{font-size:.78rem;color:var(--gray);letter-spacing:.06em;}
-.newsletter-form{display:flex;gap:.8rem;flex-wrap:wrap;}
-.newsletter-form input{background:var(--b4);border:1px solid var(--border);color:var(--white);padding:.8rem 1.2rem;font-family:'Noto Sans SC',sans-serif;font-size:.8rem;outline:none;width:280px;transition:border-color .2s;}
-.newsletter-form input:focus{border-color:var(--gold);}
-.newsletter-form button{background:var(--gold);color:var(--black);border:none;padding:.8rem 1.8rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
-.newsletter-form button:hover{background:var(--gold-l);}
+/* NEWSLETTER */
+.nl{background:var(--b3);border-top:1px solid var(--border);padding:3.5rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.nl-txt h3{font-family:'Bebas Neue',sans-serif;font-size:1.85rem;letter-spacing:.05em;margin-bottom:.25rem;}
+.nl-txt p{font-size:.72rem;color:var(--gray);}
+.nl-f{display:flex;gap:.7rem;flex-wrap:wrap;}
+.nl-f input{background:var(--b4);border:1px solid var(--border);color:var(--white);padding:.75rem 1.1rem;font-family:inherit;font-size:.76rem;outline:none;width:260px;transition:border-color .2s;}
+.nl-f input:focus{border-color:var(--gold);}
+.nl-f button{background:var(--gold);color:var(--black);border:none;padding:.75rem 1.6rem;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;}
+.nl-f button:hover{background:var(--gold-l);}
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer{background:var(--b2);border-top:1px solid var(--border);}
-.footer-main{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding:3.5rem 4rem;}
-.footer-brand img{height:38px;object-fit:contain;margin-bottom:1rem;}
-.footer-brand p{font-size:.75rem;color:var(--gray);line-height:1.8;max-width:240px;margin-bottom:1.2rem;}
-.footer-social{display:flex;gap:.6rem;}
-.footer-social a{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gray);text-decoration:none;transition:all .2s;}
-.footer-social a:hover{border-color:var(--gold);color:var(--gold);}
-.footer-social a svg{width:14px;height:14px;fill:currentColor;}
-.footer-col h4{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--white);margin-bottom:1.2rem;}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
-.footer-col ul li button{background:none;border:none;color:var(--gray);font-size:.75rem;cursor:none;font-family:'Noto Sans SC',sans-serif;letter-spacing:.06em;padding:0;transition:color .2s;text-align:left;}
-.footer-col ul li button:hover{color:var(--gold);}
-.footer-bottom{padding:1.2rem 4rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.footer-bottom p{font-size:.62rem;color:var(--gray2);letter-spacing:.08em;}
-.footer-bottom .payment-icons{display:flex;gap:.6rem;align-items:center;}
-.pay-icon{background:var(--b3);border:1px solid var(--border);padding:.3rem .6rem;font-size:.58rem;letter-spacing:.06em;color:var(--gray);}
+.ft-m{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;padding:3rem 4rem;}
+.ft-b img{height:36px;object-fit:contain;margin-bottom:.9rem;}
+.ft-b p{font-size:.7rem;color:var(--gray);line-height:1.78;max-width:220px;margin-bottom:1rem;}
+.ft-soc{display:flex;gap:.5rem;}
+.ft-soc a{width:32px;height:32px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gray);text-decoration:none;transition:all .18s;}
+.ft-soc a:hover{border-color:var(--gold);color:var(--gold);}
+.ft-soc a svg{width:13px;height:13px;fill:currentColor;}
+.ft-col h4{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:1.1rem;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.ft-col ul li button,.ft-col ul li a{background:none;border:none;color:var(--gray);font-size:.7rem;cursor:pointer;font-family:inherit;padding:0;transition:color .18s;text-align:left;text-decoration:none;display:block;}
+.ft-col ul li button:hover,.ft-col ul li a:hover{color:var(--gold);}
+.ft-bot{padding:1.1rem 4rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;}
+.ft-bot p{font-size:.58rem;color:var(--gray2);}
+.pay-is{display:flex;gap:.5rem;}
+.py{background:var(--b3);border:1px solid var(--border);padding:.28rem .55rem;font-size:.52rem;color:var(--gray);}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1000px){
+/* TOAST */
+.toast{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%) translateY(70px);background:var(--b3);color:var(--white);padding:.78rem 1.6rem;font-size:.68rem;letter-spacing:.1em;z-index:9999;transition:transform .32s cubic-bezier(.34,1.56,.64,1);pointer-events:none;border:1px solid var(--border);white-space:nowrap;display:flex;align-items:center;gap:.5rem;}
+.toast.on{transform:translateX(-50%) translateY(0);}
+.ti{color:var(--gold);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
   nav{padding:0 1.5rem;}
   nav ul{display:none;}
-  .hero-products-row{gap:.8rem;padding:1.5rem 1.5rem 0;}
-  .hero-prod-item.featured{max-width:200px;}
-  .product-layout{grid-template-columns:1fr;}
-  .prod-info-col{border-left:none;border-top:1px solid var(--border);padding:2.5rem 1.5rem;}
-  .about-hero{grid-template-columns:1fr;}
-  .about-left{padding:4rem 2rem;}
-  .about-values{grid-template-columns:1fr;}
-  .about-story{padding:4rem 2rem;}
-  .about-stats{grid-template-columns:repeat(2,1fr);}
-  .contact-layout{grid-template-columns:1fr;}
-  .contact-left{padding:4rem 2rem;}
-  .contact-right{padding:3rem 2rem;}
-  .shop-grid{grid-template-columns:1fr 1fr;}
-  .shop-row2{grid-template-columns:1fr 1fr;max-width:100%;}
-  .footer-main{grid-template-columns:1fr 1fr;gap:2rem;padding:2.5rem 1.5rem;}
-  .footer-bottom{padding:1rem 1.5rem;flex-direction:column;gap:.8rem;text-align:center;}
-  .newsletter{padding:2.5rem 1.5rem;}
-  .newsletter-form input{width:220px;}
-  .related-grid{grid-template-columns:repeat(2,1fr);}
-  .cart-sidebar{width:100%;}
-  .form-row{grid-template-columns:1fr;}
-  .prod-related{padding:2.5rem 1.5rem;}
-  .announce{font-size:.58rem;}
+  .pb{padding-top:102px;}
+  .hero-prods{gap:.7rem;padding:1.2rem 1.2rem 0;}
+  .hpi{max-width:150px;}.hpi.feat{max-width:190px;}
+  .pl{grid-template-columns:1fr;}
+  .p-info{border-left:none;border-top:1px solid var(--border);padding:2.5rem 1.5rem;}
+  .ab-hero{grid-template-columns:1fr;}
+  .ab-l{padding:3.5rem 2rem;}
+  .ab-stats{grid-template-columns:repeat(2,1fr);}
+  .ab-vals{grid-template-columns:1fr;}
+  .ab-story{padding:3.5rem 2rem;}
+  .ct-lay{grid-template-columns:1fr;}
+  .ct-l{padding:3.5rem 2rem;}
+  .ct-r{padding:2.5rem 2rem;}
+  .sg{grid-template-columns:repeat(2,1fr);}
+  .ft-m{grid-template-columns:1fr 1fr;gap:1.8rem;padding:2.2rem 1.5rem;}
+  .ft-bot{padding:.9rem 1.5rem;}
+  .nl{padding:2.2rem 1.5rem;}
+  .nl-f input{width:210px;}
+  .ck-lay{grid-template-columns:1fr;}
+  .ck-r{position:static;border-left:none;border-top:1px solid var(--border);max-height:none;}
+  .ck-l{padding:2.5rem 1.5rem;}
+  .rg{grid-template-columns:repeat(2,1fr);}
+  .p-rel{padding:2.5rem 1.5rem;}
+  .c-sb{width:100%;right:-100%;}
+  .fr{grid-template-columns:1fr;}
+  .filter-bar{padding:.85rem 1.5rem;}
 }
 @media(max-width:600px){
-  .hero-wordmark .big-title{font-size:clamp(4rem,20vw,6rem);}
-  .hero-products-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;}
-  .hero-prod-item.featured{transform:none;max-width:none;}
-  .shop-grid{grid-template-columns:1fr;}
-  .shop-row2{max-width:100%;grid-template-columns:1fr;}
-}
-/* ── CHECKOUT ── */
-.checkout-layout{display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 108px);gap:0;}
-.checkout-left{padding:4rem 4rem 4rem 5rem;border-right:1px solid var(--border);max-width:700px;}
-.checkout-logo img{height:38px;object-fit:contain;margin-bottom:2.5rem;display:block;}
-.checkout-step-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
-.step-num{width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.checkout-step-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;}
-.co-form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
-.co-fg{margin-bottom:1rem;}
-.co-fg label{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:.45rem;}
-.co-fg input,.co-fg select,.co-fg textarea{width:100%;background:var(--b3);border:1px solid var(--border);color:var(--white);padding:.82rem 1rem;font-family:'Noto Sans SC',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;appearance:none;}
-.co-fg input:focus,.co-fg select:focus{border-color:var(--gold);}
-.co-fg select option{background:var(--b3);}
-.co-shipping-options{display:flex;flex-direction:column;gap:.5rem;margin:1.5rem 0;}
-.co-ship-opt{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border:1px solid var(--border);cursor:none;transition:border-color .2s;background:var(--b3);}
-.co-ship-opt:hover{border-color:var(--gray2);}
-.co-ship-opt.selected{border-color:var(--gold);background:var(--gold-dim);}
-.co-ship-radio{width:16px;height:16px;border-radius:50%;border:1px solid var(--gray2);flex-shrink:0;transition:all .2s;position:relative;}
-.co-ship-opt.selected .co-ship-radio{border-color:var(--gold);background:var(--gold);}
-.co-ship-info{flex:1;}
-.co-ship-info span{font-size:.78rem;font-weight:500;display:block;}
-.co-ship-info small{font-size:.62rem;color:var(--gray);letter-spacing:.08em;}
-.co-ship-price{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);}
-.co-next-btn{background:var(--gold);color:var(--black);border:none;padding:1.1rem 3rem;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;margin-top:1rem;width:100%;}
-.co-next-btn:hover{background:var(--gold-l);}
-.payment-methods{display:flex;gap:.5rem;margin-bottom:1.8rem;flex-wrap:wrap;}
-.pay-method{background:var(--b3);border:1px solid var(--border);color:var(--gray);padding:.7rem 1.2rem;font-size:.72rem;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;letter-spacing:.06em;}
-.pay-method:hover{border-color:var(--gray2);color:var(--white);}
-.pay-method.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
-.card-input-wrap .card-input-inner{position:relative;}
-.card-input-wrap input{padding-right:5rem;}
-.card-icons{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);display:flex;gap:.4rem;}
-.ci-visa{font-size:.55rem;font-weight:900;color:#1a1f71;background:#fff;padding:.2rem .4rem;letter-spacing:.06em;}
-.ci-mc{font-size:.55rem;font-weight:900;color:#eb001b;background:#fff;padding:.2rem .4rem;letter-spacing:.06em;}
-.alt-pay-info{background:var(--b3);border:1px solid var(--border);padding:2rem;text-align:center;margin-top:.5rem;}
-.alt-pay-icon{font-size:1.5rem;font-weight:700;margin-bottom:.8rem;color:var(--gold);}
-.alt-pay-info p{font-size:.8rem;color:var(--gray);line-height:1.8;}
-.co-promo-btn{background:var(--b4);border:1px solid var(--border);color:var(--white);padding:.82rem 1.4rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;white-space:nowrap;}
-.co-promo-btn:hover{border-color:var(--gold);color:var(--gold);}
-.co-secure-badge{display:flex;align-items:center;gap:.5rem;font-size:.62rem;color:var(--gray);letter-spacing:.08em;margin-top:1.5rem;padding:.8rem 1rem;background:var(--b3);border:1px solid var(--border);}
-.co-back-step-btn{background:none;border:1px solid var(--border);color:var(--gray);padding:1rem 1.8rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;}
-.co-back-step-btn:hover{border-color:var(--gold);color:var(--gold);}
-.co-confirm-btn{flex:1;background:var(--gold);color:var(--black);border:none;padding:1rem;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
-.co-confirm-btn:hover{background:var(--gold-l);}
-.order-success{text-align:center;padding:3rem 1rem;}
-.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(90,154,90,.15);border:1px solid #2a5a2a;color:#7acc7a;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;}
-.order-success h2{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.06em;margin-bottom:1rem;}
-.order-success p{color:var(--gray);font-size:.88rem;line-height:1.8;margin-bottom:1rem;}
-.order-num{font-size:.78rem;color:var(--gold);letter-spacing:.1em;padding:1rem;background:var(--b3);border:1px solid var(--border);display:inline-block;margin-top:.5rem;}
-.checkout-right{background:var(--b2);padding:4rem 3rem;position:sticky;top:108px;align-self:start;border-left:1px solid var(--border);}
-.summary-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.06em;margin-bottom:1.5rem;}
-.co-checkout-item{display:grid;grid-template-columns:56px 1fr auto;gap:.8rem;padding:.9rem 0;border-bottom:1px solid var(--border);align-items:center;}
-.co-checkout-item img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#f0ede8;padding:.3rem;}
-.co-item-name{font-size:.75rem;font-weight:500;margin-bottom:.2rem;}
-.co-item-size{font-size:.62rem;color:var(--gray);}
-.co-item-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);}
-.checkout-totals{padding:1.2rem 0;border-bottom:1px solid var(--border);margin-bottom:1.2rem;}
-.co-total-row{display:flex;justify-content:space-between;font-size:.78rem;color:var(--gray);margin-bottom:.6rem;}
-.co-total-row.total-final{font-size:1rem;color:var(--white);font-weight:700;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border);}
-.co-total-row.total-final span:last-child{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);}
-.co-trust{display:flex;flex-direction:column;gap:.6rem;}
-.co-trust-item{font-size:.68rem;color:var(--gray);letter-spacing:.06em;display:flex;align-items:center;gap:.5rem;}
-@media(max-width:1000px){
-  .checkout-layout{grid-template-columns:1fr;}
-  .checkout-right{position:static;border-left:none;border-top:1px solid var(--border);}
-  .checkout-left{padding:2.5rem 1.5rem;max-width:100%;}
-  .checkout-right{padding:2.5rem 1.5rem;}
+  .hero-wm h1{font-size:clamp(3.5rem,18vw,5.5rem);}
+  .hero-prods{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;}
+  .hpi.feat{transform:none;max-width:none;}
+  .sg{grid-template-columns:1fr;}
+  .ab-stats{grid-template-columns:1fr 1fr;}
+  .ck-fr{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
 
-<!-- ANNOUNCEMENT BAR -->
-<div class="announce" id="announce">
-  ⚡ 免费配送订单满 ¥500 &nbsp;·&nbsp; 新品即将到来 &nbsp;·&nbsp; 在 Instagram 上关注我们 @thunderbelt_official ⚡
-</div>
+<!-- ANNOUNCE -->
+<div class="ann" id="ann">⚡ 免费配送满 ¥500 &nbsp;·&nbsp; 新品上市 &nbsp;·&nbsp; Instagram: @thunderbelt_official ⚡</div>
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="logo-wrap" onclick="showPage('home')">
-    <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT">
-  </div>
+  <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT" class="logo-img" onclick="go('home')">
   <ul>
-    <li><button onclick="showPage('home')" id="nav-home">首页</button></li>
-    <li><button onclick="showPage('shop')" id="nav-shop">商店</button></li>
-    <li><button onclick="showPage('about')" id="nav-about">关于我们</button></li>
-    <li><button onclick="showPage('contact')" id="nav-contact">联系我们</button></li>
-    <li>
-      <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="nav-insta">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        Instagram
-      </a>
-    </li>
+    <li><button onclick="go('home')" id="nb-home">首页</button></li>
+    <li><button onclick="go('shop')" id="nb-shop">商店</button></li>
+    <li><button onclick="go('about')" id="nb-about">关于我们</button></li>
+    <li><button onclick="go('contact')" id="nb-contact">联系我们</button></li>
+    <li><a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="ig-link">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Instagram
+    </a></li>
   </ul>
-  <div class="nav-right">
-    <button class="nav-icon-btn" onclick="openSearch()" title="搜索">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </button>
-    <button class="nav-icon-btn" id="cart-btn" onclick="openCart()" title="购物车">
+  <div class="nav-r">
+    <button class="ico-btn" onclick="openSearch()" title="搜索"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+    <button class="ico-btn" id="cart-btn" onclick="openCart()" title="购物车">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span class="cart-badge" id="cart-badge">0</span>
+      <span class="cbadge" id="cbadge">0</span>
     </button>
   </div>
 </nav>
 
 <!-- SEARCH OVERLAY -->
-<div class="search-overlay" id="search-overlay" onclick="closeSearchOutside(event)">
-  <div class="search-box">
-    <div class="search-input-wrap">
-      <input type="text" id="search-input" placeholder="搜索产品..." oninput="doSearch(this.value)">
-      <button class="search-close" onclick="closeSearch()">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+<div class="s-ov" id="s-ov" onclick="closeSearchOut(event)">
+  <div class="s-box">
+    <div class="s-wrap">
+      <input type="text" id="s-inp" placeholder="搜索产品..." oninput="doSearch(this.value)">
+      <button class="s-cls" onclick="closeSearch()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
-    <span class="search-label" id="search-label">热门产品</span>
-    <div class="search-results" id="search-results"></div>
+    <span class="s-lbl" id="s-lbl">所有产品</span>
+    <div class="s-res" id="s-res"></div>
   </div>
 </div>
 
-<!-- CART SIDEBAR -->
-<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-<div class="cart-sidebar" id="cart-sidebar">
-  <div class="cart-header">
-    <div>
-      <h2>购物车</h2>
-      <div class="cart-count-label" id="cart-count-label">0 件商品</div>
-    </div>
-    <button class="cart-close" onclick="closeCart()">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+<!-- CART -->
+<div class="c-ov" id="c-ov" onclick="closeCart()"></div>
+<div class="c-sb" id="c-sb">
+  <div class="c-hd">
+    <div><h2>购物车</h2><div class="cct" id="cct">0 件商品</div></div>
+    <button class="c-cls" onclick="closeCart()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
-  <div class="cart-items" id="cart-items-list">
-    <div class="cart-empty">
-      <div class="empty-icon">🛍</div>
-      <p>您的购物车是空的</p>
-    </div>
-  </div>
-  <div class="cart-footer" id="cart-footer" style="display:none">
-    <div class="cart-subtotal">
-      <span class="lbl">小计</span>
-      <span class="val" id="cart-total">¥0</span>
-    </div>
-    <div class="cart-shipping">满 ¥500 免费配送 · 当前配送费 ¥25</div>
-    <button class="btn-checkout" onclick="checkout()">立即结算</button>
-    <button class="btn-clear-cart" onclick="clearCart()">清空购物车</button>
+  <div class="c-list" id="c-list"><div class="c-empty"><div class="ei">🛍</div><p>购物车是空的</p></div></div>
+  <div class="c-ft" id="c-ft" style="display:none">
+    <div class="c-sub"><span class="l">小计</span><span class="v" id="c-total">¥0</span></div>
+    <div class="c-ship">满 ¥500 免费配送 · 配送费 ¥25</div>
+    <button class="btn-co" onclick="checkout()">立即结算</button>
+    <button class="btn-clr" onclick="clearCart()">清空购物车</button>
   </div>
 </div>
 
-<!-- SIZE GUIDE MODAL -->
-<div class="modal-overlay" id="size-modal" onclick="closeSizeModal(event)">
+<!-- SIZE MODAL -->
+<div class="m-ov" id="m-ov" onclick="closeModal(event)">
   <div class="modal">
-    <button class="modal-close" onclick="closeSizeModalDirect()">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+    <button class="m-cls" onclick="closeModalDirect()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <h3>尺码指南</h3>
     <table>
       <thead><tr><th>尺码</th><th>胸围 (cm)</th><th>腰围 (cm)</th><th>身高 (cm)</th></tr></thead>
@@ -522,451 +488,309 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
   </div>
 </div>
 
-<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<!-- ████ HOME ████ -->
 <div class="page active" id="page-home">
-  <div class="page-body">
-    <section class="hero-section">
-      <div class="hero-bg-text"><span>THUNDERBELT</span></div>
-      <div class="hero-wordmark">
-        <div class="big-title">THUNDERBELT</div>
-        <div class="hero-sub">⚡ 独立品牌 &nbsp;·&nbsp; 法国制造 &nbsp;·&nbsp; 新品即将发布 ⚡</div>
+  <div class="pb">
+    <section class="hero">
+      <div class="hero-bg"><span>THUNDERBELT</span></div>
+      <div class="hero-wm">
+        <h1>THUNDERBELT</h1>
+        <div class="hero-sub">⚡ 独立品牌 · 法国制造 · 新品即将发布 ⚡</div>
       </div>
-      <div class="hero-products-row">
-        <div class="hero-prod-item" onclick="showProduct('tshirt')">
-          <img src="https://i.imgur.com/CaCYMGM.png" alt="T恤">
-          <div class="hero-prod-label">经典 T 恤</div>
-        </div>
-        <div class="hero-prod-item" onclick="showProduct('short')">
-          <img src="https://i.imgur.com/xdezCMw.png" alt="短裤">
-          <div class="hero-prod-label">休闲短裤</div>
-        </div>
-        <div class="hero-prod-item featured" onclick="showProduct('pull')">
-          <div class="hero-prod-badge">新品</div>
-          <img src="https://i.imgur.com/PQUUE7v.png" alt="卫衣">
-          <div class="hero-prod-label">卫衣</div>
-        </div>
-        <div class="hero-prod-item" onclick="showProduct('cap')">
-          <img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽">
-          <div class="hero-prod-label">棒球帽</div>
-        </div>
-        <div class="hero-prod-item" onclick="showProduct('socks')">
-          <img src="https://i.imgur.com/YSu3A1b.png" alt="袜子">
-          <div class="hero-prod-label">袜子</div>
-        </div>
-        <div class="hero-prod-item" onclick="showProduct('slip')">
-          <img src="https://i.imgur.com/PuPW819.png" alt="内裤">
-          <div class="hero-prod-label">内裤</div>
-        </div>
+      <div class="hero-prods">
+        <div class="hpi" onclick="openProduct('tshirt')"><img src="https://i.imgur.com/CaCYMGM.png" alt="T恤"><div class="hpi-lbl">经典 T 恤</div></div>
+        <div class="hpi" onclick="openProduct('short')"><img src="https://i.imgur.com/xdezCMw.png" alt="短裤"><div class="hpi-lbl">休闲短裤</div></div>
+        <div class="hpi feat" onclick="openProduct('pull')"><div class="hpi-badge">新品</div><img src="https://i.imgur.com/PQUUE7v.png" alt="卫衣"><div class="hpi-lbl">卫衣</div></div>
+        <div class="hpi" onclick="openProduct('cap')"><img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽"><div class="hpi-lbl">棒球帽</div></div>
+        <div class="hpi" onclick="openProduct('socks')"><img src="https://i.imgur.com/YSu3A1b.png" alt="袜子"><div class="hpi-lbl">袜子</div></div>
+        <div class="hpi" onclick="openProduct('slip')"><img src="https://i.imgur.com/PuPW819.png" alt="内裤"><div class="hpi-lbl">内裤</div></div>
       </div>
-      <div class="hero-cta-row">
-        <button class="btn btn-gold" onclick="showPage('shop')">探索系列</button>
-        <button class="btn btn-outline" onclick="showPage('about')">了解品牌</button>
+      <div class="hero-cta">
+        <button class="btn btn-g" onclick="go('shop')">探索系列</button>
+        <button class="btn btn-o" onclick="go('about')">了解品牌</button>
       </div>
     </section>
     <div class="band">
-      <div class="band-inner">
-        <span>THUNDERBELT</span><span class="acc">⚡</span><span>独立品牌</span><span class="acc">⚡</span><span>法国制造</span><span class="acc">⚡</span><span>新品即将发布</span><span class="acc">⚡</span><span>免费配送满¥500</span><span class="acc">⚡</span>
-        <span>THUNDERBELT</span><span class="acc">⚡</span><span>独立品牌</span><span class="acc">⚡</span><span>法国制造</span><span class="acc">⚡</span><span>新品即将发布</span><span class="acc">⚡</span><span>免费配送满¥500</span><span class="acc">⚡</span>
+      <div class="band-t">
+        <span>THUNDERBELT</span><span class="a">⚡</span><span>独立品牌</span><span class="a">⚡</span><span>法国制造</span><span class="a">⚡</span><span>新品上市</span><span class="a">⚡</span><span>免费配送满¥500</span><span class="a">⚡</span>
+        <span>THUNDERBELT</span><span class="a">⚡</span><span>独立品牌</span><span class="a">⚡</span><span>法国制造</span><span class="a">⚡</span><span>新品上市</span><span class="a">⚡</span><span>免费配送满¥500</span><span class="a">⚡</span>
       </div>
     </div>
   </div>
-  <div class="newsletter">
-    <div class="newsletter-text">
-      <h3>订阅我们的通讯</h3>
-      <p>获取新品上架、独家优惠和品牌动态</p>
-    </div>
-    <div class="newsletter-form">
-      <input type="email" id="nl-email" placeholder="输入您的电子邮件...">
-      <button onclick="subscribeNewsletter()">订阅</button>
-    </div>
-  </div>
+  <div class="nl"><div class="nl-txt"><h3>订阅通讯</h3><p>获取新品、优惠和品牌动态</p></div><div class="nl-f"><input type="email" id="nl-e" placeholder="您的电子邮件..."><button onclick="nlSub()">订阅</button></div></div>
   <footer>
-    <div class="footer-main">
-      <div class="footer-brand">
-        <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt">
-        <p>THUNDERBELT 是一个独立法国品牌，专注于打造简约而有力量感的街头服饰。</p>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/thunderbelt_official/" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>商店</h4>
-        <ul>
-          <li><button onclick="showPage('shop')">所有产品</button></li>
-          <li><button onclick="filterAndGo('上衣')">上衣</button></li>
-          <li><button onclick="filterAndGo('下装')">下装</button></li>
-          <li><button onclick="filterAndGo('配件')">配件</button></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>品牌</h4>
-        <ul>
-          <li><button onclick="showPage('about')">关于我们</button></li>
-          <li><button onclick="showPage('contact')">联系我们</button></li>
-          <li><a href="https://www.instagram.com/thunderbelt_official/" target="_blank" style="color:var(--gray);text-decoration:none;font-size:.75rem;cursor:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gray)'">Instagram</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>帮助</h4>
-        <ul>
-          <li><button onclick="showToast('📦 通常3–5个工作日送达')">配送信息</button></li>
-          <li><button onclick="showToast('↩ 14天无理由退换货')">退换政策</button></li>
-          <li><button onclick="openSizeModal()">尺码指南</button></li>
-          <li><button onclick="showPage('contact')">客服支持</button></li>
-        </ul>
-      </div>
+    <div class="ft-m">
+      <div class="ft-b"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="TB"><p>THUNDERBELT — 法国独立街头服饰品牌，简约而有力量感。</p><div class="ft-soc"><a href="https://www.instagram.com/thunderbelt_official/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></div></div>
+      <div class="ft-col"><h4>商店</h4><ul><li><button onclick="go('shop')">所有产品</button></li><li><button onclick="fgo('上衣')">上衣</button></li><li><button onclick="fgo('下装')">下装</button></li><li><button onclick="fgo('配件')">配件</button></li></ul></div>
+      <div class="ft-col"><h4>品牌</h4><ul><li><button onclick="go('about')">关于我们</button></li><li><button onclick="go('contact')">联系我们</button></li><li><a href="https://www.instagram.com/thunderbelt_official/" target="_blank">Instagram</a></li></ul></div>
+      <div class="ft-col"><h4>帮助</h4><ul><li><button onclick="toast('📦 标准配送 3–5 个工作日')">配送信息</button></li><li><button onclick="toast('↩ 14天无理由退换货')">退换政策</button></li><li><button onclick="openModal()">尺码指南</button></li><li><button onclick="go('contact')">客服支持</button></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</p>
-      <div class="payment-icons">
-        <span class="pay-icon">VISA</span>
-        <span class="pay-icon">MC</span>
-        <span class="pay-icon">PAYPAL</span>
-        <span class="pay-icon">ALIPAY</span>
-      </div>
-    </div>
+    <div class="ft-bot"><p>© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</p><div class="pay-is"><span class="py">VISA</span><span class="py">MC</span><span class="py">PAYPAL</span><span class="py">ALIPAY</span></div></div>
   </footer>
 </div>
 
-<!-- ═══════════════ SHOP PAGE ═══════════════ -->
+<!-- ████ SHOP ████ -->
 <div class="page" id="page-shop">
-  <div class="page-body">
-    <div class="shop-hero">
-      <span class="sec-label">当前系列</span>
-      <h1>精选单品</h1>
-    </div>
+  <div class="pb">
+    <div class="sh-hero"><span class="sec-lbl">当前系列</span><h1>精选单品</h1></div>
     <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterShop('全部',this)">全部</button>
-      <button class="filter-btn" onclick="filterShop('上衣',this)">上衣</button>
-      <button class="filter-btn" onclick="filterShop('下装',this)">下装</button>
-      <button class="filter-btn" onclick="filterShop('配件',this)">配件</button>
-      <select class="sort-select" onchange="sortShop(this.value)">
-        <option value="default">排序方式</option>
-        <option value="price-asc">价格从低到高</option>
-        <option value="price-desc">价格从高到低</option>
+      <button class="fb on" onclick="filterShop('全部',this)">全部</button>
+      <button class="fb" onclick="filterShop('上衣',this)">上衣</button>
+      <button class="fb" onclick="filterShop('下装',this)">下装</button>
+      <button class="fb" onclick="filterShop('配件',this)">配件</button>
+      <select class="sort-s" onchange="sortShop(this.value)">
+        <option value="">排序方式</option>
+        <option value="asc">价格从低到高</option>
+        <option value="desc">价格从高到低</option>
       </select>
     </div>
-    <div class="shop-grid" id="shop-grid">
-      <div class="shop-card" data-cat="上衣" data-price="299" onclick="showProduct('tshirt')">
-        <div class="shop-card-img">
-          <img src="https://i.imgur.com/CaCYMGM.png" alt="T恤">
-          <button class="shop-card-wish" onclick="toggleWish(event,'tshirt',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-        </div>
-        <div class="shop-card-info"><div><h3>经典 T 恤</h3><div class="sub">上衣 · 白色</div></div><span class="price">¥299</span></div>
+    <div class="sg" id="sg">
+      <div class="sc" data-cat="上衣" data-price="299" onclick="openProduct('tshirt')">
+        <div class="sc-img"><img src="https://i.imgur.com/CaCYMGM.png" alt="T恤"><button class="sc-wish" onclick="toggleWish(event,'tshirt',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>经典 T 恤</h3><div class="sub">上衣 · 白色</div></div><span class="price">¥299</span></div>
       </div>
-      <div class="shop-card" data-cat="下装" data-price="349" onclick="showProduct('short')">
-        <div class="shop-card-img">
-          <img src="https://i.imgur.com/xdezCMw.png" alt="短裤">
-          <button class="shop-card-wish" onclick="toggleWish(event,'short',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-        </div>
-        <div class="shop-card-info"><div><h3>休闲短裤</h3><div class="sub">下装 · 白色</div></div><span class="price">¥349</span></div>
+      <div class="sc" data-cat="下装" data-price="349" onclick="openProduct('short')">
+        <div class="sc-img"><img src="https://i.imgur.com/xdezCMw.png" alt="短裤"><button class="sc-wish" onclick="toggleWish(event,'short',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>休闲短裤</h3><div class="sub">下装 · 白色</div></div><span class="price">¥349</span></div>
       </div>
-      <div class="shop-card" data-cat="配件" data-price="199" onclick="showProduct('cap')">
-        <div class="shop-card-img">
-          <img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽">
-          <button class="shop-card-wish" onclick="toggleWish(event,'cap',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-        </div>
-        <div class="shop-card-info"><div><h3>标志棒球帽</h3><div class="sub">配件 · 白色</div></div><span class="price">¥199</span></div>
+      <div class="sc" data-cat="配件" data-price="199" onclick="openProduct('cap')">
+        <div class="sc-img"><img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽"><button class="sc-wish" onclick="toggleWish(event,'cap',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>标志棒球帽</h3><div class="sub">配件 · 白色</div></div><span class="price">¥199</span></div>
       </div>
-      <div class="shop-card" data-cat="上衣" data-price="499" onclick="showProduct('pull')">
-        <div class="shop-card-img">
-          <div class="shop-card-badge">新品</div>
-          <img src="https://i.imgur.com/PQUUE7v.png" alt="卫衣">
-          <button class="shop-card-wish" onclick="toggleWish(event,'pull',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-        </div>
-        <div class="shop-card-info"><div><h3>THUNDERBELT 卫衣</h3><div class="sub">上衣 · 白色</div></div><span class="price">¥499</span></div>
+      <div class="sc" data-cat="上衣" data-price="499" onclick="openProduct('pull')">
+        <div class="sc-img"><div class="sc-badge">新品</div><img src="https://i.imgur.com/PQUUE7v.png" alt="卫衣"><button class="sc-wish" onclick="toggleWish(event,'pull',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>卫衣</h3><div class="sub">上衣 · 白色</div></div><span class="price">¥499</span></div>
       </div>
-      <div class="shop-card" data-cat="配件" data-price="89" onclick="showProduct('socks')">
-        <div class="shop-card-img">
-          <img src="https://i.imgur.com/YSu3A1b.png" alt="袜子">
-          <button class="shop-card-wish" onclick="toggleWish(event,'socks',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-        </div>
-        <div class="shop-card-info"><div><h3>THUNDERBELT 袜子</h3><div class="sub">配件 · 白色</div></div><span class="price">¥89</span></div>
+      <div class="sc" data-cat="配件" data-price="89" onclick="openProduct('socks')">
+        <div class="sc-img"><img src="https://i.imgur.com/YSu3A1b.png" alt="袜子"><button class="sc-wish" onclick="toggleWish(event,'socks',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>袜子</h3><div class="sub">配件 · 白色</div></div><span class="price">¥89</span></div>
       </div>
-      <div class="shop-card" data-cat="下装" data-price="99" onclick="showProduct('slip')">
-        <div class="shop-card-img">
-          <img src="https://i.imgur.com/PuPW819.png" alt="内裤">
-          <button class="shop-card-wish" onclick="toggleWish(event,'slip',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-        </div>
-        <div class="shop-card-info"><div><h3>THUNDERBELT 内裤</h3><div class="sub">下装 · 白色</div></div><span class="price">¥99</span></div>
+      <div class="sc" data-cat="下装" data-price="99" onclick="openProduct('slip')">
+        <div class="sc-img"><img src="https://i.imgur.com/PuPW819.png" alt="内裤"><button class="sc-wish" onclick="toggleWish(event,'slip',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>内裤</h3><div class="sub">下装 · 白色</div></div><span class="price">¥99</span></div>
       </div>
-  </div>
-  <div class="newsletter">
-    <div class="newsletter-text"><h3>订阅我们的通讯</h3><p>获取新品上架、独家优惠和品牌动态</p></div>
-    <div class="newsletter-form"><input type="email" placeholder="输入您的电子邮件..."><button onclick="subscribeNewsletter()">订阅</button></div>
-  </div>
-  <footer>
-    <div class="footer-main">
-      <div class="footer-brand">
-        <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt">
-        <p>THUNDERBELT 是一个独立法国品牌，专注于打造简约而有力量感的街头服饰。</p>
-        <div class="footer-social"><a href="https://www.instagram.com/thunderbelt_official/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></div>
-      </div>
-      <div class="footer-col"><h4>分类</h4><ul><li><button onclick="filterAndGo('上衣')">上衣</button></li><li><button onclick="filterAndGo('下装')">下装</button></li><li><button onclick="filterAndGo('配件')">配件</button></li></ul></div>
-      <div class="footer-col"><h4>品牌</h4><ul><li><button onclick="showPage('about')">关于我们</button></li><li><button onclick="showPage('contact')">联系我们</button></li></ul></div>
-      <div class="footer-col"><h4>帮助</h4><ul><li><button onclick="openSizeModal()">尺码指南</button></li><li><button onclick="showPage('contact')">客服支持</button></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</p><div class="payment-icons"><span class="pay-icon">VISA</span><span class="pay-icon">MC</span><span class="pay-icon">PAYPAL</span><span class="pay-icon">ALIPAY</span></div></div>
+  </div>
+  <div class="nl"><div class="nl-txt"><h3>订阅通讯</h3><p>获取新品、优惠和品牌动态</p></div><div class="nl-f"><input type="email" placeholder="您的电子邮件..."><button onclick="nlSub()">订阅</button></div></div>
+  <footer>
+    <div class="ft-m">
+      <div class="ft-b"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="TB"><p>THUNDERBELT — 法国独立街头服饰品牌。</p></div>
+      <div class="ft-col"><h4>分类</h4><ul><li><button onclick="fgo('上衣')">上衣</button></li><li><button onclick="fgo('下装')">下装</button></li><li><button onclick="fgo('配件')">配件</button></li></ul></div>
+      <div class="ft-col"><h4>品牌</h4><ul><li><button onclick="go('about')">关于我们</button></li><li><button onclick="go('contact')">联系我们</button></li></ul></div>
+      <div class="ft-col"><h4>帮助</h4><ul><li><button onclick="openModal()">尺码指南</button></li><li><button onclick="go('contact')">客服支持</button></li></ul></div>
+    </div>
+    <div class="ft-bot"><p>© 2024 THUNDERBELT 🇫🇷</p><div class="pay-is"><span class="py">VISA</span><span class="py">MC</span><span class="py">PAYPAL</span></div></div>
   </footer>
 </div>
 
-<!-- ═══════════════ PRODUCT PAGE ═══════════════ -->
+<!-- ████ PRODUCT ████ -->
 <div class="page" id="page-product">
-  <div class="page-body">
-    <div class="product-layout">
-      <div class="prod-img-col">
-        <div class="prod-img-main"><img id="prod-img" src="" alt=""></div>
-        <div class="prod-img-zoom-hint">悬停放大</div>
-      </div>
-      <div class="prod-info-col">
-        <button class="back-btn" onclick="showPage('shop')">← 返回商店</button>
-        <span class="prod-cat" id="prod-cat"></span>
-        <h1 class="prod-name" id="prod-name"></h1>
-        <div class="prod-price-wrap">
-          <div class="prod-price" id="prod-price"></div>
-          <div class="prod-stock">有货</div>
+  <div class="pb">
+    <div class="pl">
+      <div class="p-img"><img id="p-img" src="" alt=""><div class="p-zm">悬停放大</div></div>
+      <div class="p-info">
+        <button class="back-b" onclick="go('shop')">← 返回商店</button>
+        <span class="p-cat" id="p-cat"></span>
+        <h1 class="p-name" id="p-name"></h1>
+        <div class="p-pw"><div class="p-price" id="p-price"></div><div class="p-stk">有货</div></div>
+        <p class="p-desc" id="p-desc"></p>
+        <div class="sz-sec">
+          <div class="sz-hd"><span class="sz-lbl">选择尺码</span><button class="sz-guide" onclick="openModal()">尺码指南 →</button></div>
+          <div class="sz-opts" id="p-szs"></div>
         </div>
-        <p class="prod-desc" id="prod-desc"></p>
-        <div class="size-section">
-          <div class="size-header">
-            <span class="size-label">选择尺码</span>
-            <button class="size-guide-btn" onclick="openSizeModal()">尺码指南 →</button>
-          </div>
-          <div class="size-opts" id="prod-sizes"></div>
-        </div>
-        <div class="qty-section">
-          <span class="qty-label">数量</span>
-          <div class="qty-control">
-            <button onclick="changeQty(-1)">−</button>
-            <span class="qty-num" id="prod-qty">1</span>
-            <button onclick="changeQty(1)">+</button>
+        <div class="qty-sec">
+          <span class="qty-lbl">数量</span>
+          <div class="qty-ctrl">
+            <button onclick="chQty(-1)">−</button>
+            <span class="qty-n" id="p-qty">1</span>
+            <button onclick="chQty(1)">+</button>
           </div>
         </div>
-        <div class="prod-actions">
-          <button class="btn-add-cart" onclick="addToCart()">加入购物车</button>
-          <button class="wish-btn" id="prod-wish-btn" onclick="toggleProdWish()">
-            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
+        <div class="p-acts">
+          <button class="btn-ac" onclick="addCart()">加入购物车</button>
+          <button class="wish-b" id="p-wb" onclick="toggleProdWish()"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
         </div>
-        <div class="prod-meta">
-          <div class="prod-meta-item"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>免费退换货</div>
-          <div class="prod-meta-item"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>3–5天送达</div>
-          <div class="prod-meta-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>正品保证</div>
-          <div class="prod-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>24h客服</div>
+        <div class="p-meta">
+          <div class="pmi"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>免费退换货</div>
+          <div class="pmi"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>3–5天送达</div>
+          <div class="pmi"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>正品保证</div>
+          <div class="pmi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>24h客服</div>
         </div>
       </div>
     </div>
-    <div class="prod-related">
-      <h3>您可能也喜欢</h3>
-      <div class="related-grid" id="related-grid"></div>
-    </div>
+    <div class="p-rel"><h3>您可能也喜欢</h3><div class="rg" id="rg"></div></div>
   </div>
 </div>
 
-<!-- ═══════════════ ABOUT PAGE ═══════════════ -->
+<!-- ████ ABOUT ████ -->
 <div class="page" id="page-about">
-  <div class="page-body">
-    <div class="about-hero">
-      <div class="about-left">
-        <span class="sec-label">品牌故事</span>
+  <div class="pb">
+    <div class="ab-hero">
+      <div class="ab-l">
+        <span class="sec-lbl">品牌故事</span>
         <h1>关于<br>THUNDERBELT</h1>
         <p>THUNDERBELT 诞生于法国，是一个专注于街头美学与极简设计的独立服装品牌。我们相信，真正的风格无需多言——一件好的单品，本身就是态度的表达。</p>
       </div>
-      <div class="about-right"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt Logo"></div>
+      <div class="ab-r"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT"></div>
     </div>
-    <div class="about-stats">
-      <div class="stat-block"><div class="stat-num" data-target="5">0</div><div class="stat-lbl">精选产品</div></div>
-      <div class="stat-block"><div class="stat-num" data-target="100">0</div><div class="stat-lbl">%纯棉面料</div></div>
-      <div class="stat-block"><div class="stat-num" data-target="24">0</div><div class="stat-lbl">小时客服</div></div>
-      <div class="stat-block"><div class="stat-num" data-target="14">0</div><div class="stat-lbl">天退换保障</div></div>
+    <div class="ab-stats">
+      <div class="sb"><div class="sn" data-t="6">0</div><div class="sl">精选产品</div></div>
+      <div class="sb"><div class="sn" data-t="100">0</div><div class="sl">% 纯棉面料</div></div>
+      <div class="sb"><div class="sn" data-t="24">0</div><div class="sl">小时客服</div></div>
+      <div class="sb"><div class="sn" data-t="14">0</div><div class="sl">天退换保障</div></div>
     </div>
-    <div class="about-values">
-      <div class="value-block"><div class="icon">⚡</div><h3>能量与力量</h3><p>闪电是我们的核心符号——它代表速度、能量与不可阻挡的力量。每一件 THUNDERBELT 单品都承载着这种精神。</p></div>
-      <div class="value-block"><div class="icon">🇫🇷</div><h3>法国独立精神</h3><p>我们是一个真正的独立品牌，不受任何大集团控制。每一个决定都来自我们内心，来自对设计的热爱与坚持。</p></div>
-      <div class="value-block"><div class="icon">✦</div><h3>极简主义美学</h3><p>少即是多。我们的设计语言清晰、干净、有力。去掉所有多余的元素，只保留最本质的东西。</p></div>
+    <div class="ab-vals">
+      <div class="vb"><div class="ic">⚡</div><h3>能量与力量</h3><p>闪电是我们的核心符号——速度、能量与不可阻挡的力量。每一件 THUNDERBELT 单品都承载着这种精神。</p></div>
+      <div class="vb"><div class="ic">🇫🇷</div><h3>法国独立精神</h3><p>我们是一个真正的独立品牌，不受任何大集团控制。每一个决定都来自对设计的热爱与坚持。</p></div>
+      <div class="vb"><div class="ic">✦</div><h3>极简主义美学</h3><p>少即是多。清晰、干净、有力。去掉所有多余的元素，只保留最本质的东西。</p></div>
     </div>
-    <div class="about-story">
-      <span class="sec-label">我们的使命</span>
+    <div class="ab-story">
+      <span class="sec-lbl">我们的使命</span>
       <h2>为什么是 THUNDERBELT？</h2>
-      <p>在一个充斥着快时尚与过度设计的世界里，THUNDERBELT 选择了另一条路。我们不追求趋势，我们创造经典。每一件产品都经过精心设计，力求在简约与冲击力之间找到完美的平衡。</p>
-      <p>我们的客户不仅仅是在购买一件衣服，而是在表达一种态度——自信、独立、充满能量。这就是 THUNDERBELT 的意义。</p>
-      <button class="btn btn-gold" onclick="showPage('shop')" style="margin-top:1.5rem;">探索系列</button>
+      <p>在快时尚与过度设计盛行的今天，THUNDERBELT 选择了另一条路。我们不追求趋势，我们创造经典。每一件产品都经过精心设计，力求在简约与冲击力之间找到完美平衡。</p>
+      <p>我们的客户不仅仅是在购买一件衣服，而是在表达一种态度——自信、独立、充满能量。</p>
+      <button class="btn btn-g" onclick="go('shop')" style="margin-top:1.5rem;">探索系列</button>
     </div>
   </div>
   <footer>
-    <div class="footer-main">
-      <div class="footer-brand"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt"><p>THUNDERBELT 是一个独立法国品牌。</p><div class="footer-social"><a href="https://www.instagram.com/thunderbelt_official/" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></div></div>
-      <div class="footer-col"><h4>商店</h4><ul><li><button onclick="showPage('shop')">所有产品</button></li></ul></div>
-      <div class="footer-col"><h4>帮助</h4><ul><li><button onclick="showPage('contact')">联系我们</button></li><li><button onclick="openSizeModal()">尺码指南</button></li></ul></div>
-      <div class="footer-col"><h4>社交媒体</h4><ul><li><a href="https://www.instagram.com/thunderbelt_official/" target="_blank" style="color:var(--gray);text-decoration:none;font-size:.75rem;cursor:none;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gray)'">Instagram</a></li></ul></div>
+    <div class="ft-m">
+      <div class="ft-b"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="TB"><p>THUNDERBELT — 法国独立街头服饰品牌。</p></div>
+      <div class="ft-col"><h4>商店</h4><ul><li><button onclick="go('shop')">所有产品</button></li></ul></div>
+      <div class="ft-col"><h4>帮助</h4><ul><li><button onclick="go('contact')">联系我们</button></li><li><button onclick="openModal()">尺码指南</button></li></ul></div>
+      <div class="ft-col"><h4>社交</h4><ul><li><a href="https://www.instagram.com/thunderbelt_official/" target="_blank">Instagram</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2024 THUNDERBELT — 独立品牌 🇫🇷</p><div class="payment-icons"><span class="pay-icon">VISA</span><span class="pay-icon">MC</span></div></div>
+    <div class="ft-bot"><p>© 2024 THUNDERBELT 🇫🇷</p></div>
   </footer>
 </div>
 
-<!-- ═══════════════ CONTACT PAGE ═══════════════ -->
+<!-- ████ CONTACT ████ -->
 <div class="page" id="page-contact">
-  <div class="page-body">
-    <div class="contact-layout">
-      <div class="contact-left">
-        <span class="sec-label">取得联系</span>
+  <div class="pb">
+    <div class="ct-lay">
+      <div class="ct-l">
+        <span class="sec-lbl">取得联系</span>
         <h1>联系<br>我们</h1>
-        <p>有任何关于产品、订单或合作的问题？我们随时准备为您解答。通常在24小时内回复。</p>
+        <p>有任何关于产品、订单或合作的问题？通常在24小时内回复。</p>
         <div class="ci-list">
-          <div class="ci-item"><div class="ci-icon">📸</div><div><span class="ci-label">Instagram</span><div class="ci-val"><a href="https://www.instagram.com/thunderbelt_official/" target="_blank">@thunderbelt_official</a></div></div></div>
-          <div class="ci-item"><div class="ci-icon">🇫🇷</div><div><span class="ci-label">品牌原产地</span><div class="ci-val">法国</div></div></div>
-          <div class="ci-item"><div class="ci-icon">⚡</div><div><span class="ci-label">回复时间</span><div class="ci-val">24小时内</div></div></div>
-          <div class="ci-item"><div class="ci-icon">📦</div><div><span class="ci-label">配送时间</span><div class="ci-val">3–5个工作日</div></div></div>
+          <div class="cii"><div class="cii-ic">📸</div><div><span class="cii-lbl">Instagram</span><div class="cii-val"><a href="https://www.instagram.com/thunderbelt_official/" target="_blank">@thunderbelt_official</a></div></div></div>
+          <div class="cii"><div class="cii-ic">🇫🇷</div><div><span class="cii-lbl">品牌原产地</span><div class="cii-val">法国</div></div></div>
+          <div class="cii"><div class="cii-ic">⚡</div><div><span class="cii-lbl">回复时间</span><div class="cii-val">24小时内</div></div></div>
+          <div class="cii"><div class="cii-ic">📦</div><div><span class="cii-lbl">配送时间</span><div class="cii-val">3–5个工作日</div></div></div>
         </div>
       </div>
-      <div class="contact-right">
+      <div class="ct-r">
         <h2>发送消息</h2>
-        <div class="form-row">
-          <div class="fg"><label>姓名</label><input type="text" id="cf-name" placeholder="张伟"></div>
-          <div class="fg"><label>电子邮件</label><input type="email" id="cf-email" placeholder="example@email.com"></div>
+        <div class="fr">
+          <div class="fg"><label>姓名</label><input type="text" id="cf-n" placeholder="张伟"></div>
+          <div class="fg"><label>电子邮件</label><input type="email" id="cf-e" placeholder="example@email.com"></div>
         </div>
-        <div class="fg"><label>主题</label><select id="cf-subject"><option value="">请选择主题...</option><option>产品咨询</option><option>订单问题</option><option>合作洽谈</option><option>其他</option></select></div>
-        <div class="fg"><label>留言</label><textarea id="cf-message" placeholder="请告诉我们您的问题或想法..."></textarea></div>
+        <div class="fg"><label>主题</label><select id="cf-s"><option value="">请选择...</option><option>产品咨询</option><option>订单问题</option><option>合作洽谈</option><option>其他</option></select></div>
+        <div class="fg"><label>留言</label><textarea id="cf-m" placeholder="请告诉我们您的问题..."></textarea></div>
         <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-          <button class="btn-submit" onclick="submitForm()">发送留言</button>
-          <span style="font-size:.65rem;color:var(--gray);letter-spacing:.06em;">我们保护您的隐私</span>
+          <button class="btn-sub" onclick="sendForm()">发送留言</button>
+          <span style="font-size:.6rem;color:var(--gray);">我们保护您的隐私</span>
         </div>
-        <div class="form-success" id="form-success">✓ &nbsp;消息已发送！我们将尽快回复您。</div>
+        <div class="f-ok" id="f-ok">✓ 消息已发送！我们将尽快回复您。</div>
       </div>
     </div>
   </div>
   <footer>
-    <div class="footer-main">
-      <div class="footer-brand"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt"><p>THUNDERBELT 是一个独立法国品牌。</p></div>
-      <div class="footer-col"><h4>商店</h4><ul><li><button onclick="showPage('shop')">所有产品</button></li></ul></div>
-      <div class="footer-col"><h4>品牌</h4><ul><li><button onclick="showPage('about')">关于我们</button></li></ul></div>
-      <div class="footer-col"><h4>社交</h4><ul><li><a href="https://www.instagram.com/thunderbelt_official/" target="_blank" style="color:var(--gray);text-decoration:none;font-size:.75rem;cursor:none;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gray)'">Instagram</a></li></ul></div>
+    <div class="ft-m">
+      <div class="ft-b"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="TB"><p>THUNDERBELT — 法国独立街头服饰品牌。</p></div>
+      <div class="ft-col"><h4>商店</h4><ul><li><button onclick="go('shop')">所有产品</button></li></ul></div>
+      <div class="ft-col"><h4>品牌</h4><ul><li><button onclick="go('about')">关于我们</button></li></ul></div>
+      <div class="ft-col"><h4>社交</h4><ul><li><a href="https://www.instagram.com/thunderbelt_official/" target="_blank">Instagram</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2024 THUNDERBELT — 独立品牌 🇫🇷</p><div class="payment-icons"><span class="pay-icon">VISA</span><span class="pay-icon">MC</span><span class="pay-icon">PAYPAL</span></div></div>
+    <div class="ft-bot"><p>© 2024 THUNDERBELT 🇫🇷</p></div>
   </footer>
 </div>
 
-<!-- ═══════════════ CHECKOUT PAGE ═══════════════ -->
+<!-- ████ CHECKOUT ████ -->
 <div class="page" id="page-checkout">
-  <div class="page-body">
-    <div class="checkout-layout">
-      <!-- LEFT: FORM -->
-      <div class="checkout-left">
-        <button class="back-btn" onclick="showPage('shop')" style="margin-bottom:2rem;">← 返回商店</button>
-        <div class="checkout-logo"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT"></div>
-
-        <!-- STEP 1: SHIPPING -->
-        <div class="checkout-section" id="step-shipping">
-          <div class="checkout-step-header"><span class="step-num">1</span><h2>配送信息</h2></div>
-          <div class="co-form-row">
-            <div class="co-fg"><label>姓</label><input type="text" id="co-lastname" placeholder="张"></div>
-            <div class="co-fg"><label>名</label><input type="text" id="co-firstname" placeholder="伟"></div>
+  <div class="pb">
+    <div class="ck-lay">
+      <div class="ck-l">
+        <div class="ck-logo"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT"></div>
+        <!-- STEP 1 -->
+        <div id="ck-s1">
+          <div class="ck-sh-hd"><span class="ck-sn">1</span><h2>配送信息</h2></div>
+          <div class="ck-fr">
+            <div class="ck-fg"><label>姓</label><input type="text" id="ck-ln" placeholder="张"></div>
+            <div class="ck-fg"><label>名</label><input type="text" id="ck-fn" placeholder="伟"></div>
           </div>
-          <div class="co-fg"><label>电子邮件</label><input type="email" id="co-email" placeholder="example@email.com"></div>
-          <div class="co-fg"><label>手机号码</label><input type="tel" id="co-phone" placeholder="+86 138 0000 0000"></div>
-          <div class="co-fg"><label>详细地址</label><input type="text" id="co-address" placeholder="街道、门牌号..."></div>
-          <div class="co-form-row">
-            <div class="co-fg"><label>城市</label><input type="text" id="co-city" placeholder="北京"></div>
-            <div class="co-fg"><label>邮政编码</label><input type="text" id="co-zip" placeholder="100000"></div>
+          <div class="ck-fg"><label>电子邮件</label><input type="email" id="ck-em" placeholder="example@email.com"></div>
+          <div class="ck-fg"><label>手机号码</label><input type="tel" id="ck-ph" placeholder="+86 138 0000 0000"></div>
+          <div class="ck-fg"><label>详细地址</label><input type="text" id="ck-ad" placeholder="街道、门牌号..."></div>
+          <div class="ck-fr">
+            <div class="ck-fg"><label>城市</label><input type="text" id="ck-ct" placeholder="北京"></div>
+            <div class="ck-fg"><label>邮政编码</label><input type="text" id="ck-zp" placeholder="100000"></div>
           </div>
-          <div class="co-fg"><label>国家/地区</label>
-            <select id="co-country">
-              <option value="CN">中国</option><option value="FR">法国</option><option value="US">美国</option>
-              <option value="HK">香港</option><option value="TW">台湾</option><option value="SG">新加坡</option>
-            </select>
+          <div class="ck-fg"><label>国家/地区</label>
+            <select id="ck-co"><option value="CN">中国</option><option value="FR">法国</option><option value="US">美国</option><option value="HK">香港</option><option value="TW">台湾</option><option value="SG">新加坡</option></select>
           </div>
-          <div class="co-shipping-options">
-            <div class="co-ship-opt selected" onclick="selectShipping(this,'标准配送 (3–5天)',25)">
-              <div class="co-ship-radio"></div>
-              <div class="co-ship-info"><span>标准配送</span><small>3–5 个工作日</small></div>
-              <span class="co-ship-price">¥25</span>
-            </div>
-            <div class="co-ship-opt" onclick="selectShipping(this,'快递配送 (1–2天)',65)">
-              <div class="co-ship-radio"></div>
-              <div class="co-ship-info"><span>快递配送</span><small>1–2 个工作日</small></div>
-              <span class="co-ship-price">¥65</span>
-            </div>
-            <div class="co-ship-opt" onclick="selectShipping(this,'国际配送 (7–14天)',120)">
-              <div class="co-ship-radio"></div>
-              <div class="co-ship-info"><span>国际配送</span><small>7–14 个工作日</small></div>
-              <span class="co-ship-price">¥120</span>
-            </div>
+          <div class="ship-opts">
+            <div class="ship-opt on" onclick="pickShip(this,25)"><div class="ship-r"></div><div class="ship-info"><span>标准配送</span><small>3–5 个工作日</small></div><span class="ship-p">¥25</span></div>
+            <div class="ship-opt" onclick="pickShip(this,65)"><div class="ship-r"></div><div class="ship-info"><span>快递配送</span><small>1–2 个工作日</small></div><span class="ship-p">¥65</span></div>
+            <div class="ship-opt" onclick="pickShip(this,120)"><div class="ship-r"></div><div class="ship-info"><span>国际配送</span><small>7–14 个工作日</small></div><span class="ship-p">¥120</span></div>
           </div>
-          <button class="co-next-btn" onclick="goToPayment()">继续 → 支付信息</button>
+          <button class="btn-nxt" onclick="ckNext()">继续 → 支付信息</button>
         </div>
-
-        <!-- STEP 2: PAYMENT -->
-        <div class="checkout-section" id="step-payment" style="display:none">
-          <div class="checkout-step-header"><span class="step-num">2</span><h2>支付信息</h2></div>
-          <div class="payment-methods">
-            <button class="pay-method active" onclick="selectPayMethod(this,'card')">💳 银行卡</button>
-            <button class="pay-method" onclick="selectPayMethod(this,'alipay')">支付宝</button>
-            <button class="pay-method" onclick="selectPayMethod(this,'wechat')">微信支付</button>
-            <button class="pay-method" onclick="selectPayMethod(this,'paypal')">PayPal</button>
+        <!-- STEP 2 -->
+        <div id="ck-s2" style="display:none">
+          <div class="ck-sh-hd"><span class="ck-sn">2</span><h2>支付信息</h2></div>
+          <div class="pay-meths">
+            <button class="pm on" onclick="pickPay(this,'card')">💳 银行卡</button>
+            <button class="pm" onclick="pickPay(this,'alipay')">支付宝</button>
+            <button class="pm" onclick="pickPay(this,'wechat')">微信支付</button>
+            <button class="pm" onclick="pickPay(this,'paypal')">PayPal</button>
           </div>
-          <div id="card-fields">
-            <div class="co-fg"><label>持卡人姓名</label><input type="text" id="co-card-name" placeholder="ZHANG WEI"></div>
-            <div class="co-fg card-input-wrap">
-              <label>卡号</label>
-              <div class="card-input-inner">
-                <input type="text" id="co-card-num" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)">
-                <div class="card-icons"><span class="ci-visa">VISA</span><span class="ci-mc">MC</span></div>
-              </div>
-            </div>
-            <div class="co-form-row">
-              <div class="co-fg"><label>有效期</label><input type="text" id="co-card-exp" placeholder="MM / YY" maxlength="7" oninput="formatExp(this)"></div>
-              <div class="co-fg"><label>CVV</label><input type="text" id="co-card-cvv" placeholder="•••" maxlength="3"></div>
+          <div id="pf-card">
+            <div class="ck-fg"><label>持卡人姓名</label><input type="text" id="cc-nm" placeholder="ZHANG WEI"></div>
+            <div class="ck-fg card-w"><label>卡号</label><div style="position:relative"><input type="text" id="cc-nu" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)" style="padding-right:4.5rem"><div class="card-ic"><span class="cv">VISA</span><span class="cm">MC</span></div></div></div>
+            <div class="ck-fr">
+              <div class="ck-fg"><label>有效期</label><input type="text" id="cc-ex" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"></div>
+              <div class="ck-fg"><label>CVV</label><input type="text" id="cc-cv" placeholder="•••" maxlength="3"></div>
             </div>
           </div>
-          <div id="alipay-fields" style="display:none"><div class="alt-pay-info"><div class="alt-pay-icon">支付宝</div><p>点击"确认下单"后，您将被引导至支付宝完成支付。</p></div></div>
-          <div id="wechat-fields" style="display:none"><div class="alt-pay-info"><div class="alt-pay-icon">微信</div><p>点击"确认下单"后，将生成微信支付二维码。</p></div></div>
-          <div id="paypal-fields" style="display:none"><div class="alt-pay-info"><div class="alt-pay-icon">PayPal</div><p>点击"确认下单"后，您将跳转至 PayPal 完成支付。</p></div></div>
-          <div class="co-fg" style="margin-top:1.5rem">
+          <div id="pf-alipay" style="display:none"><div class="alt-pi"><div class="api">支付宝</div><p>点击"确认下单"后，将跳转至支付宝完成支付。</p></div></div>
+          <div id="pf-wechat" style="display:none"><div class="alt-pi"><div class="api">微信支付</div><p>点击"确认下单"后，将生成微信支付二维码。</p></div></div>
+          <div id="pf-paypal" style="display:none"><div class="alt-pi"><div class="api">PayPal</div><p>点击"确认下单"后，将跳转至 PayPal 完成支付。</p></div></div>
+          <div class="ck-fg" style="margin-top:1.4rem">
             <label>优惠码</label>
-            <div style="display:flex;gap:.6rem">
-              <input type="text" id="co-promo" placeholder="输入优惠码..." style="flex:1">
-              <button class="co-promo-btn" onclick="applyPromo()">使用</button>
-            </div>
-            <div id="promo-result" style="font-size:.7rem;margin-top:.4rem;display:none;"></div>
+            <div class="promo-row"><input type="text" id="ck-promo" placeholder="输入优惠码..."><button class="btn-promo" onclick="applyPromo()">使用</button></div>
+            <div class="promo-msg" id="promo-msg"></div>
           </div>
-          <div class="co-secure-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            此页面受 256 位 SSL 加密保护
-          </div>
-          <div style="display:flex;gap:.8rem;margin-top:1.8rem;flex-wrap:wrap;">
-            <button class="co-back-step-btn" onclick="backToShipping()">← 返回</button>
-            <button class="co-confirm-btn" onclick="placeOrder()">确认下单</button>
+          <div class="sec-b"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>此页面受 256 位 SSL 加密保护</div>
+          <div class="ck-btns">
+            <button class="btn-bk" onclick="ckBack()">← 返回</button>
+            <button class="btn-cf" onclick="placeOrder()">确认下单</button>
           </div>
         </div>
-
-        <!-- STEP 3: CONFIRMATION -->
-        <div class="checkout-section" id="step-confirm" style="display:none">
-          <div class="order-success">
-            <div class="success-icon">✓</div>
+        <!-- STEP 3 -->
+        <div id="ck-s3" style="display:none">
+          <div class="ord-ok">
+            <div class="ok-ic">✓</div>
             <h2>订单已确认！</h2>
             <p>感谢您的购买。订单确认邮件将发送至您的邮箱。</p>
-            <div class="order-num">订单编号：<strong id="order-num-display"></strong></div>
-            <button class="btn btn-gold" onclick="showPage('home')" style="margin-top:2rem;">返回首页</button>
+            <div class="ord-n">订单编号：<strong id="ord-id"></strong></div>
+            <button class="btn btn-g" onclick="go('home')" style="margin-top:1.8rem;">返回首页</button>
           </div>
         </div>
       </div>
-
-      <!-- RIGHT: ORDER SUMMARY -->
-      <div class="checkout-right">
-        <h3 class="summary-title">订单摘要</h3>
-        <div id="checkout-items"></div>
-        <div class="checkout-totals">
-          <div class="co-total-row"><span>小计</span><span id="co-subtotal">¥0</span></div>
-          <div class="co-total-row"><span>配送费</span><span id="co-shipping-cost">¥25</span></div>
-          <div class="co-total-row promo-row" id="co-promo-row" style="display:none"><span>优惠码折扣</span><span id="co-discount" style="color:#7acc7a">-¥0</span></div>
-          <div class="co-total-row total-final"><span>总计</span><span id="co-grand-total">¥0</span></div>
+      <!-- SUMMARY -->
+      <div class="ck-r">
+        <h3>订单摘要</h3>
+        <div id="ck-items"></div>
+        <div class="ck-tots">
+          <div class="ctr"><span>小计</span><span id="ck-sub">¥0</span></div>
+          <div class="ctr"><span>配送费</span><span id="ck-ship">¥25</span></div>
+          <div class="ctr" id="ck-disc-row" style="display:none"><span>优惠码</span><span id="ck-disc" style="color:#7acc7a">-¥0</span></div>
+          <div class="ctr fin"><span>总计</span><span id="ck-tot">¥0</span></div>
         </div>
-        <div class="co-trust">
-          <div class="co-trust-item"><span>🔒</span> 安全支付</div>
-          <div class="co-trust-item"><span>↩</span> 14天退换</div>
-          <div class="co-trust-item"><span>📦</span> 正品保证</div>
+        <div class="ck-trust">
+          <div class="ckt"><span>🔒</span> 安全支付</div>
+          <div class="ckt"><span>↩</span> 14天退换</div>
+          <div class="ckt"><span>📦</span> 正品保证</div>
         </div>
       </div>
     </div>
@@ -974,419 +798,277 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"><span class="t-icon">⚡</span><span id="toast-msg"></span></div>
+<div class="toast" id="tst"><span class="ti">⚡</span><span id="tmsg"></span></div>
 
 <script>
-// ── DATA ──
-const PRODUCTS = {
-  tshirt:{img:'https://i.imgur.com/CaCYMGM.png',cat:'上衣',name:'经典 T 恤',price:299,desc:'采用100%优质纯棉面料，舒适透气。胸前刺绣 THUNDERBELT 闪电标志，简约而有力量感。版型宽松，适合日常穿搭。',sizes:['XS','S','M','L','XL','XXL']},
-  short:{img:'https://i.imgur.com/xdezCMw.png',cat:'下装',name:'休闲短裤',price:349,desc:'经典法式运动剪裁，弹力腰绳设计，轻盈舒适。右侧腿部印有 THUNDERBELT 品牌标志，低调彰显个性。',sizes:['XS','S','M','L','XL','XXL']},
-  cap:{img:'https://i.imgur.com/wh3PGAN.png',cat:'配件',name:'标志棒球帽',price:199,desc:'结构化帽型，前帽片正面绣有金色 THUNDERBELT 闪电标志。可调节后扣，适合大多数头围。百搭经典款。',sizes:['均码']},
-  pull:{img:'https://i.imgur.com/PQUUE7v.png',cat:'上衣',name:'THUNDERBELT 卫衣',price:499,desc:'重磅法式绒面料，内里柔软蓬松。胸前大号 THUNDERBELT 闪电印花，帽檐与袖口罗纹设计，宽松oversize版型，秋冬必备单品。',sizes:['XS','S','M','L','XL','XXL']},
-  socks:{img:'https://i.imgur.com/YSu3A1b.png',cat:'配件',name:'THUNDERBELT 袜子',price:89,desc:'高品质棉混纺面料，中筒设计。侧面织入 THUNDERBELT 闪电标志，舒适耐穿。每双独立包装，也是绝佳礼品选择。',sizes:['均码 (36–45)']},
-  slip:{img:'https://i.imgur.com/PuPW819.png',cat:'下装',name:'THUNDERBELT 内裤',price:99,desc:'优质弹性棉混纺面料，亲肤柔软。腰间织入 THUNDERBELT 品牌标志，宽腰带设计，舒适包裹，全天候舒适穿着。',sizes:['XS','S','M','L','XL','XXL']}
+// DATA
+const P = {
+  tshirt:{img:'https://i.imgur.com/CaCYMGM.png',cat:'上衣',name:'经典 T 恤',price:299,desc:'100%优质纯棉，胸前刺绣 THUNDERBELT 闪电标志，宽松版型，适合日常穿搭。',sizes:['XS','S','M','L','XL','XXL']},
+  short:{img:'https://i.imgur.com/xdezCMw.png',cat:'下装',name:'休闲短裤',price:349,desc:'法式运动剪裁，弹力腰绳，右腿印有 THUNDERBELT 品牌标志，低调彰显个性。',sizes:['XS','S','M','L','XL','XXL']},
+  cap:{img:'https://i.imgur.com/wh3PGAN.png',cat:'配件',name:'标志棒球帽',price:199,desc:'结构化帽型，前帽片绣有金色 THUNDERBELT 闪电标志，可调节后扣，百搭经典款。',sizes:['均码']},
+  pull:{img:'https://i.imgur.com/PQUUE7v.png',cat:'上衣',name:'THUNDERBELT 卫衣',price:499,desc:'重磅法式绒，内里柔软蓬松，胸前大号 THUNDERBELT 闪电印花，oversize版型，秋冬必备。',sizes:['XS','S','M','L','XL','XXL']},
+  socks:{img:'https://i.imgur.com/YSu3A1b.png',cat:'配件',name:'THUNDERBELT 袜子',price:89,desc:'高品质棉混纺，中筒设计，侧面织入品牌标志，舒适耐穿，独立包装，绝佳礼品选择。',sizes:['均码 (36–45)']},
+  slip:{img:'https://i.imgur.com/PuPW819.png',cat:'下装',name:'THUNDERBELT 内裤',price:99,desc:'弹性棉混纺面料，亲肤柔软，腰间织入 THUNDERBELT 品牌标志，宽腰带设计，全天候舒适。',sizes:['XS','S','M','L','XL','XXL']}
 };
 
-// ── STATE ──
-let cart = JSON.parse(localStorage.getItem('tb_cart')||'[]');
-let wishlist = JSON.parse(localStorage.getItem('tb_wish')||'[]');
-let currentProduct = null;
+// STATE
+let cart = [];
+let wish = [];
+let curProd = null;
 let prodQty = 1;
-let currentFilter = '全部';
+let shipCost = 25;
+let discAmt = 0;
+let payMeth = 'card';
 
-// ── CURSOR ──
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-document.addEventListener('mousemove', e => {
-  cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px';
-  setTimeout(()=>{ ring.style.left = e.clientX+'px'; ring.style.top = e.clientY+'px'; }, 80);
-});
-document.querySelectorAll('button,a,.shop-card,.hero-prod-item,.related-card').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
-});
+try { cart = JSON.parse(localStorage.getItem('tb_cart')||'[]'); } catch(e){}
+try { wish = JSON.parse(localStorage.getItem('tb_wish')||'[]'); } catch(e){}
 
-// ── SCROLL NAV ──
-let lastScroll = 0;
+// CURSOR
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+if(cur && ring) {
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px';
+    setTimeout(()=>{ ring.style.left=e.clientX+'px'; ring.style.top=e.clientY+'px'; },90);
+  });
+}
+
+// SCROLL
 window.addEventListener('scroll', () => {
   const s = window.scrollY;
   const nav = document.getElementById('nav');
-  const ann = document.getElementById('announce');
-  if (s > 80) { nav.classList.add('scrolled'); ann.classList.add('hidden'); nav.classList.add('announce-hidden'); document.querySelectorAll('.page-body').forEach(p=>p.style.paddingTop='72px'); document.querySelectorAll('.checkout-right').forEach(p=>p.style.top='72px'); }
-  else { nav.classList.remove('scrolled'); ann.classList.remove('hidden'); nav.classList.remove('announce-hidden'); document.querySelectorAll('.page-body').forEach(p=>p.style.paddingTop=''); document.querySelectorAll('.checkout-right').forEach(p=>p.style.top=''); }
-  lastScroll = s;
+  const ann = document.getElementById('ann');
+  if(s > 60) {
+    ann.classList.add('off');
+    nav.classList.add('up');
+    document.querySelectorAll('.pb').forEach(el => el.style.paddingTop = '68px');
+    document.getElementById('ck-r') && (document.getElementById('ck-r').style.top = '68px');
+  } else {
+    ann.classList.remove('off');
+    nav.classList.remove('up');
+    document.querySelectorAll('.pb').forEach(el => el.style.paddingTop = '');
+    document.getElementById('ck-r') && (document.getElementById('ck-r').style.top = '');
+  }
 });
 
-// ── PAGE NAV ──
-function showPage(page) {
+// NAV
+function go(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
-  document.querySelectorAll('nav ul li button').forEach(b => b.classList.remove('active'));
-  const nb = document.getElementById('nav-'+page);
-  if(nb) nb.classList.add('active');
+  document.querySelectorAll('nav ul li button').forEach(b => b.classList.remove('on'));
+  const nb = document.getElementById('nb-'+page);
+  if(nb) nb.classList.add('on');
   window.scrollTo(0,0);
-  if(page==='about') animateStats();
+  if(page==='about') animStats();
 }
 
-// ── PRODUCT ──
-function showProduct(id) {
-  const p = PRODUCTS[id]; currentProduct = id; prodQty = 1;
-  document.getElementById('prod-img').src = p.img;
-  document.getElementById('prod-img').alt = p.name;
-  document.getElementById('prod-cat').textContent = p.cat;
-  document.getElementById('prod-name').textContent = p.name;
-  document.getElementById('prod-price').textContent = '¥'+p.price;
-  document.getElementById('prod-desc').textContent = p.desc;
-  document.getElementById('prod-qty').textContent = '1';
-  const so = document.getElementById('prod-sizes'); so.innerHTML = '';
+// PRODUCT
+function openProduct(id) {
+  const p = P[id]; curProd = id; prodQty = 1;
+  document.getElementById('p-img').src = p.img;
+  document.getElementById('p-cat').textContent = p.cat;
+  document.getElementById('p-name').textContent = p.name;
+  document.getElementById('p-price').textContent = '¥'+p.price;
+  document.getElementById('p-desc').textContent = p.desc;
+  document.getElementById('p-qty').textContent = '1';
+  const so = document.getElementById('p-szs'); so.innerHTML = '';
   p.sizes.forEach(s => {
-    const b = document.createElement('button'); b.className = 'size-btn'; b.textContent = s;
-    b.onclick = () => { document.querySelectorAll('.size-btn').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); };
+    const b = document.createElement('button'); b.className='szb'; b.textContent=s;
+    b.onclick = () => { document.querySelectorAll('.szb').forEach(x=>x.classList.remove('on')); b.classList.add('on'); };
     so.appendChild(b);
   });
-  const wb = document.getElementById('prod-wish-btn');
-  if(wishlist.includes(id)) wb.classList.add('active'); else wb.classList.remove('active');
+  const wb = document.getElementById('p-wb');
+  wish.includes(id) ? wb.classList.add('on') : wb.classList.remove('on');
   buildRelated(id);
-  showPage('product');
+  go('product');
 }
 
-function changeQty(d) {
-  prodQty = Math.max(1, Math.min(10, prodQty + d));
-  document.getElementById('prod-qty').textContent = prodQty;
-}
+function chQty(d){ prodQty = Math.max(1,Math.min(10,prodQty+d)); document.getElementById('p-qty').textContent=prodQty; }
 
-function buildRelated(currentId) {
-  const others = Object.entries(PRODUCTS).filter(([k])=>k!==currentId).slice(0,4);
-  const grid = document.getElementById('related-grid'); grid.innerHTML = '';
+function buildRelated(cur) {
+  const others = Object.entries(P).filter(([k])=>k!==cur).slice(0,4);
+  const g = document.getElementById('rg'); g.innerHTML='';
   others.forEach(([id,p]) => {
-    const d = document.createElement('div'); d.className = 'related-card';
-    d.onclick = () => showProduct(id);
-    d.innerHTML = `<img src="${p.img}" alt="${p.name}"><div class="rc-info"><div class="rc-name">${p.name}</div><div class="rc-price">¥${p.price}</div></div>`;
-    grid.appendChild(d);
+    const d=document.createElement('div'); d.className='rc'; d.onclick=()=>openProduct(id);
+    d.innerHTML=`<img src="${p.img}" alt="${p.name}"><div class="rc-i"><div class="rc-n">${p.name}</div><div class="rc-p">¥${p.price}</div></div>`;
+    g.appendChild(d);
   });
 }
 
-// ── CART ──
-function saveCart() {
-  localStorage.setItem('tb_cart', JSON.stringify(cart));
-  updateCartUI();
-}
-
+// CART
+function saveCart() { try{localStorage.setItem('tb_cart',JSON.stringify(cart));}catch(e){} updateCartUI(); }
 function updateCartUI() {
-  const badge = document.getElementById('cart-badge');
   const total = cart.reduce((s,i)=>s+(i.qty||1),0);
+  const badge = document.getElementById('cbadge');
   badge.textContent = total;
-  if(total>0) badge.classList.add('visible'); else badge.classList.remove('visible');
-  document.getElementById('cart-count-label').textContent = total+' 件商品';
-  renderCartItems();
+  total>0 ? badge.classList.add('on') : badge.classList.remove('on');
+  document.getElementById('cct').textContent = total+' 件商品';
+  renderCart();
 }
-
-function renderCartItems() {
-  const list = document.getElementById('cart-items-list');
-  const footer = document.getElementById('cart-footer');
-  if(cart.length===0){
-    list.innerHTML = '<div class="cart-empty"><div class="empty-icon">🛍</div><p>您的购物车是空的</p></div>';
-    footer.style.display='none'; return;
-  }
-  footer.style.display='block';
-  list.innerHTML = '';
-  cart.forEach((item,idx) => {
-    const p = PRODUCTS[item.id];
-    const el = document.createElement('div'); el.className = 'cart-item';
-    el.innerHTML = `
-      <div class="cart-item-img"><img src="${p.img}" alt="${p.name}"></div>
-      <div>
-        <div class="cart-item-name">${p.name}</div>
-        <div class="cart-item-size">${item.size}</div>
-        <div class="cart-item-qty">
-          <button class="qty-btn" onclick="updateCartQty(${idx},-1)">−</button>
-          <span>${item.qty}</span>
-          <button class="qty-btn" onclick="updateCartQty(${idx},1)">+</button>
-        </div>
-      </div>
-      <div>
-        <button class="cart-item-remove" onclick="removeCartItem(${idx})">✕</button>
-        <div class="cart-item-price">¥${p.price*item.qty}</div>
-      </div>`;
+function renderCart() {
+  const list = document.getElementById('c-list');
+  const ft = document.getElementById('c-ft');
+  if(!cart.length){ list.innerHTML='<div class="c-empty"><div class="ei">🛍</div><p>购物车是空的</p></div>'; ft.style.display='none'; return; }
+  ft.style.display='block'; list.innerHTML='';
+  cart.forEach((item,i)=>{
+    const p=P[item.id]; const el=document.createElement('div'); el.className='ci';
+    el.innerHTML=`<div class="ci-img"><img src="${p.img}" alt="${p.name}"></div><div><div class="ci-name">${p.name}</div><div class="ci-sz">${item.size}</div><div class="ci-q"><button class="qb" onclick="updQty(${i},-1)">−</button><span>${item.qty}</span><button class="qb" onclick="updQty(${i},1)">+</button></div></div><div><button class="ci-rm" onclick="rmItem(${i})">✕</button><div class="ci-p">¥${p.price*item.qty}</div></div>`;
     list.appendChild(el);
   });
-  const sub = cart.reduce((s,i)=>s+PRODUCTS[i.id].price*i.qty,0);
-  document.getElementById('cart-total').textContent = '¥'+sub;
+  const sub = cart.reduce((s,i)=>s+P[i.id].price*i.qty,0);
+  document.getElementById('c-total').textContent = '¥'+sub;
 }
+function addCart() {
+  const sel = document.querySelector('.szb.on');
+  if(!sel && P[curProd].sizes.length>1){ toast('请先选择尺码'); return; }
+  const sz = sel ? sel.textContent : P[curProd].sizes[0];
+  const ex = cart.find(i=>i.id===curProd&&i.size===sz);
+  ex ? ex.qty+=prodQty : cart.push({id:curProd,size:sz,qty:prodQty});
+  saveCart(); toast('✓ 已加入购物车 — '+P[curProd].name); openCart();
+}
+function updQty(i,d){ cart[i].qty=Math.max(1,cart[i].qty+d); saveCart(); }
+function rmItem(i){ cart.splice(i,1); saveCart(); }
+function clearCart(){ cart=[]; saveCart(); toast('购物车已清空'); }
+function openCart(){ document.getElementById('c-ov').classList.add('on'); document.getElementById('c-sb').classList.add('on'); }
+function closeCart(){ document.getElementById('c-ov').classList.remove('on'); document.getElementById('c-sb').classList.remove('on'); }
 
-function addToCart() {
-  const sel = document.querySelector('.size-btn.sel');
-  const p = PRODUCTS[currentProduct];
-  if(!sel && p.sizes.length>1) { showToast('请先选择尺码'); return; }
-  const size = sel ? sel.textContent : p.sizes[0];
-  const existing = cart.find(i=>i.id===currentProduct && i.size===size);
-  if(existing) existing.qty += prodQty;
-  else cart.push({id:currentProduct, size, qty:prodQty});
-  saveCart();
-  showToast('✓ 已加入购物车 — '+p.name);
-  openCart();
-}
+// WISH
+function toggleWish(e,id,btn){ e.stopPropagation(); if(wish.includes(id)){wish=wish.filter(x=>x!==id);btn.classList.remove('on');toast('已移出收藏');}else{wish.push(id);btn.classList.add('on');toast('♡ 已加入收藏 — '+P[id].name);} try{localStorage.setItem('tb_wish',JSON.stringify(wish));}catch(e){} }
+function toggleProdWish(){ const b=document.getElementById('p-wb'); if(wish.includes(curProd)){wish=wish.filter(x=>x!==curProd);b.classList.remove('on');toast('已移出收藏');}else{wish.push(curProd);b.classList.add('on');toast('♡ 已加入收藏 — '+P[curProd].name);} try{localStorage.setItem('tb_wish',JSON.stringify(wish));}catch(e){} }
 
-function updateCartQty(idx, d) {
-  cart[idx].qty = Math.max(1, cart[idx].qty+d);
-  saveCart();
-}
-function removeCartItem(idx) { cart.splice(idx,1); saveCart(); }
-function clearCart() { cart=[]; saveCart(); showToast('购物车已清空'); }
-function checkout() { closeCart(); showPage('checkout'); buildCheckoutSummary(); }
-
-function openCart() {
-  document.getElementById('cart-overlay').classList.add('open');
-  document.getElementById('cart-sidebar').classList.add('open');
-}
-function closeCart() {
-  document.getElementById('cart-overlay').classList.remove('open');
-  document.getElementById('cart-sidebar').classList.remove('open');
-}
-
-// ── WISHLIST ──
-function toggleWish(e, id, btn) {
-  e.stopPropagation();
-  if(wishlist.includes(id)) { wishlist=wishlist.filter(x=>x!==id); btn.classList.remove('active'); showToast('已移出收藏'); }
-  else { wishlist.push(id); btn.classList.add('active'); showToast('♡ 已加入收藏 — '+PRODUCTS[id].name); }
-  localStorage.setItem('tb_wish',JSON.stringify(wishlist));
-}
-function toggleProdWish() {
-  const btn = document.getElementById('prod-wish-btn');
-  if(wishlist.includes(currentProduct)) { wishlist=wishlist.filter(x=>x!==currentProduct); btn.classList.remove('active'); showToast('已移出收藏'); }
-  else { wishlist.push(currentProduct); btn.classList.add('active'); showToast('♡ 已加入收藏 — '+PRODUCTS[currentProduct].name); }
-  localStorage.setItem('tb_wish',JSON.stringify(wishlist));
-}
-
-// ── SEARCH ──
-function openSearch() {
-  document.getElementById('search-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('search-input').focus(),100);
-  doSearch('');
-}
-function closeSearch() { document.getElementById('search-overlay').classList.remove('open'); document.getElementById('search-input').value=''; }
-function closeSearchOutside(e) { if(e.target===document.getElementById('search-overlay')) closeSearch(); }
+// SEARCH
+function openSearch(){ document.getElementById('s-ov').classList.add('on'); setTimeout(()=>document.getElementById('s-inp').focus(),80); doSearch(''); }
+function closeSearch(){ document.getElementById('s-ov').classList.remove('on'); document.getElementById('s-inp').value=''; }
+function closeSearchOut(e){ if(e.target===document.getElementById('s-ov')) closeSearch(); }
 function doSearch(q) {
-  const res = document.getElementById('search-results');
-  const lbl = document.getElementById('search-label');
-  q = q.toLowerCase().trim();
-  const matches = Object.entries(PRODUCTS).filter(([k,p])=>
-    !q || p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q)
-  );
-  lbl.textContent = q ? `"${q}" 的搜索结果 (${matches.length})` : '所有产品';
-  res.innerHTML = '';
-  matches.forEach(([id,p]) => {
-    const d = document.createElement('div'); d.className='search-result-item';
-    d.onclick = ()=>{ closeSearch(); showProduct(id); };
-    d.innerHTML = `<img src="${p.img}" alt="${p.name}"><div class="sr-name">${p.name}</div><div class="sr-price">¥${p.price}</div>`;
-    res.appendChild(d);
-  });
+  const res=document.getElementById('s-res'); const lbl=document.getElementById('s-lbl');
+  q=q.toLowerCase().trim();
+  const m=Object.entries(P).filter(([k,p])=>!q||p.name.toLowerCase().includes(q)||p.cat.includes(q));
+  lbl.textContent = q ? `"${q}" 的结果 (${m.length})` : '所有产品';
+  res.innerHTML='';
+  m.forEach(([id,p])=>{ const d=document.createElement('div'); d.className='s-item'; d.onclick=()=>{closeSearch();openProduct(id);}; d.innerHTML=`<img src="${p.img}" alt="${p.name}"><div class="sn">${p.name}</div><div class="sp">¥${p.price}</div>`; res.appendChild(d); });
 }
-document.addEventListener('keydown', e => { if(e.key==='Escape'){ closeSearch(); closeCart(); closeSizeModalDirect(); } });
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closeCart();closeModalDirect();}});
 
-// ── FILTER ──
-function filterShop(cat, btn) {
-  currentFilter = cat;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  document.querySelectorAll('.shop-card').forEach(c => {
-    if(cat==='全部'||c.dataset.cat===cat) c.classList.remove('hidden');
-    else c.classList.add('hidden');
-  });
+// FILTER/SORT
+function filterShop(cat,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on')); if(btn)btn.classList.add('on');
+  document.querySelectorAll('.sc').forEach(c=>{ cat==='全部'||c.dataset.cat===cat?c.classList.remove('hidden'):c.classList.add('hidden'); });
 }
-function filterAndGo(cat) {
-  showPage('shop');
-  setTimeout(()=>{
-    const btn = [...document.querySelectorAll('.filter-btn')].find(b=>b.textContent===cat);
-    filterShop(cat,btn);
-  },50);
-}
-function sortShop(val) {
-  const grid = document.getElementById('shop-grid');
-  const cards = [...grid.querySelectorAll('.shop-card')];
-  cards.sort((a,b)=>{
-    if(val==='price-asc') return parseInt(a.dataset.price)-parseInt(b.dataset.price);
-    if(val==='price-desc') return parseInt(b.dataset.price)-parseInt(a.dataset.price);
-    return 0;
-  });
-  cards.forEach(c=>grid.appendChild(c));
-}
+function fgo(cat){ go('shop'); setTimeout(()=>{ const b=[...document.querySelectorAll('.fb')].find(b=>b.textContent===cat); filterShop(cat,b); },50); }
+function sortShop(v){ const g=document.getElementById('sg'); [...g.querySelectorAll('.sc')].sort((a,b)=>v==='asc'?a.dataset.price-b.dataset.price:v==='desc'?b.dataset.price-a.dataset.price:0).forEach(c=>g.appendChild(c)); }
 
-// ── SIZE MODAL ──
-function openSizeModal() { document.getElementById('size-modal').classList.add('open'); }
-function closeSizeModal(e) { if(e.target===document.getElementById('size-modal')) closeSizeModalDirect(); }
-function closeSizeModalDirect() { document.getElementById('size-modal').classList.remove('open'); }
+// MODAL
+function openModal(){ document.getElementById('m-ov').classList.add('on'); }
+function closeModal(e){ if(e.target===document.getElementById('m-ov'))closeModalDirect(); }
+function closeModalDirect(){ document.getElementById('m-ov').classList.remove('on'); }
 
-// ── STATS ANIMATION ──
-function animateStats() {
-  document.querySelectorAll('.stat-num[data-target]').forEach(el => {
-    const target = parseInt(el.dataset.target);
-    let cur = 0;
-    const step = Math.ceil(target/40);
-    const t = setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=cur; if(cur>=target) clearInterval(t); }, 30);
+// STATS ANIMATION
+function animStats(){
+  document.querySelectorAll('.sn[data-t]').forEach(el=>{
+    const t=+el.dataset.t; let c=0; const s=Math.ceil(t/40);
+    const iv=setInterval(()=>{c=Math.min(c+s,t);el.textContent=c;if(c>=t)clearInterval(iv);},28);
   });
 }
 
-// ── FORM ──
-function submitForm() {
-  const n=document.getElementById('cf-name').value.trim();
-  const e=document.getElementById('cf-email').value.trim();
-  const m=document.getElementById('cf-message').value.trim();
-  if(!n||!e||!m){ showToast('请填写所有必填字段'); return; }
-  const s=document.getElementById('form-success'); s.style.display='block';
-  ['cf-name','cf-email','cf-subject','cf-message'].forEach(id=>document.getElementById(id).value='');
-  showToast('✓ 消息已发送！');
-  setTimeout(()=>s.style.display='none',5000);
+// FORM
+function sendForm(){
+  const n=document.getElementById('cf-n').value.trim();
+  const e=document.getElementById('cf-e').value.trim();
+  const m=document.getElementById('cf-m').value.trim();
+  if(!n||!e||!m){toast('请填写所有必填字段');return;}
+  document.getElementById('f-ok').style.display='block';
+  ['cf-n','cf-e','cf-m'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cf-s').value='';
+  toast('✓ 消息已发送！');
+  setTimeout(()=>document.getElementById('f-ok').style.display='none',5000);
 }
 
-// ── NEWSLETTER ──
-function subscribeNewsletter() {
-  const input = document.getElementById('nl-email');
-  if(!input||!input.value.trim()){ showToast('请输入您的邮箱'); return; }
-  showToast('✓ 订阅成功！欢迎加入 THUNDERBELT 家族');
-  if(input) input.value='';
-}
+// NEWSLETTER
+function nlSub(){ const inp=document.getElementById('nl-e'); if(inp&&!inp.value.trim()){toast('请输入您的邮箱');return;} toast('✓ 订阅成功！欢迎加入 THUNDERBELT 家族'); if(inp)inp.value=''; }
 
-// ── TOAST ──
-let toastTimer;
-function showToast(msg) {
-  document.getElementById('toast-msg').textContent = msg;
-  const t = document.getElementById('toast');
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
-}
+// TOAST
+let tTimer;
+function toast(msg){ document.getElementById('tmsg').textContent=msg; const t=document.getElementById('tst'); t.classList.add('on'); clearTimeout(tTimer); tTimer=setTimeout(()=>t.classList.remove('on'),2700); }
 
-// ── CHECKOUT ──
-let shippingCost = 25;
-let discountAmount = 0;
-let selectedPayMethod = 'card';
-
-function buildCheckoutSummary() {
-  // reset steps
-  document.getElementById('step-shipping').style.display = 'block';
-  document.getElementById('step-payment').style.display = 'none';
-  document.getElementById('step-confirm').style.display = 'none';
-  discountAmount = 0;
-  shippingCost = 25;
-  document.getElementById('co-promo-row').style.display = 'none';
-  document.getElementById('co-shipping-cost').textContent = '¥25';
-  // reset shipping selection
-  document.querySelectorAll('.co-ship-opt').forEach((el,i) => el.classList.toggle('selected', i===0));
-
-  const items = document.getElementById('checkout-items');
-  items.innerHTML = '';
-  cart.forEach(item => {
-    const p = PRODUCTS[item.id];
-    const div = document.createElement('div');
-    div.className = 'co-checkout-item';
-    div.innerHTML = `
-      <img src="${p.img}" alt="${p.name}">
-      <div><div class="co-item-name">${p.name}</div><div class="co-item-size">${item.size} × ${item.qty}</div></div>
-      <div class="co-item-price">¥${p.price * item.qty}</div>`;
-    items.appendChild(div);
+// CHECKOUT
+function checkout(){ closeCart(); buildCkSummary(); go('checkout'); }
+function buildCkSummary(){
+  document.getElementById('ck-s1').style.display='block';
+  document.getElementById('ck-s2').style.display='none';
+  document.getElementById('ck-s3').style.display='none';
+  discAmt=0; shipCost=25;
+  document.getElementById('ck-disc-row').style.display='none';
+  document.getElementById('ck-ship').textContent='¥25';
+  document.querySelectorAll('.ship-opt').forEach((el,i)=>el.classList.toggle('on',i===0));
+  const it=document.getElementById('ck-items'); it.innerHTML='';
+  cart.forEach(item=>{
+    const p=P[item.id]; const d=document.createElement('div'); d.className='cki';
+    d.innerHTML=`<img src="${p.img}" alt="${p.name}"><div><div class="ckin">${p.name}</div><div class="ckis">${item.size} × ${item.qty}</div></div><div class="ckip">¥${p.price*item.qty}</div>`;
+    it.appendChild(d);
   });
-  updateCheckoutTotals();
+  updCkTots();
 }
-
-function updateCheckoutTotals() {
-  const sub = cart.reduce((s,i) => s + PRODUCTS[i.id].price * i.qty, 0);
-  const grand = sub + shippingCost - discountAmount;
-  document.getElementById('co-subtotal').textContent = '¥' + sub;
-  document.getElementById('co-shipping-cost').textContent = '¥' + shippingCost;
-  document.getElementById('co-grand-total').textContent = '¥' + Math.max(0, grand);
+function updCkTots(){
+  const sub=cart.reduce((s,i)=>s+P[i.id].price*i.qty,0);
+  document.getElementById('ck-sub').textContent='¥'+sub;
+  document.getElementById('ck-ship').textContent='¥'+shipCost;
+  document.getElementById('ck-tot').textContent='¥'+Math.max(0,sub+shipCost-discAmt);
 }
-
-function selectShipping(el, label, cost) {
-  document.querySelectorAll('.co-ship-opt').forEach(o => o.classList.remove('selected'));
-  el.classList.add('selected');
-  shippingCost = cost;
-  updateCheckoutTotals();
+function pickShip(el,cost){
+  document.querySelectorAll('.ship-opt').forEach(o=>o.classList.remove('on')); el.classList.add('on');
+  shipCost=cost; updCkTots();
 }
-
-function goToPayment() {
-  const email = document.getElementById('co-email').value.trim();
-  const address = document.getElementById('co-address').value.trim();
-  const city = document.getElementById('co-city').value.trim();
-  if (!email || !address || !city) { showToast('请填写所有必填字段'); return; }
-  document.getElementById('step-shipping').style.display = 'none';
-  document.getElementById('step-payment').style.display = 'block';
-  window.scrollTo(0, 0);
+function ckNext(){
+  const em=document.getElementById('ck-em').value.trim();
+  const ad=document.getElementById('ck-ad').value.trim();
+  if(!em||!ad){toast('请填写邮件和地址');return;}
+  document.getElementById('ck-s1').style.display='none';
+  document.getElementById('ck-s2').style.display='block';
+  window.scrollTo(0,0);
 }
-
-function backToShipping() {
-  document.getElementById('step-payment').style.display = 'none';
-  document.getElementById('step-shipping').style.display = 'block';
-  window.scrollTo(0, 0);
+function ckBack(){
+  document.getElementById('ck-s2').style.display='none';
+  document.getElementById('ck-s1').style.display='block';
+  window.scrollTo(0,0);
 }
-
-function selectPayMethod(btn, method) {
-  selectedPayMethod = method;
-  document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  ['card','alipay','wechat','paypal'].forEach(m => {
-    const el = document.getElementById(m + '-fields');
-    if (el) el.style.display = (m === method) ? 'block' : 'none';
-  });
+function pickPay(btn,m){
+  payMeth=m;
+  document.querySelectorAll('.pm').forEach(b=>b.classList.remove('on')); btn.classList.add('on');
+  ['card','alipay','wechat','paypal'].forEach(x=>{const el=document.getElementById('pf-'+x);if(el)el.style.display=x===m?'block':'none';});
 }
-
-function formatCard(input) {
-  let v = input.value.replace(/\D/g, '').substring(0, 16);
-  input.value = v.replace(/(.{4})/g, '$1 ').trim();
+function fmtCard(inp){ let v=inp.value.replace(/\D/g,'').substring(0,16); inp.value=v.replace(/(.{4})/g,'$1 ').trim(); }
+function fmtExp(inp){ let v=inp.value.replace(/\D/g,'').substring(0,4); if(v.length>=3)v=v.substring(0,2)+' / '+v.substring(2); inp.value=v; }
+function applyPromo(){
+  const code=document.getElementById('ck-promo').value.trim().toUpperCase();
+  const msg=document.getElementById('promo-msg');
+  const row=document.getElementById('ck-disc-row');
+  const promos={'THUNDER10':10,'BOLT20':20,'WELCOME15':15};
+  msg.style.display='block';
+  if(promos[code]){
+    discAmt=promos[code]; msg.style.color='#7acc7a'; msg.textContent='✓ 折扣 -¥'+discAmt+' 已应用';
+    row.style.display='flex'; document.getElementById('ck-disc').textContent='-¥'+discAmt;
+    updCkTots();
+  }else{ discAmt=0; msg.style.color='var(--red)'; msg.textContent='✗ 无效优惠码'; row.style.display='none'; updCkTots(); }
 }
-
-function formatExp(input) {
-  let v = input.value.replace(/\D/g, '').substring(0, 4);
-  if (v.length >= 3) v = v.substring(0,2) + ' / ' + v.substring(2);
-  input.value = v;
-}
-
-function applyPromo() {
-  const code = document.getElementById('co-promo').value.trim().toUpperCase();
-  const res = document.getElementById('promo-result');
-  const row = document.getElementById('co-promo-row');
-  const promos = { 'THUNDER10': 10, 'BOLT20': 20, 'WELCOME15': 15 };
-  res.style.display = 'block';
-  if (promos[code]) {
-    discountAmount = promos[code];
-    res.style.color = '#7acc7a';
-    res.textContent = '✓ 优惠码已应用！折扣 -¥' + discountAmount;
-    row.style.display = 'flex';
-    document.getElementById('co-discount').textContent = '-¥' + discountAmount;
-    updateCheckoutTotals();
-  } else {
-    discountAmount = 0;
-    res.style.color = 'var(--red)';
-    res.textContent = '✗ 无效的优惠码';
-    row.style.display = 'none';
-    updateCheckoutTotals();
+function placeOrder(){
+  if(payMeth==='card'){
+    const n=document.getElementById('cc-nm').value.trim();
+    const nu=document.getElementById('cc-nu').value.replace(/\s/g,'');
+    const ex=document.getElementById('cc-ex').value;
+    const cv=document.getElementById('cc-cv').value;
+    if(!n||nu.length<16||!ex||cv.length<3){toast('请填写完整支付信息');return;}
   }
+  document.getElementById('ck-s2').style.display='none';
+  document.getElementById('ck-s3').style.display='block';
+  document.getElementById('ord-id').textContent='TB-'+Date.now().toString().slice(-8);
+  cart=[]; saveCart(); window.scrollTo(0,0);
 }
 
-function placeOrder() {
-  if (selectedPayMethod === 'card') {
-    const num = document.getElementById('co-card-num').value.replace(/\s/g,'');
-    const exp = document.getElementById('co-card-exp').value;
-    const cvv = document.getElementById('co-card-cvv').value;
-    const name = document.getElementById('co-card-name').value.trim();
-    if (!name || num.length < 16 || !exp || cvv.length < 3) { showToast('请填写完整的支付信息'); return; }
-  }
-  // Show confirmation
-  document.getElementById('step-payment').style.display = 'none';
-  document.getElementById('step-confirm').style.display = 'block';
-  const orderId = 'TB-' + Date.now().toString().slice(-8).toUpperCase();
-  document.getElementById('order-num-display').textContent = orderId;
-  cart = []; saveCart();
-  window.scrollTo(0, 0);
-}
-
-// ── INIT ──
+// INIT
 updateCartUI();
-// Restore wishlist UI on shop cards
-wishlist.forEach(id => {
-  const btn = document.querySelector(`.shop-card[onclick*="${id}"] .shop-card-wish`);
-  if(btn) btn.classList.add('active');
-});
+// Restore wish UI
+wish.forEach(id=>{ const b=document.querySelector(`.sc[onclick*="${id}"] .sc-wish`); if(b)b.classList.add('on'); });
 </script>
 </body>
 </html>
