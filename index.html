@@ -1257,6 +1257,129 @@ function showToast(msg) {
   toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
+// ── CHECKOUT ──
+let shippingCost = 25;
+let discountAmount = 0;
+let selectedPayMethod = 'card';
+
+function buildCheckoutSummary() {
+  // reset steps
+  document.getElementById('step-shipping').style.display = 'block';
+  document.getElementById('step-payment').style.display = 'none';
+  document.getElementById('step-confirm').style.display = 'none';
+  discountAmount = 0;
+  shippingCost = 25;
+  document.getElementById('co-promo-row').style.display = 'none';
+  document.getElementById('co-shipping-cost').textContent = '¥25';
+  // reset shipping selection
+  document.querySelectorAll('.co-ship-opt').forEach((el,i) => el.classList.toggle('selected', i===0));
+
+  const items = document.getElementById('checkout-items');
+  items.innerHTML = '';
+  cart.forEach(item => {
+    const p = PRODUCTS[item.id];
+    const div = document.createElement('div');
+    div.className = 'co-checkout-item';
+    div.innerHTML = `
+      <img src="${p.img}" alt="${p.name}">
+      <div><div class="co-item-name">${p.name}</div><div class="co-item-size">${item.size} × ${item.qty}</div></div>
+      <div class="co-item-price">¥${p.price * item.qty}</div>`;
+    items.appendChild(div);
+  });
+  updateCheckoutTotals();
+}
+
+function updateCheckoutTotals() {
+  const sub = cart.reduce((s,i) => s + PRODUCTS[i.id].price * i.qty, 0);
+  const grand = sub + shippingCost - discountAmount;
+  document.getElementById('co-subtotal').textContent = '¥' + sub;
+  document.getElementById('co-shipping-cost').textContent = '¥' + shippingCost;
+  document.getElementById('co-grand-total').textContent = '¥' + Math.max(0, grand);
+}
+
+function selectShipping(el, label, cost) {
+  document.querySelectorAll('.co-ship-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  shippingCost = cost;
+  updateCheckoutTotals();
+}
+
+function goToPayment() {
+  const email = document.getElementById('co-email').value.trim();
+  const address = document.getElementById('co-address').value.trim();
+  const city = document.getElementById('co-city').value.trim();
+  if (!email || !address || !city) { showToast('请填写所有必填字段'); return; }
+  document.getElementById('step-shipping').style.display = 'none';
+  document.getElementById('step-payment').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function backToShipping() {
+  document.getElementById('step-payment').style.display = 'none';
+  document.getElementById('step-shipping').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function selectPayMethod(btn, method) {
+  selectedPayMethod = method;
+  document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['card','alipay','wechat','paypal'].forEach(m => {
+    const el = document.getElementById(m + '-fields');
+    if (el) el.style.display = (m === method) ? 'block' : 'none';
+  });
+}
+
+function formatCard(input) {
+  let v = input.value.replace(/\D/g, '').substring(0, 16);
+  input.value = v.replace(/(.{4})/g, '$1 ').trim();
+}
+
+function formatExp(input) {
+  let v = input.value.replace(/\D/g, '').substring(0, 4);
+  if (v.length >= 3) v = v.substring(0,2) + ' / ' + v.substring(2);
+  input.value = v;
+}
+
+function applyPromo() {
+  const code = document.getElementById('co-promo').value.trim().toUpperCase();
+  const res = document.getElementById('promo-result');
+  const row = document.getElementById('co-promo-row');
+  const promos = { 'THUNDER10': 10, 'BOLT20': 20, 'WELCOME15': 15 };
+  res.style.display = 'block';
+  if (promos[code]) {
+    discountAmount = promos[code];
+    res.style.color = '#7acc7a';
+    res.textContent = '✓ 优惠码已应用！折扣 -¥' + discountAmount;
+    row.style.display = 'flex';
+    document.getElementById('co-discount').textContent = '-¥' + discountAmount;
+    updateCheckoutTotals();
+  } else {
+    discountAmount = 0;
+    res.style.color = 'var(--red)';
+    res.textContent = '✗ 无效的优惠码';
+    row.style.display = 'none';
+    updateCheckoutTotals();
+  }
+}
+
+function placeOrder() {
+  if (selectedPayMethod === 'card') {
+    const num = document.getElementById('co-card-num').value.replace(/\s/g,'');
+    const exp = document.getElementById('co-card-exp').value;
+    const cvv = document.getElementById('co-card-cvv').value;
+    const name = document.getElementById('co-card-name').value.trim();
+    if (!name || num.length < 16 || !exp || cvv.length < 3) { showToast('请填写完整的支付信息'); return; }
+  }
+  // Show confirmation
+  document.getElementById('step-payment').style.display = 'none';
+  document.getElementById('step-confirm').style.display = 'block';
+  const orderId = 'TB-' + Date.now().toString().slice(-8).toUpperCase();
+  document.getElementById('order-num-display').textContent = orderId;
+  cart = []; saveCart();
+  window.scrollTo(0, 0);
+}
+
 // ── INIT ──
 updateCartUI();
 // Restore wishlist UI on shop cards
