@@ -350,6 +350,74 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
   .shop-grid{grid-template-columns:1fr;}
   .shop-row2{max-width:100%;grid-template-columns:1fr;}
 }
+/* ── CHECKOUT ── */
+.checkout-layout{display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 72px);gap:0;}
+.checkout-left{padding:4rem 4rem 4rem 5rem;border-right:1px solid var(--border);max-width:700px;}
+.checkout-logo img{height:38px;object-fit:contain;margin-bottom:2.5rem;display:block;}
+.checkout-step-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.checkout-step-header h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;}
+.co-form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.co-fg{margin-bottom:1rem;}
+.co-fg label{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:.45rem;}
+.co-fg input,.co-fg select,.co-fg textarea{width:100%;background:var(--b3);border:1px solid var(--border);color:var(--white);padding:.82rem 1rem;font-family:'Noto Sans SC',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;appearance:none;}
+.co-fg input:focus,.co-fg select:focus{border-color:var(--gold);}
+.co-fg select option{background:var(--b3);}
+.co-shipping-options{display:flex;flex-direction:column;gap:.5rem;margin:1.5rem 0;}
+.co-ship-opt{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;border:1px solid var(--border);cursor:none;transition:border-color .2s;background:var(--b3);}
+.co-ship-opt:hover{border-color:var(--gray2);}
+.co-ship-opt.selected{border-color:var(--gold);background:var(--gold-dim);}
+.co-ship-radio{width:16px;height:16px;border-radius:50%;border:1px solid var(--gray2);flex-shrink:0;transition:all .2s;position:relative;}
+.co-ship-opt.selected .co-ship-radio{border-color:var(--gold);background:var(--gold);}
+.co-ship-info{flex:1;}
+.co-ship-info span{font-size:.78rem;font-weight:500;display:block;}
+.co-ship-info small{font-size:.62rem;color:var(--gray);letter-spacing:.08em;}
+.co-ship-price{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);}
+.co-next-btn{background:var(--gold);color:var(--black);border:none;padding:1.1rem 3rem;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;margin-top:1rem;width:100%;}
+.co-next-btn:hover{background:var(--gold-l);}
+.payment-methods{display:flex;gap:.5rem;margin-bottom:1.8rem;flex-wrap:wrap;}
+.pay-method{background:var(--b3);border:1px solid var(--border);color:var(--gray);padding:.7rem 1.2rem;font-size:.72rem;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;letter-spacing:.06em;}
+.pay-method:hover{border-color:var(--gray2);color:var(--white);}
+.pay-method.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.card-input-wrap .card-input-inner{position:relative;}
+.card-input-wrap input{padding-right:5rem;}
+.card-icons{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);display:flex;gap:.4rem;}
+.ci-visa{font-size:.55rem;font-weight:900;color:#1a1f71;background:#fff;padding:.2rem .4rem;letter-spacing:.06em;}
+.ci-mc{font-size:.55rem;font-weight:900;color:#eb001b;background:#fff;padding:.2rem .4rem;letter-spacing:.06em;}
+.alt-pay-info{background:var(--b3);border:1px solid var(--border);padding:2rem;text-align:center;margin-top:.5rem;}
+.alt-pay-icon{font-size:1.5rem;font-weight:700;margin-bottom:.8rem;color:var(--gold);}
+.alt-pay-info p{font-size:.8rem;color:var(--gray);line-height:1.8;}
+.co-promo-btn{background:var(--b4);border:1px solid var(--border);color:var(--white);padding:.82rem 1.4rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;white-space:nowrap;}
+.co-promo-btn:hover{border-color:var(--gold);color:var(--gold);}
+.co-secure-badge{display:flex;align-items:center;gap:.5rem;font-size:.62rem;color:var(--gray);letter-spacing:.08em;margin-top:1.5rem;padding:.8rem 1rem;background:var(--b3);border:1px solid var(--border);}
+.co-back-step-btn{background:none;border:1px solid var(--border);color:var(--gray);padding:1rem 1.8rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:all .2s;}
+.co-back-step-btn:hover{border-color:var(--gold);color:var(--gold);}
+.co-confirm-btn{flex:1;background:var(--gold);color:var(--black);border:none;padding:1rem;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:none;font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
+.co-confirm-btn:hover{background:var(--gold-l);}
+.order-success{text-align:center;padding:3rem 1rem;}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(90,154,90,.15);border:1px solid #2a5a2a;color:#7acc7a;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;}
+.order-success h2{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.06em;margin-bottom:1rem;}
+.order-success p{color:var(--gray);font-size:.88rem;line-height:1.8;margin-bottom:1rem;}
+.order-num{font-size:.78rem;color:var(--gold);letter-spacing:.1em;padding:1rem;background:var(--b3);border:1px solid var(--border);display:inline-block;margin-top:.5rem;}
+.checkout-right{background:var(--b2);padding:4rem 3rem;position:sticky;top:72px;align-self:start;border-left:1px solid var(--border);}
+.summary-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.06em;margin-bottom:1.5rem;}
+.co-checkout-item{display:grid;grid-template-columns:56px 1fr auto;gap:.8rem;padding:.9rem 0;border-bottom:1px solid var(--border);align-items:center;}
+.co-checkout-item img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#f0ede8;padding:.3rem;}
+.co-item-name{font-size:.75rem;font-weight:500;margin-bottom:.2rem;}
+.co-item-size{font-size:.62rem;color:var(--gray);}
+.co-item-price{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--gold);}
+.checkout-totals{padding:1.2rem 0;border-bottom:1px solid var(--border);margin-bottom:1.2rem;}
+.co-total-row{display:flex;justify-content:space-between;font-size:.78rem;color:var(--gray);margin-bottom:.6rem;}
+.co-total-row.total-final{font-size:1rem;color:var(--white);font-weight:700;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border);}
+.co-total-row.total-final span:last-child{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);}
+.co-trust{display:flex;flex-direction:column;gap:.6rem;}
+.co-trust-item{font-size:.68rem;color:var(--gray);letter-spacing:.06em;display:flex;align-items:center;gap:.5rem;}
+@media(max-width:1000px){
+  .checkout-layout{grid-template-columns:1fr;}
+  .checkout-right{position:static;border-left:none;border-top:1px solid var(--border);}
+  .checkout-left{padding:2.5rem 1.5rem;max-width:100%;}
+  .checkout-right{padding:2.5rem 1.5rem;}
+}
 </style>
 </head>
 <body>
@@ -485,6 +553,10 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
           <img src="https://i.imgur.com/YSu3A1b.png" alt="袜子">
           <div class="hero-prod-label">袜子</div>
         </div>
+        <div class="hero-prod-item" onclick="showProduct('slip')">
+          <img src="https://i.imgur.com/PuPW819.png" alt="内裤">
+          <div class="hero-prod-label">内裤</div>
+        </div>
       </div>
       <div class="hero-cta-row">
         <button class="btn btn-gold" onclick="showPage('shop')">探索系列</button>
@@ -613,7 +685,13 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
         </div>
         <div class="shop-card-info"><div><h3>THUNDERBELT 袜子</h3><div class="sub">配件 · 白色</div></div><span class="price">¥89</span></div>
       </div>
-    </div>
+      <div class="shop-card" data-cat="下装" data-price="99" onclick="showProduct('slip')">
+        <div class="shop-card-img">
+          <img src="https://i.imgur.com/PuPW819.png" alt="内裤">
+          <button class="shop-card-wish" onclick="toggleWish(event,'slip',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+        </div>
+        <div class="shop-card-info"><div><h3>THUNDERBELT 内裤</h3><div class="sub">下装 · 白色</div></div><span class="price">¥99</span></div>
+      </div>
   </div>
   <div class="newsletter">
     <div class="newsletter-text"><h3>订阅我们的通讯</h3><p>获取新品上架、独家优惠和品牌动态</p></div>
@@ -770,6 +848,131 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
   </footer>
 </div>
 
+<!-- ═══════════════ CHECKOUT PAGE ═══════════════ -->
+<div class="page" id="page-checkout">
+  <div class="page-body">
+    <div class="checkout-layout">
+      <!-- LEFT: FORM -->
+      <div class="checkout-left">
+        <button class="back-btn" onclick="showPage('shop')" style="margin-bottom:2rem;">← 返回商店</button>
+        <div class="checkout-logo"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT"></div>
+
+        <!-- STEP 1: SHIPPING -->
+        <div class="checkout-section" id="step-shipping">
+          <div class="checkout-step-header"><span class="step-num">1</span><h2>配送信息</h2></div>
+          <div class="co-form-row">
+            <div class="co-fg"><label>姓</label><input type="text" id="co-lastname" placeholder="张"></div>
+            <div class="co-fg"><label>名</label><input type="text" id="co-firstname" placeholder="伟"></div>
+          </div>
+          <div class="co-fg"><label>电子邮件</label><input type="email" id="co-email" placeholder="example@email.com"></div>
+          <div class="co-fg"><label>手机号码</label><input type="tel" id="co-phone" placeholder="+86 138 0000 0000"></div>
+          <div class="co-fg"><label>详细地址</label><input type="text" id="co-address" placeholder="街道、门牌号..."></div>
+          <div class="co-form-row">
+            <div class="co-fg"><label>城市</label><input type="text" id="co-city" placeholder="北京"></div>
+            <div class="co-fg"><label>邮政编码</label><input type="text" id="co-zip" placeholder="100000"></div>
+          </div>
+          <div class="co-fg"><label>国家/地区</label>
+            <select id="co-country">
+              <option value="CN">中国</option><option value="FR">法国</option><option value="US">美国</option>
+              <option value="HK">香港</option><option value="TW">台湾</option><option value="SG">新加坡</option>
+            </select>
+          </div>
+          <div class="co-shipping-options">
+            <div class="co-ship-opt selected" onclick="selectShipping(this,'标准配送 (3–5天)',25)">
+              <div class="co-ship-radio"></div>
+              <div class="co-ship-info"><span>标准配送</span><small>3–5 个工作日</small></div>
+              <span class="co-ship-price">¥25</span>
+            </div>
+            <div class="co-ship-opt" onclick="selectShipping(this,'快递配送 (1–2天)',65)">
+              <div class="co-ship-radio"></div>
+              <div class="co-ship-info"><span>快递配送</span><small>1–2 个工作日</small></div>
+              <span class="co-ship-price">¥65</span>
+            </div>
+            <div class="co-ship-opt" onclick="selectShipping(this,'国际配送 (7–14天)',120)">
+              <div class="co-ship-radio"></div>
+              <div class="co-ship-info"><span>国际配送</span><small>7–14 个工作日</small></div>
+              <span class="co-ship-price">¥120</span>
+            </div>
+          </div>
+          <button class="co-next-btn" onclick="goToPayment()">继续 → 支付信息</button>
+        </div>
+
+        <!-- STEP 2: PAYMENT -->
+        <div class="checkout-section" id="step-payment" style="display:none">
+          <div class="checkout-step-header"><span class="step-num">2</span><h2>支付信息</h2></div>
+          <div class="payment-methods">
+            <button class="pay-method active" onclick="selectPayMethod(this,'card')">💳 银行卡</button>
+            <button class="pay-method" onclick="selectPayMethod(this,'alipay')">支付宝</button>
+            <button class="pay-method" onclick="selectPayMethod(this,'wechat')">微信支付</button>
+            <button class="pay-method" onclick="selectPayMethod(this,'paypal')">PayPal</button>
+          </div>
+          <div id="card-fields">
+            <div class="co-fg"><label>持卡人姓名</label><input type="text" id="co-card-name" placeholder="ZHANG WEI"></div>
+            <div class="co-fg card-input-wrap">
+              <label>卡号</label>
+              <div class="card-input-inner">
+                <input type="text" id="co-card-num" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)">
+                <div class="card-icons"><span class="ci-visa">VISA</span><span class="ci-mc">MC</span></div>
+              </div>
+            </div>
+            <div class="co-form-row">
+              <div class="co-fg"><label>有效期</label><input type="text" id="co-card-exp" placeholder="MM / YY" maxlength="7" oninput="formatExp(this)"></div>
+              <div class="co-fg"><label>CVV</label><input type="text" id="co-card-cvv" placeholder="•••" maxlength="3"></div>
+            </div>
+          </div>
+          <div id="alipay-fields" style="display:none"><div class="alt-pay-info"><div class="alt-pay-icon">支付宝</div><p>点击"确认下单"后，您将被引导至支付宝完成支付。</p></div></div>
+          <div id="wechat-fields" style="display:none"><div class="alt-pay-info"><div class="alt-pay-icon">微信</div><p>点击"确认下单"后，将生成微信支付二维码。</p></div></div>
+          <div id="paypal-fields" style="display:none"><div class="alt-pay-info"><div class="alt-pay-icon">PayPal</div><p>点击"确认下单"后，您将跳转至 PayPal 完成支付。</p></div></div>
+          <div class="co-fg" style="margin-top:1.5rem">
+            <label>优惠码</label>
+            <div style="display:flex;gap:.6rem">
+              <input type="text" id="co-promo" placeholder="输入优惠码..." style="flex:1">
+              <button class="co-promo-btn" onclick="applyPromo()">使用</button>
+            </div>
+            <div id="promo-result" style="font-size:.7rem;margin-top:.4rem;display:none;"></div>
+          </div>
+          <div class="co-secure-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            此页面受 256 位 SSL 加密保护
+          </div>
+          <div style="display:flex;gap:.8rem;margin-top:1.8rem;flex-wrap:wrap;">
+            <button class="co-back-step-btn" onclick="backToShipping()">← 返回</button>
+            <button class="co-confirm-btn" onclick="placeOrder()">确认下单</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: CONFIRMATION -->
+        <div class="checkout-section" id="step-confirm" style="display:none">
+          <div class="order-success">
+            <div class="success-icon">✓</div>
+            <h2>订单已确认！</h2>
+            <p>感谢您的购买。订单确认邮件将发送至您的邮箱。</p>
+            <div class="order-num">订单编号：<strong id="order-num-display"></strong></div>
+            <button class="btn btn-gold" onclick="showPage('home')" style="margin-top:2rem;">返回首页</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: ORDER SUMMARY -->
+      <div class="checkout-right">
+        <h3 class="summary-title">订单摘要</h3>
+        <div id="checkout-items"></div>
+        <div class="checkout-totals">
+          <div class="co-total-row"><span>小计</span><span id="co-subtotal">¥0</span></div>
+          <div class="co-total-row"><span>配送费</span><span id="co-shipping-cost">¥25</span></div>
+          <div class="co-total-row promo-row" id="co-promo-row" style="display:none"><span>优惠码折扣</span><span id="co-discount" style="color:#7acc7a">-¥0</span></div>
+          <div class="co-total-row total-final"><span>总计</span><span id="co-grand-total">¥0</span></div>
+        </div>
+        <div class="co-trust">
+          <div class="co-trust-item"><span>🔒</span> 安全支付</div>
+          <div class="co-trust-item"><span>↩</span> 14天退换</div>
+          <div class="co-trust-item"><span>📦</span> 正品保证</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"><span class="t-icon">⚡</span><span id="toast-msg"></span></div>
 
@@ -780,7 +983,8 @@ const PRODUCTS = {
   short:{img:'https://i.imgur.com/xdezCMw.png',cat:'下装',name:'休闲短裤',price:349,desc:'经典法式运动剪裁，弹力腰绳设计，轻盈舒适。右侧腿部印有 THUNDERBELT 品牌标志，低调彰显个性。',sizes:['XS','S','M','L','XL','XXL']},
   cap:{img:'https://i.imgur.com/wh3PGAN.png',cat:'配件',name:'标志棒球帽',price:199,desc:'结构化帽型，前帽片正面绣有金色 THUNDERBELT 闪电标志。可调节后扣，适合大多数头围。百搭经典款。',sizes:['均码']},
   pull:{img:'https://i.imgur.com/PQUUE7v.png',cat:'上衣',name:'THUNDERBELT 卫衣',price:499,desc:'重磅法式绒面料，内里柔软蓬松。胸前大号 THUNDERBELT 闪电印花，帽檐与袖口罗纹设计，宽松oversize版型，秋冬必备单品。',sizes:['XS','S','M','L','XL','XXL']},
-  socks:{img:'https://i.imgur.com/YSu3A1b.png',cat:'配件',name:'THUNDERBELT 袜子',price:89,desc:'高品质棉混纺面料，中筒设计。侧面织入 THUNDERBELT 闪电标志，舒适耐穿。每双独立包装，也是绝佳礼品选择。',sizes:['均码 (36–45)']}
+  socks:{img:'https://i.imgur.com/YSu3A1b.png',cat:'配件',name:'THUNDERBELT 袜子',price:89,desc:'高品质棉混纺面料，中筒设计。侧面织入 THUNDERBELT 闪电标志，舒适耐穿。每双独立包装，也是绝佳礼品选择。',sizes:['均码 (36–45)']},
+  slip:{img:'https://i.imgur.com/PuPW819.png',cat:'下装',name:'THUNDERBELT 内裤',price:99,desc:'优质弹性棉混纺面料，亲肤柔软。腰间织入 THUNDERBELT 品牌标志，宽腰带设计，舒适包裹，全天候舒适穿着。',sizes:['XS','S','M','L','XL','XXL']}
 };
 
 // ── STATE ──
@@ -929,7 +1133,7 @@ function updateCartQty(idx, d) {
 }
 function removeCartItem(idx) { cart.splice(idx,1); saveCart(); }
 function clearCart() { cart=[]; saveCart(); showToast('购物车已清空'); }
-function checkout() { showToast('🚀 跳转至结算页面...'); setTimeout(closeCart,800); }
+function checkout() { closeCart(); showPage('checkout'); buildCheckoutSummary(); }
 
 function openCart() {
   document.getElementById('cart-overlay').classList.add('open');
