@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THUNDERBELT | 独立品牌</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --gold: #C9962A; --black: #0a0a0a; --white: #f5f5f0; --gray: #888; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--black); color: var(--white); font-family: 'Noto Sans SC', sans-serif; overflow-x: hidden; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 4rem; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; background: var(--black); z-index: 100; }
+  nav img.logo { height: 48px; filter: brightness(0) invert(1); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul li a { color: var(--gray); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+  nav ul li a:hover { color: var(--gold); }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 88vh; align-items: center; padding: 0 4rem; gap: 4rem; position: relative; overflow: hidden; }
+  .hero::before { content: '⚡'; position: absolute; font-size: 40vw; right: -5vw; top: 50%; transform: translateY(-50%); opacity: 0.03; pointer-events: none; line-height: 1; }
+  .hero-text h1 { font-family: 'Noto Serif SC', serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .hero-text h1 span { color: var(--gold); display: block; }
+  .hero-text p { color: var(--gray); font-size: 1rem; line-height: 1.8; max-width: 400px; margin-bottom: 2.5rem; font-weight: 300; }
+  .btn { display: inline-block; padding: 0.9rem 2.5rem; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.25s; }
+  .btn:hover { background: var(--gold); color: var(--black); }
+  .hero-img { display: flex; justify-content: center; align-items: center; animation: float 4s ease-in-out infinite; }
+  .hero-img img { max-height: 60vh; max-width: 100%; object-fit: contain; filter: drop-shadow(0 0 60px rgba(201,150,42,0.15)); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .divider { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 4rem; opacity: 0.4; }
+  .band { overflow: hidden; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 1.2rem 0; background: #0d0d0d; }
+  .band-inner { display: flex; gap: 4rem; animation: scroll 18s linear infinite; white-space: nowrap; }
+  .band-inner span { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray); }
+  .band-inner span.accent { color: var(--gold); }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .products { padding: 6rem 4rem; }
+  .products-header { text-align: center; margin-bottom: 4rem; }
+  .products-header .label { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 1rem; }
+  .products-header h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .card { background: #111; cursor: pointer; overflow: hidden; }
+  .card-img { width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #f5f5f0; }
+  .card-img img { width: 100%; height: 100%; object-fit: contain; padding: 2rem; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .card:hover .card-img img { transform: scale(1.06); }
+  .card-info { padding: 1.5rem; border-top: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: space-between; }
+  .card-info h3 { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; }
+  .card-info .tag { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; }
+  footer { padding: 3rem 4rem; border-top: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: space-between; }
+  footer img { height: 32px; filter: brightness(0) invert(1); opacity: 0.4; }
+  footer p { font-size: 0.7rem; color: #444; letter-spacing: 0.1em; }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; } nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; min-height: auto; gap: 2rem; }
+    .hero::before { display: none; }
+    .products { padding: 3rem 1.5rem; }
+    .grid { grid-template-columns: 1fr; gap: 2px; }
+    .divider { margin: 0 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <img src="https://i.imgur.com/GL2qRos.jpeg" alt="Thunderbelt" class="logo">
+  <ul>
+    <li><a href="#">首页</a></li>
+    <li><a href="#products">新品</a></li>
+    <li><a href="#">关于</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>闪耀<span>每一天</span></h1>
+    <p>THUNDERBELT 是一个独立法国品牌，专注于打造简约而有力量感的街头服饰。每件单品都承载着闪电的精神——速度、力量与个性。</p>
+    <a href="#products" class="btn">探索系列</a>
+  </div>
+  <div class="hero-img">
+    <img src="https://i.imgur.com/wh3PGAN.png" alt="Thunderbelt Cap">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="band">
+  <div class="band-inner">
+    <span>THUNDERBELT</span><span class="accent">⚡</span>
+    <span>独立品牌</span><span class="accent">⚡</span>
+    <span>法国制造</span><span class="accent">⚡</span>
+    <span>新品即将发布</span><span class="accent">⚡</span>
+    <span>THUNDERBELT</span><span class="accent">⚡</span>
+    <span>独立品牌</span><span class="accent">⚡</span>
+    <span>法国制造</span><span class="accent">⚡</span>
+    <span>新品即将发布</span><span class="accent">⚡</span>
+  </div>
+</div>
+
+<section class="products" id="products">
+  <div class="products-header">
+    <span class="label">当前系列</span>
+    <h2>精选单品</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-img"><img src="https://i.imgur.com/CaCYMGM.png" alt="T恤"></div>
+      <div class="card-info"><h3>经典 T 恤</h3><span class="tag">上衣</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="https://i.imgur.com/xdezCMw.png" alt="短裤"></div>
+      <div class="card-info"><h3>休闲短裤</h3><span class="tag">下装</span></div>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽"></div>
+      <div class="card-info"><h3>标志棒球帽</h3><span class="tag">配件</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="https://i.imgur.com/GL2qRos.jpeg" alt="Thunderbelt">
+  <p>© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</p>
+</footer>
+</body>
+</html>
