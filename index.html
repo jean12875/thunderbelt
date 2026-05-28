@@ -4,118 +4,1248 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>THUNDERBELT | 独立品牌</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --gold: #C9962A; --black: #0a0a0a; --white: #f5f5f0; --gray: #888; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--black); color: var(--white); font-family: 'Noto Sans SC', sans-serif; overflow-x: hidden; }
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 4rem; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; background: var(--black); z-index: 100; }
-  nav img.logo { height: 48px; object-fit: contain; }
-  nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
-  nav ul li a { color: var(--gray); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
-  nav ul li a:hover { color: var(--gold); }
-  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 88vh; align-items: center; padding: 0 4rem; gap: 4rem; position: relative; overflow: hidden; }
-  .hero::before { content: '⚡'; position: absolute; font-size: 40vw; right: -5vw; top: 50%; transform: translateY(-50%); opacity: 0.03; pointer-events: none; line-height: 1; }
-  .hero-text h1 { font-family: 'Noto Serif SC', serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  .hero-text h1 span { color: var(--gold); display: block; }
-  .hero-text p { color: var(--gray); font-size: 1rem; line-height: 1.8; max-width: 400px; margin-bottom: 2.5rem; font-weight: 300; }
-  .btn { display: inline-block; padding: 0.9rem 2.5rem; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.25s; }
-  .btn:hover { background: var(--gold); color: var(--black); }
-  .hero-img { display: flex; justify-content: center; align-items: center; animation: float 4s ease-in-out infinite; }
-  .hero-img img { max-height: 60vh; max-width: 100%; object-fit: contain; filter: drop-shadow(0 0 60px rgba(201,150,42,0.15)); }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-  .divider { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 4rem; opacity: 0.4; }
-  .band { overflow: hidden; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 1.2rem 0; background: #0d0d0d; }
-  .band-inner { display: flex; gap: 4rem; animation: scroll 18s linear infinite; white-space: nowrap; }
-  .band-inner span { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray); }
-  .band-inner span.accent { color: var(--gold); }
-  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .products { padding: 6rem 4rem; }
-  .products-header { text-align: center; margin-bottom: 4rem; }
-  .products-header .label { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 1rem; }
-  .products-header h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; }
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .card { background: #111; cursor: pointer; overflow: hidden; }
-  .card-img { width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #f5f5f0; }
-  .card-img img { width: 100%; height: 100%; object-fit: contain; padding: 2rem; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
-  .card:hover .card-img img { transform: scale(1.06); }
-  .card-info { padding: 1.5rem; border-top: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: space-between; }
-  .card-info h3 { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; }
-  .card-info .tag { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; }
-  footer { padding: 3rem 4rem; border-top: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: space-between; }
-  footer img { height: 40px; object-fit: contain; opacity: 0.85; }
-  footer p { font-size: 0.7rem; color: #444; letter-spacing: 0.1em; }
-  .insta-link { display: flex; align-items: center; gap: 0.6rem; color: var(--gray); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.1em; transition: color 0.2s; }
-  .insta-link:hover { color: var(--gold); }
-  .insta-link svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; } nav ul { display: none; }
-    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; min-height: auto; gap: 2rem; }
-    .hero::before { display: none; }
-    .products { padding: 3rem 1.5rem; }
-    .grid { grid-template-columns: 1fr; gap: 2px; }
-    .divider { margin: 0 1.5rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
-  }
+/* ===================== RESET & ROOT ===================== */
+:root {
+  --gold: #C9962A;
+  --gold-light: #e8b84b;
+  --black: #080808;
+  --black2: #0f0f0f;
+  --black3: #161616;
+  --white: #f0ede8;
+  --gray: #666;
+  --gray2: #333;
+  --border: #1c1c1c;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Noto Sans SC', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===================== PAGES ===================== */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ===================== NAV ===================== */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5rem;
+  height: 72px;
+  border-bottom: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(8,8,8,0.95);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+}
+nav .logo-wrap {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+nav .logo-wrap img {
+  height: 44px;
+  object-fit: contain;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 0;
+  align-items: center;
+}
+nav ul li a, nav ul li button {
+  background: none;
+  border: none;
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: color 0.2s;
+  display: block;
+}
+nav ul li a:hover, nav ul li button:hover,
+nav ul li a.active, nav ul li button.active { color: var(--white); }
+.nav-insta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gray) !important;
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 1.2rem;
+  transition: color 0.2s;
+}
+.nav-insta:hover { color: var(--gold) !important; }
+.nav-insta svg { width:16px; height:16px; fill:currentColor; flex-shrink:0; }
+.nav-cart-btn {
+  background: var(--gold) !important;
+  color: var(--black) !important;
+  padding: 0.5rem 1.4rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  margin-left: 1rem;
+}
+.nav-cart-btn:hover { background: var(--gold-light) !important; }
+
+/* ===================== PAGE PADDING ===================== */
+.page-body { padding-top: 72px; min-height: 100vh; }
+
+/* ===================== HERO ===================== */
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.hero-wordmark {
+  text-align: center;
+  padding: 5rem 2rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+.hero-wordmark .big-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(6rem, 18vw, 18rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, #fff 0%, #888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  user-select: none;
+  animation: fadeDown 1s ease both;
+}
+@keyframes fadeDown {
+  from { opacity:0; transform: translateY(-30px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.hero-sub {
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  animation: fadeUp 1s 0.2s ease both;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.hero-products-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem 4rem 0;
+  flex: 1;
+  animation: fadeUp 1s 0.4s ease both;
+}
+.hero-prod-item {
+  flex: 1;
+  max-width: 320px;
+  cursor: pointer;
+  position: relative;
+}
+.hero-prod-item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  padding: 1.5rem;
+  background: #f5f5f0;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.hero-prod-item:hover img { transform: translateY(-8px) scale(1.03); }
+.hero-prod-label {
+  text-align: center;
+  padding: 1rem 0 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  transition: color 0.2s;
+}
+.hero-prod-item:hover .hero-prod-label { color: var(--gold); }
+.hero-prod-item.center-item {
+  max-width: 380px;
+  transform: translateY(-20px);
+}
+.hero-cta-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 2rem 4rem;
+  animation: fadeUp 1s 0.6s ease both;
+}
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.8rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: all 0.25s;
+  border: none;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 700;
+}
+.btn-gold:hover { background: var(--gold-light); }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--white);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ===================== TICKER BAND ===================== */
+.band {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  background: var(--black2);
+}
+.band-inner {
+  display: flex;
+  gap: 3rem;
+  animation: ticker 20s linear infinite;
+  white-space: nowrap;
+}
+.band-inner span {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray);
+  flex-shrink: 0;
+}
+.band-inner .accent { color: var(--gold); }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ===================== SHOP PAGE ===================== */
+.shop-hero {
+  text-align: center;
+  padding: 6rem 2rem 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.shop-hero .section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+.shop-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--white);
+}
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+}
+.shop-row2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+  max-width: 66.67%;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+.shop-card {
+  background: var(--black2);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.shop-card:hover { background: var(--black3); }
+.shop-card-img {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  background: #f0ede8;
+}
+.shop-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 2.5rem;
+  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.shop-card:hover .shop-card-img img { transform: scale(1.05); }
+.shop-card-info {
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+}
+.shop-card-info h3 {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.shop-card-info .price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+/* ===================== PRODUCT PAGE ===================== */
+.product-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 72px);
+}
+.product-img-col {
+  background: #f0ede8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  min-height: 70vh;
+}
+.product-img-col img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+}
+.product-info-col {
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--border);
+}
+.product-info-col .back-btn {
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 0;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+}
+.product-info-col .back-btn:hover { color: var(--gold); }
+.product-info-col .prod-cat {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+.product-info-col h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+.product-info-col .prod-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+.product-info-col p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.9;
+  font-weight: 300;
+  max-width: 400px;
+  margin-bottom: 2.5rem;
+}
+.size-select {
+  margin-bottom: 2rem;
+}
+.size-select label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.8rem;
+}
+.size-options {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.size-btn {
+  width: 48px;
+  height: 48px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.size-btn:hover, .size-btn.selected {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.buy-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn-buy {
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 700;
+  padding: 1.1rem 3rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: background 0.2s;
+  flex: 1;
+}
+.btn-buy:hover { background: var(--gold-light); }
+.btn-wishlist {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 1.1rem 1.5rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.btn-wishlist:hover { border-color: var(--gold); }
+.btn-wishlist svg { width:18px; height:18px; fill:currentColor; display:block; }
+.contact-note {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+  color: var(--gray);
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+}
+.contact-note a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ===================== ABOUT PAGE ===================== */
+.about-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 70vh;
+  border-bottom: 1px solid var(--border);
+}
+.about-left {
+  background: var(--black2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 7rem 5rem;
+}
+.about-left .section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+.about-left h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 7vw, 7rem);
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  margin-bottom: 2rem;
+}
+.about-left p {
+  color: var(--gray);
+  font-size: 0.95rem;
+  line-height: 1.9;
+  font-weight: 300;
+  max-width: 440px;
+}
+.about-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black3);
+  padding: 4rem;
+}
+.about-right img {
+  max-width: 280px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 80px rgba(201,150,42,0.2));
+}
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.value-block {
+  background: var(--black2);
+  padding: 3.5rem 3rem;
+}
+.value-block .icon {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+.value-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+.value-block p {
+  font-size: 0.85rem;
+  color: var(--gray);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.about-story {
+  padding: 6rem 8rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-story .section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+.about-story h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: 0.06em;
+  margin-bottom: 2rem;
+  line-height: 1;
+}
+.about-story p {
+  color: var(--gray);
+  font-size: 0.95rem;
+  line-height: 2;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+/* ===================== CONTACT PAGE ===================== */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 72px);
+}
+.contact-left {
+  background: var(--black2);
+  padding: 7rem 5rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contact-left .section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+.contact-left h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  letter-spacing: 0.05em;
+  line-height: 0.95;
+  margin-bottom: 2.5rem;
+}
+.contact-left p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.9;
+  font-weight: 300;
+  max-width: 400px;
+  margin-bottom: 3rem;
+}
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+.contact-info-item .ci-icon {
+  font-size: 1.2rem;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+}
+.contact-info-item .ci-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.contact-info-item .ci-val {
+  font-size: 0.9rem;
+  color: var(--white);
+}
+.contact-info-item a { color: var(--white); text-decoration: none; }
+.contact-info-item a:hover { color: var(--gold); }
+
+.contact-right {
+  padding: 7rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contact-right h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 2.5rem;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.6rem;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: var(--black3);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 0.9rem 1.2rem;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  resize: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(--gold); }
+.form-group textarea { min-height: 130px; }
+.form-group select option { background: var(--black3); }
+.form-submit {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.btn-submit {
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 700;
+  padding: 1rem 2.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: background 0.2s;
+}
+.btn-submit:hover { background: var(--gold-light); }
+.form-note {
+  font-size: 0.72rem;
+  color: var(--gray);
+  letter-spacing: 0.05em;
+}
+.form-success {
+  display: none;
+  background: var(--black3);
+  border: 1px solid var(--gold);
+  padding: 1.2rem 1.5rem;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-top: 1rem;
+}
+
+/* ===================== FOOTER ===================== */
+footer {
+  padding: 3rem 5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: var(--black2);
+}
+footer img.footer-logo { height: 40px; object-fit: contain; opacity: 0.85; cursor: pointer; }
+footer .footer-copy { font-size: 0.68rem; color: var(--gray2); letter-spacing: 0.1em; }
+footer .footer-links { display: flex; align-items: center; gap: 2rem; }
+footer .footer-links button {
+  background: none; border: none;
+  color: var(--gray);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: color 0.2s;
+}
+footer .footer-links button:hover { color: var(--gold); }
+.footer-insta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  transition: color 0.2s;
+}
+.footer-insta:hover { color: var(--gold); }
+.footer-insta svg { width:16px; height:16px; fill:currentColor; }
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--gold);
+  color: var(--black);
+  padding: 0.9rem 2rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  nav ul li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .hero-products-row { flex-direction: column; align-items: center; padding: 1rem 2rem 0; }
+  .hero-prod-item.center-item { transform: none; }
+  .product-page { grid-template-columns: 1fr; }
+  .product-info-col { border-left: none; border-top: 1px solid var(--border); padding: 3rem 2rem; }
+  .about-hero { grid-template-columns: 1fr; }
+  .about-left { padding: 4rem 2rem; }
+  .about-values { grid-template-columns: 1fr; }
+  .about-story { padding: 4rem 2rem; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .contact-left { padding: 4rem 2rem; }
+  .contact-right { padding: 3rem 2rem; }
+  .shop-grid { grid-template-columns: 1fr; }
+  .shop-row2 { grid-template-columns: 1fr; max-width: 100%; }
+  footer { flex-direction: column; padding: 2rem 1.5rem; text-align: center; }
+  footer .footer-links { flex-wrap: wrap; justify-content: center; }
+}
 </style>
 </head>
 <body>
+
+<!-- ===================== NAV ===================== -->
 <nav>
-  <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt" class="logo">
+  <div class="logo-wrap" onclick="showPage('home')">
+    <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT">
+  </div>
   <ul>
-    <li><a href="#">首页</a></li>
-    <li><a href="#products">新品</a></li>
-    <li><a href="#">关于</a></li>
+    <li><button onclick="showPage('home')" id="nav-home">首页</button></li>
+    <li><button onclick="showPage('shop')" id="nav-shop">商店</button></li>
+    <li><button onclick="showPage('about')" id="nav-about">关于我们</button></li>
+    <li><button onclick="showPage('contact')" id="nav-contact">联系我们</button></li>
     <li>
-      <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="insta-link">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        @thunderbelt_official
+      <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="nav-insta">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
       </a>
     </li>
   </ul>
 </nav>
 
-<section class="hero">
-  <div class="hero-text">
-    <h1>闪耀<span>每一天</span></h1>
-    <p>THUNDERBELT 是一个独立法国品牌，专注于打造简约而有力量感的街头服饰。每件单品都承载着闪电的精神——速度、力量与个性。</p>
-    <a href="#products" class="btn">探索系列</a>
-  </div>
-  <div class="hero-img">
-    <img src="https://i.imgur.com/wh3PGAN.png" alt="Thunderbelt Cap">
-  </div>
-</section>
+<!-- ===================== HOME PAGE ===================== -->
+<div class="page active" id="page-home">
+  <div class="page-body">
 
-<div class="divider"></div>
+    <section class="hero-section">
+      <div class="hero-wordmark">
+        <div class="big-title">THUNDERBELT</div>
+        <div class="hero-sub">⚡ 独立品牌 &nbsp;·&nbsp; 法国制造 &nbsp;·&nbsp; 新品即将发布 ⚡</div>
+      </div>
+      <div class="hero-products-row">
+        <div class="hero-prod-item" onclick="showProduct('tshirt')">
+          <img src="https://i.imgur.com/CaCYMGM.png" alt="T恤">
+          <div class="hero-prod-label">经典 T 恤</div>
+        </div>
+        <div class="hero-prod-item" onclick="showProduct('short')">
+          <img src="https://i.imgur.com/xdezCMw.png" alt="短裤">
+          <div class="hero-prod-label">休闲短裤</div>
+        </div>
+        <div class="hero-prod-item center-item" onclick="showProduct('cap')">
+          <img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽">
+          <div class="hero-prod-label">标志棒球帽</div>
+        </div>
+        <div class="hero-prod-item" onclick="showProduct('pull')">
+          <img src="https://i.imgur.com/PQUUE7v.png" alt="卫衣">
+          <div class="hero-prod-label">卫衣</div>
+        </div>
+        <div class="hero-prod-item" onclick="showProduct('socks')">
+          <img src="https://i.imgur.com/YSu3A1b.png" alt="袜子">
+          <div class="hero-prod-label">袜子</div>
+        </div>
+      </div>
+      <div class="hero-cta-row">
+        <button class="btn btn-gold" onclick="showPage('shop')">探索系列</button>
+        <button class="btn btn-outline" onclick="showPage('about')">了解品牌</button>
+      </div>
+    </section>
 
-<section class="products" id="products">
-  <div class="products-header">
-    <span class="label">当前系列</span>
-    <h2>精选单品</h2>
-  </div>
-  <div class="grid">
-    <div class="card">
-      <div class="card-img"><img src="https://i.imgur.com/CaCYMGM.png" alt="T恤"></div>
-      <div class="card-info"><h3>经典 T 恤</h3><span class="tag">上衣</span></div>
+    <div class="band">
+      <div class="band-inner">
+        <span>THUNDERBELT</span><span class="accent">⚡</span>
+        <span>独立品牌</span><span class="accent">⚡</span>
+        <span>法国制造</span><span class="accent">⚡</span>
+        <span>新品即将发布</span><span class="accent">⚡</span>
+        <span>THUNDERBELT</span><span class="accent">⚡</span>
+        <span>独立品牌</span><span class="accent">⚡</span>
+        <span>法国制造</span><span class="accent">⚡</span>
+        <span>新品即将发布</span><span class="accent">⚡</span>
+        <span>THUNDERBELT</span><span class="accent">⚡</span>
+        <span>独立品牌</span><span class="accent">⚡</span>
+        <span>法国制造</span><span class="accent">⚡</span>
+        <span>新品即将发布</span><span class="accent">⚡</span>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-img"><img src="https://i.imgur.com/xdezCMw.png" alt="短裤"></div>
-      <div class="card-info"><h3>休闲短裤</h3><span class="tag">下装</span></div>
-    </div>
-    <div class="card">
-      <div class="card-img"><img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽"></div>
-      <div class="card-info"><h3>标志棒球帽</h3><span class="tag">配件</span></div>
-    </div>
-  </div>
-</section>
 
-<footer>
-  <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt">
-  <p>© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</p>
-  <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="insta-link">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    Instagram
-  </a>
-</footer>
+  </div>
+  <!-- FOOTER -->
+  <footer>
+    <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt" class="footer-logo" onclick="showPage('home')">
+    <span class="footer-copy">© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</span>
+    <div class="footer-links">
+      <button onclick="showPage('shop')">商店</button>
+      <button onclick="showPage('about')">关于我们</button>
+      <button onclick="showPage('contact')">联系我们</button>
+      <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="footer-insta">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @thunderbelt_official
+      </a>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== SHOP PAGE ===================== -->
+<div class="page" id="page-shop">
+  <div class="page-body">
+    <div class="shop-hero">
+      <span class="section-label">当前系列</span>
+      <h1>精选单品</h1>
+    </div>
+    <div class="shop-grid">
+      <div class="shop-card" onclick="showProduct('tshirt')">
+        <div class="shop-card-img"><img src="https://i.imgur.com/CaCYMGM.png" alt="T恤"></div>
+        <div class="shop-card-info">
+          <div>
+            <h3>经典 T 恤</h3>
+            <div style="font-size:0.68rem;color:var(--gray);letter-spacing:0.1em;margin-top:0.3rem;">上衣 · 白色</div>
+          </div>
+          <span class="price">¥299</span>
+        </div>
+      </div>
+      <div class="shop-card" onclick="showProduct('short')">
+        <div class="shop-card-img"><img src="https://i.imgur.com/xdezCMw.png" alt="短裤"></div>
+        <div class="shop-card-info">
+          <div>
+            <h3>休闲短裤</h3>
+            <div style="font-size:0.68rem;color:var(--gray);letter-spacing:0.1em;margin-top:0.3rem;">下装 · 白色</div>
+          </div>
+          <span class="price">¥349</span>
+        </div>
+      </div>
+      <div class="shop-card" onclick="showProduct('cap')">
+        <div class="shop-card-img"><img src="https://i.imgur.com/wh3PGAN.png" alt="棒球帽"></div>
+        <div class="shop-card-info">
+          <div>
+            <h3>标志棒球帽</h3>
+            <div style="font-size:0.68rem;color:var(--gray);letter-spacing:0.1em;margin-top:0.3rem;">配件 · 白色</div>
+          </div>
+          <span class="price">¥199</span>
+        </div>
+      </div>
+    </div>
+    <div class="shop-row2">
+      <div class="shop-card" onclick="showProduct('pull')">
+        <div class="shop-card-img"><img src="https://i.imgur.com/PQUUE7v.png" alt="卫衣"></div>
+        <div class="shop-card-info">
+          <div>
+            <h3>THUNDERBELT 卫衣</h3>
+            <div style="font-size:0.68rem;color:var(--gray);letter-spacing:0.1em;margin-top:0.3rem;">上衣 · 白色</div>
+          </div>
+          <span class="price">¥499</span>
+        </div>
+      </div>
+      <div class="shop-card" onclick="showProduct('socks')">
+        <div class="shop-card-img"><img src="https://i.imgur.com/YSu3A1b.png" alt="袜子"></div>
+        <div class="shop-card-info">
+          <div>
+            <h3>THUNDERBELT 袜子</h3>
+            <div style="font-size:0.68rem;color:var(--gray);letter-spacing:0.1em;margin-top:0.3rem;">配件 · 白色</div>
+          </div>
+          <span class="price">¥89</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt" class="footer-logo" onclick="showPage('home')">
+    <span class="footer-copy">© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</span>
+    <div class="footer-links">
+      <button onclick="showPage('about')">关于我们</button>
+      <button onclick="showPage('contact')">联系我们</button>
+      <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="footer-insta">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== PRODUCT PAGES ===================== -->
+<div class="page" id="page-product">
+  <div class="page-body">
+    <div class="product-page">
+      <div class="product-img-col">
+        <img id="prod-img" src="" alt="">
+      </div>
+      <div class="product-info-col">
+        <button class="back-btn" onclick="showPage('shop')">
+          ← 返回商店
+        </button>
+        <span class="prod-cat" id="prod-cat"></span>
+        <h1 id="prod-name"></h1>
+        <div class="prod-price" id="prod-price"></div>
+        <p id="prod-desc"></p>
+        <div class="size-select" id="size-wrap">
+          <label>选择尺码</label>
+          <div class="size-options" id="size-options"></div>
+        </div>
+        <div class="buy-actions">
+          <button class="btn-buy" onclick="addToCart()">立即购买</button>
+          <button class="btn-wishlist" title="收藏" onclick="showToast('已加入收藏 ♡')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="contact-note">
+          想了解更多或定制款式？<br>
+          <a href="#" onclick="showPage('contact')">联系我们</a> — 我们将在24小时内回复您。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ABOUT PAGE ===================== -->
+<div class="page" id="page-about">
+  <div class="page-body">
+    <div class="about-hero">
+      <div class="about-left">
+        <span class="section-label">品牌故事</span>
+        <h1>关于<br>THUNDERBELT</h1>
+        <p>THUNDERBELT 诞生于法国，是一个专注于街头美学与极简设计的独立服装品牌。我们相信，真正的风格无需多言——一件好的单品，本身就是态度的表达。</p>
+      </div>
+      <div class="about-right">
+        <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt Logo">
+      </div>
+    </div>
+
+    <div class="about-values">
+      <div class="value-block">
+        <div class="icon">⚡</div>
+        <h3>能量与力量</h3>
+        <p>闪电是我们的核心符号——它代表速度、能量与不可阻挡的力量。每一件 THUNDERBELT 单品都承载着这种精神。</p>
+      </div>
+      <div class="value-block">
+        <div class="icon">🇫🇷</div>
+        <h3>法国独立精神</h3>
+        <p>我们是一个真正的独立品牌，不受任何大集团控制。每一个决定都来自我们内心，来自对设计的热爱与坚持。</p>
+      </div>
+      <div class="value-block">
+        <div class="icon">✦</div>
+        <h3>极简主义美学</h3>
+        <p>少即是多。我们的设计语言清晰、干净、有力。去掉所有多余的元素，只保留最本质的东西。</p>
+      </div>
+    </div>
+
+    <div class="about-story">
+      <span class="section-label">我们的使命</span>
+      <h2>为什么是 THUNDERBELT？</h2>
+      <p>在一个充斥着快时尚与过度设计的世界里，THUNDERBELT 选择了另一条路。我们不追求趋势，我们创造经典。每一件产品都经过精心设计，力求在简约与冲击力之间找到完美的平衡。</p>
+      <p>我们的客户不仅仅是在购买一件衣服，而是在表达一种态度——自信、独立、充满能量。这就是 THUNDERBELT 的意义。</p>
+      <button class="btn btn-gold" onclick="showPage('shop')" style="margin-top:1rem;">探索系列</button>
+    </div>
+  </div>
+  <footer>
+    <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt" class="footer-logo" onclick="showPage('home')">
+    <span class="footer-copy">© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</span>
+    <div class="footer-links">
+      <button onclick="showPage('shop')">商店</button>
+      <button onclick="showPage('contact')">联系我们</button>
+      <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="footer-insta">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== CONTACT PAGE ===================== -->
+<div class="page" id="page-contact">
+  <div class="page-body">
+    <div class="contact-layout">
+      <div class="contact-left">
+        <span class="section-label">取得联系</span>
+        <h1>联系<br>我们</h1>
+        <p>有任何关于产品、订单或合作的问题？我们随时准备为您解答。通常在24小时内回复。</p>
+        <div class="contact-info-list">
+          <div class="contact-info-item">
+            <div class="ci-icon">📸</div>
+            <div>
+              <span class="ci-label">Instagram</span>
+              <div class="ci-val"><a href="https://www.instagram.com/thunderbelt_official/" target="_blank">@thunderbelt_official</a></div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">🇫🇷</div>
+            <div>
+              <span class="ci-label">品牌原产地</span>
+              <div class="ci-val">法国</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">⚡</div>
+            <div>
+              <span class="ci-label">回复时间</span>
+              <div class="ci-val">24小时内</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-right">
+        <h2>发送消息</h2>
+        <div class="form-group">
+          <label>您的姓名</label>
+          <input type="text" id="cf-name" placeholder="张伟">
+        </div>
+        <div class="form-group">
+          <label>电子邮件</label>
+          <input type="email" id="cf-email" placeholder="example@email.com">
+        </div>
+        <div class="form-group">
+          <label>主题</label>
+          <select id="cf-subject">
+            <option value="">请选择主题...</option>
+            <option>产品咨询</option>
+            <option>订单问题</option>
+            <option>合作洽谈</option>
+            <option>其他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>您的留言</label>
+          <textarea id="cf-message" placeholder="请告诉我们您的问题或想法..."></textarea>
+        </div>
+        <div class="form-submit">
+          <button class="btn-submit" onclick="submitForm()">发送留言</button>
+          <span class="form-note">我们保护您的隐私</span>
+        </div>
+        <div class="form-success" id="form-success">✓ &nbsp;消息已发送！我们将尽快回复您。</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <img src="https://i.imgur.com/g9uB7hp.jpeg" alt="Thunderbelt" class="footer-logo" onclick="showPage('home')">
+    <span class="footer-copy">© 2024 THUNDERBELT — 独立品牌 🇫🇷 保留所有权利</span>
+    <div class="footer-links">
+      <button onclick="showPage('shop')">商店</button>
+      <button onclick="showPage('about')">关于我们</button>
+      <a href="https://www.instagram.com/thunderbelt_official/" target="_blank" class="footer-insta">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </footer>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const PRODUCTS = {
+  tshirt: {
+    img: 'https://i.imgur.com/CaCYMGM.png',
+    cat: '上衣',
+    name: '经典 T 恤',
+    price: '¥299',
+    desc: '采用100%优质纯棉面料，舒适透气。胸前刺绣 THUNDERBELT 闪电标志，简约而有力量感。版型宽松，适合日常穿搭。',
+    sizes: ['XS','S','M','L','XL','XXL'],
+  },
+  short: {
+    img: 'https://i.imgur.com/xdezCMw.png',
+    cat: '下装',
+    name: '休闲短裤',
+    price: '¥349',
+    desc: '经典法式运动剪裁，弹力腰绳设计，轻盈舒适。右侧腿部印有 THUNDERBELT 品牌标志，低调彰显个性。',
+    sizes: ['XS','S','M','L','XL','XXL'],
+  },
+  cap: {
+    img: 'https://i.imgur.com/wh3PGAN.png',
+    cat: '配件',
+    name: '标志棒球帽',
+    price: '¥199',
+    desc: '结构化帽型，前帽片正面绣有金色 THUNDERBELT 闪电标志。可调节后扣，适合大多数头围。百搭经典款。',
+    sizes: ['均码'],
+  },
+  pull: {
+    img: 'https://i.imgur.com/PQUUE7v.png',
+    cat: '上衣',
+    name: 'THUNDERBELT 卫衣',
+    price: '¥499',
+    desc: '重磅法式绒面料，内里柔软蓬松。胸前大号 THUNDERBELT 闪电印花，帽檐与袖口罗纹设计，宽松oversize版型，秋冬必备单品。',
+    sizes: ['XS','S','M','L','XL','XXL'],
+  },
+  socks: {
+    img: 'https://i.imgur.com/YSu3A1b.png',
+    cat: '配件',
+    name: 'THUNDERBELT 袜子',
+    price: '¥89',
+    desc: '高品质棉混纺面料，中筒设计。侧面织入 THUNDERBELT 闪电标志，舒适耐穿。每双独立包装，也是绝佳礼品选择。',
+    sizes: ['均码 (36–45)'],
+  }
+};
+
+let currentProduct = null;
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('nav ul li button').forEach(b => b.classList.remove('active'));
+  const navBtn = document.getElementById('nav-' + page);
+  if (navBtn) navBtn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showProduct(id) {
+  const p = PRODUCTS[id];
+  currentProduct = id;
+  document.getElementById('prod-img').src = p.img;
+  document.getElementById('prod-img').alt = p.name;
+  document.getElementById('prod-cat').textContent = p.cat;
+  document.getElementById('prod-name').textContent = p.name;
+  document.getElementById('prod-price').textContent = p.price;
+  document.getElementById('prod-desc').textContent = p.desc;
+  const sizeOpts = document.getElementById('size-options');
+  sizeOpts.innerHTML = '';
+  p.sizes.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'size-btn';
+    btn.textContent = s;
+    btn.onclick = () => {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    };
+    sizeOpts.appendChild(btn);
+  });
+  showPage('product');
+}
+
+function addToCart() {
+  const selected = document.querySelector('.size-btn.selected');
+  if (!selected && PRODUCTS[currentProduct].sizes.length > 1) {
+    showToast('请先选择尺码');
+    return;
+  }
+  showToast('✓ 已加入购物车');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function submitForm() {
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-message').value.trim();
+  if (!name || !email || !msg) { showToast('请填写所有必填字段'); return; }
+  document.getElementById('form-success').style.display = 'block';
+  document.getElementById('cf-name').value = '';
+  document.getElementById('cf-email').value = '';
+  document.getElementById('cf-subject').value = '';
+  document.getElementById('cf-message').value = '';
+  setTimeout(() => document.getElementById('form-success').style.display = 'none', 5000);
+}
+</script>
 </body>
 </html>
