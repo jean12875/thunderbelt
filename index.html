@@ -507,18 +507,14 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
         <div class="hpi" onclick="openProduct('mug')"><img src="https://i.imgur.com/ZsrR3A5.png" alt="马克杯"><div class="hpi-lbl">马克杯</div></div>
         <div class="hpi" onclick="openProduct('bottle')"><img src="https://i.imgur.com/dd4znAe.png" alt="保温瓶"><div class="hpi-lbl">保温瓶</div></div>
         <div class="hpi" onclick="openProduct('poster')"><img src="https://i.imgur.com/j2WiQYE.png" alt="海报"><div class="hpi-lbl">海报</div></div>
+        <div class="hpi" onclick="openProduct('pen')"><img src="https://i.imgur.com/SSutPGq.png" alt="钢笔"><div class="hpi-lbl">钢笔</div></div>
+        <div class="hpi" onclick="openProduct('pull2')"><img src="https://i.imgur.com/4ukrxpM.png" alt="卫衣2"><div class="hpi-lbl">卫衣 Vol.2</div></div>
       </div>
       <div class="hero-cta">
         <button class="btn btn-g" onclick="go('shop')">探索系列</button>
         <button class="btn btn-o" onclick="go('about')">了解品牌</button>
       </div>
     </section>
-    <div class="band">
-      <div class="band-t">
-        <span>THUNDERBELT</span><span class="a">·</span><span>独立品牌</span><span class="a">·</span><span>法国制造</span><span class="a">·</span><span>新品上市</span><span class="a">·</span><span>免费配送满¥500</span><span class="a">·</span>
-        <span>THUNDERBELT</span><span class="a">·</span><span>独立品牌</span><span class="a">·</span><span>法国制造</span><span class="a">·</span><span>新品上市</span><span class="a">·</span><span>免费配送满¥500</span><span class="a">·</span>
-      </div>
-    </div>
   </div>
   <div class="nl"><div class="nl-txt"><h3>订阅通讯</h3><p>获取新品、优惠和品牌动态</p></div><div class="nl-f"><input type="email" id="nl-e" placeholder="您的电子邮件..."><button onclick="nlSub()">订阅</button></div></div>
   <footer>
@@ -583,6 +579,14 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
       <div class="sc" data-cat="配件" data-price="189" onclick="openProduct('bottle')">
         <div class="sc-img"><img src="https://i.imgur.com/dd4znAe.png" alt="保温瓶"><button class="sc-wish" onclick="toggleWish(event,'bottle',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
         <div class="sc-info"><div><h3>THUNDERBELT 保温瓶</h3><div class="sub">配件 · 白色</div></div><span class="price">¥189</span></div>
+      </div>
+      <div class="sc" data-cat="配件" data-price="149" onclick="openProduct('pen')">
+        <div class="sc-img"><img src="https://i.imgur.com/SSutPGq.png" alt="钢笔"><button class="sc-wish" onclick="toggleWish(event,'pen',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>THUNDERBELT 钢笔</h3><div class="sub">配件 · 黑色</div></div><span class="price">¥149</span></div>
+      </div>
+      <div class="sc" data-cat="上衣" data-price="549" onclick="openProduct('pull2')">
+        <div class="sc-img"><img src="https://i.imgur.com/4ukrxpM.png" alt="卫衣2"><button class="sc-wish" onclick="toggleWish(event,'pull2',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>卫衣 Vol.2</h3><div class="sub">上衣 · 新款</div></div><span class="price">¥549</span></div>
       </div>
     </div>
   </div>
@@ -649,7 +653,7 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
       <div class="ab-r"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT"></div>
     </div>
     <div class="ab-stats">
-      <div class="sb"><div class="sn" data-t="9">0</div><div class="sl">精选产品</div></div>
+      <div class="sb"><div class="sn" data-t="11">0</div><div class="sl">精选产品</div></div>
       <div class="sb"><div class="sn" data-t="100">0</div><div class="sl">% 纯棉面料</div></div>
       <div class="sb"><div class="sn" data-t="24">0</div><div class="sl">小时客服</div></div>
       <div class="sb"><div class="sn" data-t="14">0</div><div class="sl">天退换保障</div></div>
@@ -826,7 +830,9 @@ const P = {
   slip:{img:'https://i.imgur.com/PuPW819.png',cat:'下装',name:'THUNDERBELT 内裤',price:99,desc:'弹性棉混纺面料，亲肤柔软，腰间织入 THUNDERBELT 品牌标志，宽腰带设计，全天候舒适。',sizes:['XS','S','M','L','XL','XXL']},
   mug:{img:'https://i.imgur.com/ZsrR3A5.png',cat:'配件',name:'THUNDERBELT 马克杯',price:129,desc:'高品质陶瓷马克杯，330ml 容量，印有 THUNDERBELT 经典闪电标志。适用于微波炉和洗碗机，日常咖啡必备单品。',sizes:['均码']},
   poster:{img:'https://i.imgur.com/j2WiQYE.png',cat:'配件',name:'THUNDERBELT 海报',price:79,desc:'高清印刷 THUNDERBELT 品牌海报，A3 尺寸，哑光纸面，装饰家居或办公空间的理想选择。',sizes:['A3 (297×420mm)']},
-  bottle:{img:'https://i.imgur.com/dd4znAe.png',cat:'配件',name:'THUNDERBELT 保温瓶',price:189,desc:'不锈钢双层保温设计，500ml 容量，保温12小时保冷24小时。激光雕刻 THUNDERBELT 标志，出行必备。',sizes:['均码']}
+  bottle:{img:'https://i.imgur.com/dd4znAe.png',cat:'配件',name:'THUNDERBELT 保温瓶',price:189,desc:'不锈钢双层保温设计，500ml 容量，保温12小时保冷24小时。激光雕刻 THUNDERBELT 标志，出行必备。',sizes:['均码']},
+  pen:{img:'https://i.imgur.com/SSutPGq.png',cat:'配件',name:'THUNDERBELT 钢笔',price:149,desc:'精致金属笔身，哑光黑色涂装，笔夹处刻有 THUNDERBELT 闪电标志。书写顺滑，商务与日常兼备，附礼盒包装。',sizes:['均码']},
+  pull2:{img:'https://i.imgur.com/4ukrxpM.png',cat:'上衣',name:'THUNDERBELT 卫衣 Vol.2',price:549,desc:'全新配色卫衣，重磅法式绒面料，oversize版型，胸前大号 THUNDERBELT 品牌刺绣，秋冬必备单品。',sizes:['XS','S','M','L','XL','XXL']}
 };
 
 // STATE
