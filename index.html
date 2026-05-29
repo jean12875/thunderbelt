@@ -520,6 +520,9 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
         <div class="hpi" onclick="openProduct('poster')"><img src="https://i.imgur.com/j2WiQYE.png" alt="海报"><div class="hpi-lbl">海报</div></div>
         <div class="hpi" onclick="openProduct('pen')"><img src="https://i.imgur.com/SSutPGq.png" alt="钢笔"><div class="hpi-lbl">钢笔</div></div>
         <div class="hpi" onclick="openProduct('pull2')"><img src="https://i.imgur.com/4ukrxpM.png" alt="卫衣2"><div class="hpi-lbl">卫衣 Vol.2</div></div>
+        <div class="hpi" onclick="openProduct('shirt')"><img src="https://i.imgur.com/TKM8YDX.png" alt="衬衫"><div class="hpi-lbl">衬衫</div></div>
+        <div class="hpi" onclick="openProduct('bob')"><img src="https://i.imgur.com/n7I5sHl.png" alt="渔夫帽"><div class="hpi-lbl">渔夫帽</div></div>
+        <div class="hpi" onclick="openProduct('hoodie')"><img src="https://i.imgur.com/y36tOVu.png" alt="连帽衫"><div class="hpi-lbl">连帽衫</div></div>
       </div>
       <div class="hero-cta">
         <button class="btn btn-g" onclick="go('shop')">探索系列</button>
@@ -625,6 +628,18 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
         <div class="sc-img"><img src="https://i.imgur.com/4ukrxpM.png" alt="卫衣2"><button class="sc-wish" onclick="toggleWish(event,'pull2',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
         <div class="sc-info"><div><h3>卫衣 Vol.2</h3><div class="sub">上衣 · 新款</div></div><span class="price">¥549</span></div>
       </div>
+      <div class="sc" data-cat="上衣" data-price="379" onclick="openProduct('shirt')">
+        <div class="sc-img"><div class="sc-badge">新品</div><img src="https://i.imgur.com/TKM8YDX.png" alt="衬衫"><button class="sc-wish" onclick="toggleWish(event,'shirt',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>THUNDERBELT 衬衫</h3><div class="sub">上衣 · 白色</div></div><span class="price">¥379</span></div>
+      </div>
+      <div class="sc" data-cat="配件" data-price="169" onclick="openProduct('bob')">
+        <div class="sc-img"><div class="sc-badge">新品</div><img src="https://i.imgur.com/n7I5sHl.png" alt="渔夫帽"><button class="sc-wish" onclick="toggleWish(event,'bob',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>THUNDERBELT 渔夫帽</h3><div class="sub">配件 · 白色</div></div><span class="price">¥169</span></div>
+      </div>
+      <div class="sc" data-cat="上衣" data-price="479" onclick="openProduct('hoodie')">
+        <div class="sc-img"><div class="sc-badge">新品</div><img src="https://i.imgur.com/y36tOVu.png" alt="连帽衫"><button class="sc-wish" onclick="toggleWish(event,'hoodie',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>THUNDERBELT 连帽衫</h3><div class="sub">上衣 · 新款</div></div><span class="price">¥479</span></div>
+      </div>
     </div>
   </div>
   <div class="nl"><div class="nl-txt"><h3>订阅通讯</h3><p>获取新品、优惠和品牌动态</p></div><div class="nl-f"><input type="email" placeholder="您的电子邮件..."><button onclick="nlSub()">订阅</button></div></div>
@@ -690,7 +705,7 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
       <div class="ab-r"><img src="https://i.imgur.com/g9uB7hp.jpeg" alt="THUNDERBELT"></div>
     </div>
     <div class="ab-stats">
-      <div class="sb"><div class="sn" data-t="11">0</div><div class="sl">精选产品</div></div>
+      <div class="sb"><div class="sn" data-t="14">0</div><div class="sl">精选产品</div></div>
       <div class="sb"><div class="sn" data-t="100">0</div><div class="sl">% 纯棉面料</div></div>
       <div class="sb"><div class="sn" data-t="24">0</div><div class="sl">小时客服</div></div>
       <div class="sb"><div class="sn" data-t="14">0</div><div class="sl">天退换保障</div></div>
@@ -869,7 +884,10 @@ const P = {
   poster:{img:'https://i.imgur.com/j2WiQYE.png',cat:'配件',name:'THUNDERBELT 海报',price:79,desc:'高清印刷 THUNDERBELT 品牌海报，A3 尺寸，哑光纸面，装饰家居或办公空间的理想选择。',sizes:['A3 (297×420mm)']},
   bottle:{img:'https://i.imgur.com/dd4znAe.png',cat:'配件',name:'THUNDERBELT 保温瓶',price:189,desc:'不锈钢双层保温设计，500ml 容量，保温12小时保冷24小时。激光雕刻 THUNDERBELT 标志，出行必备。',sizes:['均码']},
   pen:{img:'https://i.imgur.com/SSutPGq.png',cat:'配件',name:'THUNDERBELT 钢笔',price:149,desc:'精致金属笔身，哑光黑色涂装，笔夹处刻有 THUNDERBELT 闪电标志。书写顺滑，商务与日常兼备，附礼盒包装。',sizes:['均码']},
-  pull2:{img:'https://i.imgur.com/4ukrxpM.png',cat:'上衣',name:'THUNDERBELT 卫衣 Vol.2',price:549,desc:'全新配色卫衣，重磅法式绒面料，oversize版型，胸前大号 THUNDERBELT 品牌刺绣，秋冬必备单品。',sizes:['XS','S','M','L','XL','XXL']}
+  pull2:{img:'https://i.imgur.com/4ukrxpM.png',cat:'上衣',name:'THUNDERBELT 卫衣 Vol.2',price:549,desc:'全新配色卫衣，重磅法式绒面料，oversize版型，胸前大号 THUNDERBELT 品牌刺绣，秋冬必备单品。',sizes:['XS','S','M','L','XL','XXL']},
+  shirt:{img:'https://i.imgur.com/TKM8YDX.png',cat:'上衣',name:'THUNDERBELT 衬衫',price:379,desc:'精纺纯棉面料，修身版型，胸口精绣 THUNDERBELT 闪电标志。商务休闲两用，百搭经典款。',sizes:['XS','S','M','L','XL','XXL']},
+  bob:{img:'https://i.imgur.com/n7I5sHl.png',cat:'配件',name:'THUNDERBELT 渔夫帽',price:169,desc:'柔软棉质面料，可折叠便携，帽沿环绕 THUNDERBELT 品牌刺绣，遮阳防晒，街头必备单品。',sizes:['均码']},
+  hoodie:{img:'https://i.imgur.com/y36tOVu.png',cat:'上衣',name:'THUNDERBELT 连帽衫',price:479,desc:'厚实棉绒面料，宽大帽兜，前置大口袋设计，胸前 THUNDERBELT 品牌刺绣，经典街头风格。',sizes:['XS','S','M','L','XL','XXL']}
 };
 
 // STATE
@@ -1131,18 +1149,62 @@ updateCartUI();
 // Restore wish UI
 wish.forEach(id=>{ const b=document.querySelector(`.sc[onclick*="${id}"] .sc-wish`); if(b)b.classList.add('on'); });
 
-// SALES COUNTER
+// SALES COUNTER — progressive growth
+// Base: 46 on May 29 2026 00:00 UTC
+// Growth schedule: day0 +10/day, day1 +15/day, day2 +25/day, day3+ +45/day
+function calcSalesCount() {
+  const BASE = 46;
+  const BASE_DATE = new Date('2026-05-29T00:00:00Z');
+  const now = new Date();
+  const msPerDay = 86400000;
+  const totalMs = now - BASE_DATE;
+  if(totalMs <= 0) return BASE;
+
+  // Sales per day schedule: index = day number since base
+  const dailyRates = [10, 15, 25, 45]; // day0, day1, day2, day3+
+  const totalDays = totalMs / msPerDay;
+  const fullDays = Math.floor(totalDays);
+  const fracDay = totalDays - fullDays; // fraction of current day elapsed
+
+  let sales = BASE;
+  for(let d = 0; d < fullDays; d++) {
+    const rate = dailyRates[Math.min(d, dailyRates.length - 1)];
+    sales += rate;
+  }
+  // Add partial day progress
+  const todayRate = dailyRates[Math.min(fullDays, dailyRates.length - 1)];
+  sales += Math.floor(todayRate * fracDay);
+
+  return Math.round(sales);
+}
+
 function animSales(elId) {
   const el = document.getElementById(elId);
-  if(!el || el.dataset.done) return;
-  el.dataset.done = '1';
-  let c = 0;
+  if(!el) return;
+  const target = calcSalesCount();
+  // If already animated to this target, just set it
+  if(el.dataset.done === String(target)) return;
+  el.dataset.done = String(target);
+  const start = parseInt(el.textContent) || 0;
+  const diff = target - start;
+  if(diff <= 0) { el.textContent = target; return; }
+  let c = start;
+  const step = Math.max(1, Math.ceil(diff / 40));
   const iv = setInterval(() => {
-    c = Math.min(c + 1, 46);
+    c = Math.min(c + step, target);
     el.textContent = c;
-    if(c >= 46) clearInterval(iv);
-  }, 38);
+    if(c >= target) clearInterval(iv);
+  }, 35);
 }
+
+// Live tick: update counter every minute while page is open
+function startLiveTick() {
+  setInterval(() => {
+    animSales('sales-num-home');
+    animSales('sales-num-shop');
+  }, 60000);
+}
+
 // Override go() to trigger counter on page switch
 const _go = go;
 go = function(page) {
@@ -1150,8 +1212,8 @@ go = function(page) {
   if(page === 'home') setTimeout(() => animSales('sales-num-home'), 400);
   if(page === 'shop') setTimeout(() => animSales('sales-num-shop'), 200);
 };
-// Trigger on initial load (home page is default active)
-setTimeout(() => animSales('sales-num-home'), 700);
+// Trigger on initial load
+setTimeout(() => { animSales('sales-num-home'); startLiveTick(); }, 700);
 </script>
 </body>
 </html>
