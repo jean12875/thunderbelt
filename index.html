@@ -409,6 +409,17 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
   .ab-stats{grid-template-columns:1fr 1fr;}
   .ck-fr{grid-template-columns:1fr;}
 }
+/* SALES COUNTER */
+.sales-bar{display:flex;align-items:center;justify-content:center;gap:2rem;padding:1.4rem 2rem;background:var(--b2);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.sales-counter{display:flex;align-items:center;gap:1rem;}
+.sales-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--gold);letter-spacing:.04em;line-height:1;}
+.sales-text{display:flex;flex-direction:column;}
+.sales-text span:first-child{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--white);font-weight:500;}
+.sales-text span:last-child{font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);}
+.sales-pulse{width:8px;height:8px;border-radius:50%;background:#5a9a5a;position:relative;flex-shrink:0;}
+.sales-pulse::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid #5a9a5a;animation:pulse 2s ease-out infinite;}
+@keyframes pulse{0%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(2.5);}}
+.sales-divider{width:1px;height:2rem;background:var(--border);}
 </style>
 </head>
 <body>
@@ -515,6 +526,20 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
         <button class="btn btn-o" onclick="go('about')">了解品牌</button>
       </div>
     </section>
+    <div class="sales-bar">
+      <div class="sales-counter">
+        <div class="sales-pulse"></div>
+        <div class="sales-num" id="sales-num-home">0</div>
+        <div class="sales-text">
+          <span>已售出订单</span>
+          <span>实时更新</span>
+        </div>
+      </div>
+      <div class="sales-divider"></div>
+      <div style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);text-align:center;">
+        加入已购买 THUNDERBELT 的顾客行列
+      </div>
+    </div>
   </div>
   <div class="nl"><div class="nl-txt"><h3>订阅通讯</h3><p>获取新品、优惠和品牌动态</p></div><div class="nl-f"><input type="email" id="nl-e" placeholder="您的电子邮件..."><button onclick="nlSub()">订阅</button></div></div>
   <footer>
@@ -532,6 +557,18 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
 <div class="page" id="page-shop">
   <div class="pb">
     <div class="sh-hero"><span class="sec-lbl">当前系列</span><h1>精选单品</h1></div>
+    <div class="sales-bar">
+      <div class="sales-counter">
+        <div class="sales-pulse"></div>
+        <div class="sales-num" id="sales-num-shop">0</div>
+        <div class="sales-text">
+          <span>已售出订单</span>
+          <span>实时更新</span>
+        </div>
+      </div>
+      <div class="sales-divider"></div>
+      <div style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);">加入已购买 THUNDERBELT 的顾客行列</div>
+    </div>
     <div class="filter-bar">
       <button class="fb on" onclick="filterShop('全部',this)">全部</button>
       <button class="fb" onclick="filterShop('上衣',this)">上衣</button>
@@ -1093,6 +1130,28 @@ function placeOrder(){
 updateCartUI();
 // Restore wish UI
 wish.forEach(id=>{ const b=document.querySelector(`.sc[onclick*="${id}"] .sc-wish`); if(b)b.classList.add('on'); });
+
+// SALES COUNTER
+function animSales(elId) {
+  const el = document.getElementById(elId);
+  if(!el || el.dataset.done) return;
+  el.dataset.done = '1';
+  let c = 0;
+  const iv = setInterval(() => {
+    c = Math.min(c + 1, 46);
+    el.textContent = c;
+    if(c >= 46) clearInterval(iv);
+  }, 38);
+}
+// Override go() to trigger counter on page switch
+const _go = go;
+go = function(page) {
+  _go(page);
+  if(page === 'home') setTimeout(() => animSales('sales-num-home'), 400);
+  if(page === 'shop') setTimeout(() => animSales('sales-num-shop'), 200);
+};
+// Trigger on initial load (home page is default active)
+setTimeout(() => animSales('sales-num-home'), 700);
 </script>
 </body>
 </html>
