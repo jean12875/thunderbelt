@@ -528,6 +528,7 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
         <div class="hpi" onclick="openProduct('shirt')"><img src="https://i.imgur.com/TKM8YDX.png" alt="衬衫"><div class="hpi-lbl">衬衫</div></div>
         <div class="hpi" onclick="openProduct('bob')"><img src="https://i.imgur.com/n7I5sHl.png" alt="渔夫帽"><div class="hpi-lbl">渔夫帽</div></div>
         <div class="hpi" onclick="openProduct('hoodie')"><img src="https://i.imgur.com/y36tOVu.png" alt="连帽衫"><div class="hpi-lbl">连帽衫</div></div>
+        <div class="hpi" onclick="openProduct('string')"><img src="https://i.imgur.com/euxVJVc.png" alt="丁字裤"><div class="hpi-lbl">丁字裤</div></div>
       </div>
       <div class="hero-cta">
         <button class="btn btn-g" onclick="go('shop')">探索系列</button>
@@ -648,6 +649,10 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
         <div class="sc-img"><div class="sc-badge">新品</div><img src="https://i.imgur.com/y36tOVu.png" alt="连帽衫"><button class="sc-wish" onclick="toggleWish(event,'hoodie',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
         <div class="sc-info"><div><h3>THUNDERBELT 连帽衫</h3><div class="sub">上衣 · 新款</div></div><span class="price">¥479</span></div>
       </div>
+      <div class="sc" data-cat="下装" data-price="89" onclick="openProduct('string')">
+        <div class="sc-img"><img src="https://i.imgur.com/euxVJVc.png" alt="丁字裤"><button class="sc-wish" onclick="toggleWish(event,'string',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+        <div class="sc-info"><div><h3>THUNDERBELT 丁字裤</h3><div class="sub">下装 · 白色</div></div><span class="price">¥89</span></div>
+      </div>
     </div>
   </div>
   <div class="nl"><div class="nl-txt"><h3>订阅通讯</h3><p>获取新品、优惠和品牌动态</p></div><div class="nl-f"><input type="email" placeholder="您的电子邮件..."><button onclick="nlSub()">订阅</button></div></div>
@@ -719,10 +724,10 @@ footer{background:var(--b2);border-top:1px solid var(--border);}
 </svg></div>
     </div>
     <div class="ab-stats">
-      <div class="sb"><div class="sn" data-t="14">0</div><div class="sl">精选产品</div></div>
+      <div class="sb"><div class="sn" data-t="15">0</div><div class="sl">精选产品</div></div>
       <div class="sb"><div class="sn" data-t="100">0</div><div class="sl">% 纯棉面料</div></div>
       <div class="sb"><div class="sn" data-t="24">0</div><div class="sl">小时客服</div></div>
-      <div class="sb"><div class="sn" data-t="14">0</div><div class="sl">天退换保障</div></div>
+      <div class="sb"><div class="sn" data-t="15">0</div><div class="sl">天退换保障</div></div>
     </div>
     <div class="ab-vals">
       <div class="vb"><div class="ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3>能量与力量</h3><p>闪电是我们的核心符号——速度、能量与不可阻挡的力量。每一件 THUNDERBELT 单品都承载着这种精神。</p></div>
@@ -910,7 +915,8 @@ const P = {
   pull2:{img:'https://i.imgur.com/4ukrxpM.png',cat:'上衣',name:'THUNDERBELT 卫衣 Vol.2',price:549,desc:'全新配色卫衣，重磅法式绒面料，oversize版型，胸前大号 THUNDERBELT 品牌刺绣，秋冬必备单品。',sizes:['XS','S','M','L','XL','XXL']},
   shirt:{img:'https://i.imgur.com/TKM8YDX.png',cat:'上衣',name:'THUNDERBELT 衬衫',price:379,desc:'精纺纯棉面料，修身版型，胸口精绣 THUNDERBELT 闪电标志。商务休闲两用，百搭经典款。',sizes:['XS','S','M','L','XL','XXL']},
   bob:{img:'https://i.imgur.com/n7I5sHl.png',cat:'配件',name:'THUNDERBELT 渔夫帽',price:169,desc:'柔软棉质面料，可折叠便携，帽沿环绕 THUNDERBELT 品牌刺绣，遮阳防晒，街头必备单品。',sizes:['均码']},
-  hoodie:{img:'https://i.imgur.com/y36tOVu.png',cat:'上衣',name:'THUNDERBELT 连帽衫',price:479,desc:'厚实棉绒面料，宽大帽兜，前置大口袋设计，胸前 THUNDERBELT 品牌刺绣，经典街头风格。',sizes:['XS','S','M','L','XL','XXL']}
+  hoodie:{img:'https://i.imgur.com/y36tOVu.png',cat:'上衣',name:'THUNDERBELT 连帽衫',price:479,desc:'厚实棉绒面料，宽大帽兜，前置大口袋设计，胸前 THUNDERBELT 品牌刺绣，经典街头风格。',sizes:['XS','S','M','L','XL','XXL']},
+  string:{img:'https://i.imgur.com/euxVJVc.png',cat:'下装',name:'THUNDERBELT 丁字裤',price:89,desc:'弹性棉混纺面料，亲肤柔软，腰间织入 THUNDERBELT 品牌标志，时尚简约设计。',sizes:['XS','S','M','L','XL','XXL']}
 };
 
 // STATE
